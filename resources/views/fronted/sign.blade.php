@@ -14,7 +14,7 @@
                         <img src="{{ url('fronted/images/logo.png') }}" alt="">
                     </a>
                     <h4 class="mb-12">Sign Up to your Account</h4>
-                    <p class="mb-32 text-secondary-light text-lg">Welcome! Please enter your</p>
+                    <p class="mb-32 text-secondary-light text-lg">Welcome! Please enter your details</p>
                 </div>
                 <form action="{{ route('register') }}" method="post">
                     @csrf
