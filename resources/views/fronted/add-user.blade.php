@@ -1,3 +1,4 @@
+
 @extends('fronted.layout.main')
 @section('main-container')
 
@@ -7,9 +8,9 @@
     </button>
     <div>
       <a href="index.html" class="sidebar-logo">
-        <img src="assets/images/logo.png" alt="site logo" class="light-logo">
-        <img src="assets/images/logo-light.png" alt="site logo" class="dark-logo">
-        <img src="assets/images/logo-icon.png" alt="site logo" class="logo-icon">
+        <img src="{{url('fronted/logo/dw_logo.png')}}" alt="site logo" class="light-logo">
+        <img src="{{url('fronted/images/logo-light.png')}}" alt="site logo" class="dark-logo">
+        <img src="{{url('fronted/images/logo-icon.png')}}" alt="site logo" class="logo-icon">
       </a>
     </div>
     <div class="sidebar-menu-area">
@@ -213,11 +214,12 @@
             {{-- <li>
               <a href="users-list.html"><i class="ri-circle-fill circle-icon text-primary-600 w-auto"></i> Users List</a>
             </li> --}}
-            {{-- <li>
-              <a href="users-grid.html"><i class="ri-circle-fill circle-icon text-warning-main w-auto"></i> Users Grid</a>
-            </li> --}}
+
             <li>
               <a href="{{url('add-user')}}"><i class="ri-circle-fill circle-icon text-info-main w-auto"></i> Add User</a>
+            </li>
+    <li>
+              <a href="{{url('list-user')}}"><i class="ri-circle-fill circle-icon text-warning-main w-auto"></i> List User</a>
             </li>
             {{-- <li>
               <a href="view-profile.html"><i class="ri-circle-fill circle-icon text-danger-main w-auto"></i> View Profile</a>
@@ -330,7 +332,7 @@
           <button type="button" data-theme-toggle class="w-40-px h-40-px bg-neutral-200 rounded-circle d-flex justify-content-center align-items-center"></button>
           <div class="dropdown d-none d-sm-inline-block">
             <button class="has-indicator w-40-px h-40-px bg-neutral-200 rounded-circle d-flex justify-content-center align-items-center" type="button" data-bs-toggle="dropdown">
-              <img src="assets/images/lang-flag.png" alt="image" class="w-24 h-24 object-fit-cover rounded-circle">
+              <img src="{{url('fronted/images/lang-flag.png')}}" alt="image" class="w-24 h-24 object-fit-cover rounded-circle">
             </button>
             <div class="dropdown-menu to-top dropdown-menu-sm">
               <div class="py-12 px-16 radius-8 bg-primary-50 mb-16 d-flex align-items-center justify-content-between gap-2">
@@ -343,7 +345,7 @@
                 <div class="form-check style-check d-flex align-items-center justify-content-between mb-16">
                   <label class="form-check-label line-height-1 fw-medium text-secondary-light" for="english">
                     <span class="text-black hover-bg-transparent hover-text-primary d-flex align-items-center gap-3">
-                      <img src="assets/images/flags/flag1.png" alt="" class="w-36-px h-36-px bg-success-subtle text-success-main rounded-circle flex-shrink-0">
+                      <img src="{{url('fronted/images/flags/flag1.png')}}" alt="" class="w-36-px h-36-px bg-success-subtle text-success-main rounded-circle flex-shrink-0">
                       <span class="text-md fw-semibold mb-0">English</span>
                     </span>
                   </label>
@@ -353,7 +355,7 @@
                 <div class="form-check style-check d-flex align-items-center justify-content-between mb-16">
                   <label class="form-check-label line-height-1 fw-medium text-secondary-light" for="japan">
                     <span class="text-black hover-bg-transparent hover-text-primary d-flex align-items-center gap-3">
-                      <img src="assets/images/flags/flag2.png" alt="" class="w-36-px h-36-px bg-success-subtle text-success-main rounded-circle flex-shrink-0">
+                      <img src="{{url('fronted/images/flags/flag2.png')}}" alt="" class="w-36-px h-36-px bg-success-subtle text-success-main rounded-circle flex-shrink-0">
                       <span class="text-md fw-semibold mb-0">Japan</span>
                     </span>
                   </label>
@@ -363,7 +365,7 @@
                 <div class="form-check style-check d-flex align-items-center justify-content-between mb-16">
                   <label class="form-check-label line-height-1 fw-medium text-secondary-light" for="france">
                     <span class="text-black hover-bg-transparent hover-text-primary d-flex align-items-center gap-3">
-                      <img src="assets/images/flags/flag3.png" alt="" class="w-36-px h-36-px bg-success-subtle text-success-main rounded-circle flex-shrink-0">
+                      <img src="{{url('fronted/images/flags/flag3.png')}}" alt="" class="w-36-px h-36-px bg-success-subtle text-success-main rounded-circle flex-shrink-0">
                       <span class="text-md fw-semibold mb-0">France</span>
                     </span>
                   </label>
@@ -373,7 +375,7 @@
                 <div class="form-check style-check d-flex align-items-center justify-content-between mb-16">
                   <label class="form-check-label line-height-1 fw-medium text-secondary-light" for="germany">
                     <span class="text-black hover-bg-transparent hover-text-primary d-flex align-items-center gap-3">
-                      <img src="assets/images/flags/flag4.png" alt="" class="w-36-px h-36-px bg-success-subtle text-success-main rounded-circle flex-shrink-0">
+                      <img src="{{url('fronted/images/flags/flag4.png')}}" alt="" class="w-36-px h-36-px bg-success-subtle text-success-main rounded-circle flex-shrink-0">
                       <span class="text-md fw-semibold mb-0">Germany</span>
                     </span>
                   </label>
@@ -383,7 +385,7 @@
                 <div class="form-check style-check d-flex align-items-center justify-content-between mb-16">
                   <label class="form-check-label line-height-1 fw-medium text-secondary-light" for="korea">
                     <span class="text-black hover-bg-transparent hover-text-primary d-flex align-items-center gap-3">
-                      <img src="assets/images/flags/flag5.png" alt="" class="w-36-px h-36-px bg-success-subtle text-success-main rounded-circle flex-shrink-0">
+                      <img src="{{url('fronted/images/flags/flag5.png')}}" alt="" class="w-36-px h-36-px bg-success-subtle text-success-main rounded-circle flex-shrink-0">
                       <span class="text-md fw-semibold mb-0">South Korea</span>
                     </span>
                   </label>
@@ -393,7 +395,7 @@
                 <div class="form-check style-check d-flex align-items-center justify-content-between mb-16">
                   <label class="form-check-label line-height-1 fw-medium text-secondary-light" for="bangladesh">
                     <span class="text-black hover-bg-transparent hover-text-primary d-flex align-items-center gap-3">
-                      <img src="assets/images/flags/flag6.png" alt="" class="w-36-px h-36-px bg-success-subtle text-success-main rounded-circle flex-shrink-0">
+                      <img src="{{url('fronted/images/flags/flag6.png')}}" alt="" class="w-36-px h-36-px bg-success-subtle text-success-main rounded-circle flex-shrink-0">
                       <span class="text-md fw-semibold mb-0">Bangladesh</span>
                     </span>
                   </label>
@@ -403,7 +405,7 @@
                 <div class="form-check style-check d-flex align-items-center justify-content-between mb-16">
                   <label class="form-check-label line-height-1 fw-medium text-secondary-light" for="india">
                     <span class="text-black hover-bg-transparent hover-text-primary d-flex align-items-center gap-3">
-                      <img src="assets/images/flags/flag7.png" alt="" class="w-36-px h-36-px bg-success-subtle text-success-main rounded-circle flex-shrink-0">
+                      <img src="{{url('fronted/images/flags/flag7.png')}}" alt="" class="w-36-px h-36-px bg-success-subtle text-success-main rounded-circle flex-shrink-0">
                       <span class="text-md fw-semibold mb-0">India</span>
                     </span>
                   </label>
@@ -412,7 +414,7 @@
                 <div class="form-check style-check d-flex align-items-center justify-content-between">
                   <label class="form-check-label line-height-1 fw-medium text-secondary-light" for="canada">
                     <span class="text-black hover-bg-transparent hover-text-primary d-flex align-items-center gap-3">
-                      <img src="assets/images/flags/flag8.png" alt="" class="w-36-px h-36-px bg-success-subtle text-success-main rounded-circle flex-shrink-0">
+                      <img src="{{url('fronted/images/flags/flag8.png')}}" alt="" class="w-36-px h-36-px bg-success-subtle text-success-main rounded-circle flex-shrink-0">
                       <span class="text-md fw-semibold mb-0">Canada</span>
                     </span>
                   </label>
@@ -421,7 +423,6 @@
               </div>
             </div>
           </div><!-- Language dropdown end -->
-
           <div class="dropdown">
             <button class="has-indicator w-40-px h-40-px bg-neutral-200 rounded-circle d-flex justify-content-center align-items-center" type="button" data-bs-toggle="dropdown">
               <iconify-icon icon="mage:email" class="text-primary-light text-xl"></iconify-icon>
@@ -439,7 +440,7 @@
               <a href="javascript:void(0)" class="px-24 py-12 d-flex align-items-start gap-3 mb-2 justify-content-between">
                 <div class="text-black hover-bg-transparent hover-text-primary d-flex align-items-center gap-3">
                   <span class="w-40-px h-40-px rounded-circle flex-shrink-0 position-relative">
-                    <img src="assets/images/notification/profile-3.png" alt="">
+                    <img src="{{url('fronted/images/notification/profile-3.png')}}" alt="">
                     <span class="w-8-px h-8-px bg-success-main rounded-circle position-absolute end-0 bottom-0"></span>
                   </span>
                   <div>
@@ -456,7 +457,7 @@
               <a href="javascript:void(0)" class="px-24 py-12 d-flex align-items-start gap-3 mb-2 justify-content-between">
                 <div class="text-black hover-bg-transparent hover-text-primary d-flex align-items-center gap-3">
                   <span class="w-40-px h-40-px rounded-circle flex-shrink-0 position-relative">
-                    <img src="assets/images/notification/profile-4.png" alt="">
+                    <img src="{{url('fronted/images/notification/profile-4.png')}}" alt="">
                     <span class="w-8-px h-8-px  bg-neutral-300 rounded-circle position-absolute end-0 bottom-0"></span>
                   </span>
                   <div>
@@ -473,7 +474,7 @@
               <a href="javascript:void(0)" class="px-24 py-12 d-flex align-items-start gap-3 mb-2 justify-content-between bg-neutral-50">
                 <div class="text-black hover-bg-transparent hover-text-primary d-flex align-items-center gap-3">
                   <span class="w-40-px h-40-px rounded-circle flex-shrink-0 position-relative">
-                    <img src="assets/images/notification/profile-5.png" alt="">
+                    <img src="{{url('fronted/images/notification/profile-5.png')}}" alt="">
                     <span class="w-8-px h-8-px bg-success-main rounded-circle position-absolute end-0 bottom-0"></span>
                   </span>
                   <div>
@@ -490,7 +491,7 @@
               <a href="javascript:void(0)" class="px-24 py-12 d-flex align-items-start gap-3 mb-2 justify-content-between bg-neutral-50">
                 <div class="text-black hover-bg-transparent hover-text-primary d-flex align-items-center gap-3">
                   <span class="w-40-px h-40-px rounded-circle flex-shrink-0 position-relative">
-                    <img src="assets/images/notification/profile-6.png" alt="">
+                    <img src="{{url('fronted/images/notification/profile-6.png')}}" alt="">
                     <span class="w-8-px h-8-px bg-neutral-300 rounded-circle position-absolute end-0 bottom-0"></span>
                   </span>
                   <div>
@@ -507,7 +508,7 @@
               <a href="javascript:void(0)" class="px-24 py-12 d-flex align-items-start gap-3 mb-2 justify-content-between">
                 <div class="text-black hover-bg-transparent hover-text-primary d-flex align-items-center gap-3">
                   <span class="w-40-px h-40-px rounded-circle flex-shrink-0 position-relative">
-                    <img src="assets/images/notification/profile-7.png" alt="">
+                    <img src="{{url('fronted/images/notification/profile-7.png')}}" alt="">
                     <span class="w-8-px h-8-px bg-success-main rounded-circle position-absolute end-0 bottom-0"></span>
                   </span>
                   <div>
@@ -557,7 +558,7 @@
               <a href="javascript:void(0)" class="px-24 py-12 d-flex align-items-start gap-3 mb-2 justify-content-between bg-neutral-50">
                 <div class="text-black hover-bg-transparent hover-text-primary d-flex align-items-center gap-3">
                   <span class="w-44-px h-44-px bg-success-subtle text-success-main rounded-circle d-flex justify-content-center align-items-center flex-shrink-0">
-                    <img src="assets/images/notification/profile-1.png" alt="">
+                    <img src="{{url('fronted/images/notification/profile-1.png')}}" alt="">
                   </span>
                   <div>
                     <h6 class="text-md fw-semibold mb-4">Ronald Richards</h6>
@@ -583,7 +584,7 @@
               <a href="javascript:void(0)" class="px-24 py-12 d-flex align-items-start gap-3 mb-2 justify-content-between bg-neutral-50">
                 <div class="text-black hover-bg-transparent hover-text-primary d-flex align-items-center gap-3">
                   <span class="w-44-px h-44-px bg-success-subtle text-success-main rounded-circle d-flex justify-content-center align-items-center flex-shrink-0">
-                    <img src="assets/images/notification/profile-2.png" alt="">
+                    <img src="{{url('fronted/images/notification/profile-2.png')}}" alt="">
                   </span>
                   <div>
                     <h6 class="text-md fw-semibold mb-4">Annette Black</h6>
@@ -616,7 +617,7 @@
 
           <div class="dropdown">
             <button class="d-flex justify-content-center align-items-center rounded-circle" type="button" data-bs-toggle="dropdown">
-              <img src="assets/images/user.png" alt="image" class="w-40-px h-40-px object-fit-cover rounded-circle">
+              <img src="{{url('fronted/images/user.png')}}" alt="image" class="w-40-px h-40-px object-fit-cover rounded-circle">
             </button>
             <div class="dropdown-menu to-top dropdown-menu-sm">
               <div class="py-12 px-16 radius-8 bg-primary-50 mb-16 d-flex align-items-center justify-content-between gap-2">
@@ -665,81 +666,210 @@
       </li>
       <li>-</li>
       <li class="fw-medium">Add User</li>
+
     </ul>
   </div>
+  @if(session('success'))
+  <div class="alert alert-primary">
+  <p>{{session('success')}}</p>
+  </div>
+  @endif
+  @if(session('error'))
+  <div class="alert alert-danger">
+  <p>{{session('error')}}</p>
+  </div>
+  @endif
+  <div class="col-lg-12">
+    <div class="card">
+        <div class="card-body">
+            <form class="row gy-3 needs-validation" action="{{ route('adding') }}" method="POST" enctype="multipart/form-data" novalidate>
+                @csrf
 
-          <div class="card h-100 p-0 radius-12">
-              <div class="card-body p-24">
-                  <div class="row justify-content-center">
-                      <div class="col-xxl-6 col-xl-8 col-lg-10">
-                          <div class="card border">
-                              <div class="card-body">
-                                  <h6 class="text-md text-primary-light mb-16">Profile Image</h6>
+                <div class="col-md-6">
+                    <label for="file" class="form-label">Image</label>
+                    <input type="file" class="form-control @error('file') is-invalid @enderror" id="file" name="file" required>
+                    @error('file')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                </div>
 
-                                  <!-- Upload Image Start -->
-                                  <div class="mb-24 mt-16">
-                                      <div class="avatar-upload">
-                                          <div class="avatar-edit position-absolute bottom-0 end-0 me-24 mt-16 z-1 cursor-pointer">
-                                              <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" hidden>
-                                              <label for="imageUpload" class="w-32-px h-32-px d-flex justify-content-center align-items-center bg-primary-50 text-primary-600 border border-primary-600 bg-hover-primary-100 text-lg rounded-circle">
-                                                  <iconify-icon icon="solar:camera-outline" class="icon"></iconify-icon>
-                                              </label>
-                                          </div>
-                                          <div class="avatar-preview">
-                                              <div id="imagePreview"> </div>
-                                          </div>
-                                      </div>
-                                  </div>
-                                  <!-- Upload Image End -->
+                <div class="col-md-6">
+                    <label for="firstname" class="form-label">First Name</label>
+                    <input type="text" class="form-control @error('firstname') is-invalid @enderror" id="firstname" name="firstname" placeholder="Enter First Name" value="{{ old('firstname') }}" required>
+                    @error('firstname')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                </div>
 
-                                  <form action="#">
-                                      <div class="mb-20">
-                                          <label for="name" class="form-label fw-semibold text-primary-light text-sm mb-8">Full Name <span class="text-danger-600">*</span></label>
-                                          <input type="text" class="form-control radius-8" id="name" placeholder="Enter Full Name">
-                                      </div>
-                                      <div class="mb-20">
-                                          <label for="email" class="form-label fw-semibold text-primary-light text-sm mb-8">Email <span class="text-danger-600">*</span></label>
-                                          <input type="email" class="form-control radius-8" id="email" placeholder="Enter email address">
-                                      </div>
-                                      <div class="mb-20">
-                                          <label for="number" class="form-label fw-semibold text-primary-light text-sm mb-8">Phone</label>
-                                          <input type="email" class="form-control radius-8" id="number" placeholder="Enter phone number">
-                                      </div>
-                                      <div class="mb-20">
-                                          <label for="depart" class="form-label fw-semibold text-primary-light text-sm mb-8">Department <span class="text-danger-600">*</span> </label>
-                                          <select class="form-control radius-8 form-select" id="depart">
-                                              <option>Enter Event Title </option>
-                                              <option>Enter Event Title One </option>
-                                              <option>Enter Event Title Two</option>
-                                          </select>
-                                      </div>
-                                      <div class="mb-20">
-                                          <label for="desig" class="form-label fw-semibold text-primary-light text-sm mb-8">Designation <span class="text-danger-600">*</span> </label>
-                                          <select class="form-control radius-8 form-select" id="desig">
-                                              <option>Enter Designation Title </option>
-                                              <option>Enter Designation Title One </option>
-                                              <option>Enter Designation Title Two</option>
-                                          </select>
-                                      </div>
-                                      <div class="mb-20">
-                                          <label for="desc" class="form-label fw-semibold text-primary-light text-sm mb-8">Description</label>
-                                          <textarea name="#0" class="form-control radius-8" id="desc" placeholder="Write description..."></textarea>
-                                      </div>
-                                      <div class="d-flex align-items-center justify-content-center gap-3">
-                                          <button type="button" class="border border-danger-600 bg-hover-danger-200 text-danger-600 text-md px-56 py-11 radius-8">
-                                              Cancel
-                                          </button>
-                                          <button type="submit" class="btn btn-primary border border-primary-600 text-md px-56 py-12 radius-8">
-                                              Save
-                                          </button>
-                                      </div>
-                                  </form>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-          </div>
+                <div class="col-md-6">
+                    <label for="lastname" class="form-label">Last Name</label>
+                    <input type="text" class="form-control @error('lastname') is-invalid @enderror" id="lastname" name="lastname" placeholder="Enter Last Name" value="{{ old('lastname') }}" required>
+                    @error('lastname')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                </div>
+
+                <div class="col-md-6">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email" placeholder="Enter Email" value="{{ old('email') }}" required>
+                    @error('email')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                </div>
+
+                <div class="col-md-6">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" class="form-control @error('password') is-invalid @enderror" id="password" name="password" placeholder="*******" required>
+                    @error('password')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                </div>
+
+                <div class="col-md-6">
+                    <label for="phone" class="form-label">Phone</label>
+                    <input type="text" class="form-control @error('phone') is-invalid @enderror" id="phone" name="phone" placeholder="+91-8559083842" value="{{ old('phone') }}" required>
+                    @error('phone')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                </div>
+
+                <div class="col-md-6">
+                    <label for="state" class="form-label">State</label>
+                    <input type="text" class="form-control @error('state') is-invalid @enderror" id="state" name="state" placeholder="Enter State" value="{{ old('state') }}" required>
+                    @error('state')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                </div>
+
+                <div class="col-md-6">
+                    <label for="city" class="form-label">City</label>
+                    <input type="text" class="form-control @error('city') is-invalid @enderror" id="city" name="city" placeholder="Enter City" value="{{ old('city') }}" required>
+                    @error('city')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                </div>
+
+                <div class="col-md-6">
+                    <label for="pincode" class="form-label">Pin code</label>
+                    <input type="text" class="form-control @error('pincode') is-invalid @enderror" id="pincode" name="pincode" placeholder="144008" value="{{ old('pincode') }}" required>
+                    @error('pincode')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                </div>
+
+                <div class="col-md-6">
+                    <label for="address" class="form-label">Address</label>
+                    <input type="text" class="form-control @error('address') is-invalid @enderror" id="address" name="address" placeholder="Enter Address" value="{{ old('address') }}" required>
+                    @error('address')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                </div>
+
+                <div class="col-md-12">
+                    <button class="btn btn-primary" type="submit">Submit form</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+  {{-- <div class="card h-100 p-0 radius-12">
+    <div class="card-body p-24">
+        <div class="row justify-content-center">
+            <div class="col-xxl-6 col-xl-8 col-lg-10">
+                <div class="card border">
+                    <div class="card-body">
+                        <h6 class="text-md text-primary-light mb-16">Profile Image</h6>
+                        <form action="#">
+                            @csrf
+                            <!-- Upload Image Start -->
+                            <div class="mb-24 mt-16">
+                                <div class="avatar-upload">
+                                    <div class="avatar-edit position-absolute bottom-0 end-0 me-24 mt-16 z-1 cursor-pointer">
+                                        <input type="file" id="imageUpload" name="imageUpload" accept=".png, .jpg, .jpeg" hidden>
+                                        <label for="imageUpload" class="w-32-px h-32-px d-flex justify-content-center align-items-center bg-primary-50 text-primary-600 border border-primary-600 bg-hover-primary-100 text-lg rounded-circle" aria-label="Upload Image">
+                                            <iconify-icon icon="solar:camera-outline" class="icon"></iconify-icon>
+                                        </label>
+                                    </div>
+                                    <div class="avatar-preview">
+                                        <div id="imagePreview"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Upload Image End -->
+
+                            <div class="mb-20">
+                                <label for="firstname" class="form-label fw-semibold text-primary-light text-sm mb-8">First Name <span class="text-danger-600">*</span></label>
+                                <input type="text" class="form-control radius-8" name="firstname" id="firstname" placeholder="john" required autofocus>
+                            </div>
+                            <div class="mb-20">
+                                <label for="lastname" class="form-label fw-semibold text-primary-light text-sm mb-8">Last Name <span class="text-danger-600">*</span></label>
+                                <input type="text" class="form-control radius-8" name="lastname" id="lastname" placeholder="Dee" required>
+                            </div>
+                            <div class="mb-20">
+                                <label for="email" class="form-label fw-semibold text-primary-light text-sm mb-8">Email <span class="text-danger-600">*</span></label>
+                                <input type="email" class="form-control radius-8" name="email" id="email" placeholder="info@gmail.com" required>
+                            </div>
+                            <div class="mb-20">
+                                <label for="password" class="form-label fw-semibold text-primary-light text-sm mb-8">Password <span class="text-danger-600">*</span></label>
+                                <input type="password" class="form-control radius-8" id="password" name="password" placeholder="*******" required>
+                            </div>
+                            <div class="mb-20">
+                                <label for="number" class="form-label fw-semibold text-primary-light text-sm mb-8">Phone</label>
+                                <input type="tel" class="form-control radius-8" name="number" id="number" placeholder="9865843468">
+                            </div>
+                            <div class="mb-20">
+                                <label for="address" class="form-label fw-semibold text-primary-light text-sm mb-8">Address</label>
+                                <input type="text" class="form-control radius-8" name="address" id="address" placeholder="H-NO. 979/17 ">
+                            </div>
+                            <div class="mb-20">
+                                <label for="State" class="form-label fw-semibold text-primary-light text-sm mb-8">state</label>
+                                <input type="text" class="form-control radius-8" name="state" id="state" placeholder="Punjab">
+                            </div>
+                            <div class="mb-20">
+                                <label for="city" class="form-label fw-semibold text-primary-light text-sm mb-8">city</label>
+                                <input type="text" class="form-control radius-8" name="city" id="city" placeholder="jalandhar">
+                            </div>
+                            <div class="mb-20">
+                                <label for="pincode" class="form-label fw-semibold text-primary-light text-sm mb-8">Pincode</label>
+                                <input type="text" class="form-control radius-8" name="pincode" id="pincode" placeholder="144008">
+                            </div>
+                            <div class="d-flex align-items-center justify-content-center gap-3">
+                                <button type="reset" class="border border-danger-600 bg-hover-danger-200 text-danger-600 text-md px-56 py-11 radius-8">
+                                    Cancel
+                                </button>
+                                <button type="submit" class="btn btn-primary border border-primary-600 text-md px-56 py-12 radius-8">
+                                    Save
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> --}}
+
       </div>
 
       <footer class="d-footer">
@@ -753,4 +883,23 @@
     </div>
   </footer>
     </main>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    // JavaScript to handle form validation feedback
+    (function () {
+        'use strict'
+        var forms = document.querySelectorAll('.needs-validation')
+        Array.prototype.slice.call(forms)
+            .forEach(function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (!form.checkValidity()) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                    }
+                    form.classList.add('was-validated')
+                }, false)
+            })
+    })()
+</script>
 @endsection

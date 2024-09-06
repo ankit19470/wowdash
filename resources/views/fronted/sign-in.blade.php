@@ -30,9 +30,9 @@
                 @csrf
                 <div class="position-relative mb-20">
                 <div class="icon-field ">
-                    <span class="icon top-50 translate-middle-y">
+                    {{-- <span class="icon top-50 translate-middle-y">
                         <iconify-icon icon="mage:email"></iconify-icon>
-                    </span>
+                    </span> --}}
                     <input type="email" name="email" class="form-control h-56-px bg-neutral-50 radius-12" placeholder="Email" value="{{ old('email') }}" id="email" onblur="validateEmail()">
                 </div>
                 @error('email') <span id="error_email" class="text-danger">{{$message}}</span>
@@ -41,9 +41,9 @@
                 </div>
                 <div class="position-relative mb-20">
                     <div class="icon-field">
-                        <span class="icon top-50 translate-middle-y">
+                        {{-- <span class="icon top-50 translate-middle-y">
                             <iconify-icon icon="solar:lock-password-outline"></iconify-icon>
-                        </span>
+                        </span> --}}
                         <input type="password" name="password" class="form-control h-56-px bg-neutral-50 radius-12" id="your-password" placeholder="Password" value="{{ old('password') }}" onblur="validatePassword()">
                     </div>
                 @error('password') <span class="text-danger">{{$message}}</span>@enderror

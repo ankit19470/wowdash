@@ -17,7 +17,7 @@ class LoginController extends Controller
         ]);
         if(Auth::attempt($data))
         {
-          return redirect('/dashboard')->with('success', 'Login Successfully !!');
+          return redirect('/add-user')->with('success', 'Login Successfully !!');
         }
         return redirect()->back()->with('error', 'Invalid credentials, please try again.');
     }

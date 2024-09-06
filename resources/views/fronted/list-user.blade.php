@@ -1,15 +1,15 @@
+
 @extends('fronted.layout.main')
 @section('main-container')
-
 <aside class="sidebar">
     <button type="button" class="sidebar-close-btn">
       <iconify-icon icon="radix-icons:cross-2"></iconify-icon>
     </button>
     <div>
       <a href="index.html" class="sidebar-logo">
-        <img src="assets/images/logo.png" alt="site logo" class="light-logo">
-        <img src="assets/images/logo-light.png" alt="site logo" class="dark-logo">
-        <img src="assets/images/logo-icon.png" alt="site logo" class="logo-icon">
+        <img src="{{url('fronted/logo/dw_logo.png')}}" alt="site logo" class="light-logo">
+        <img src="{{url('fronted/images/logo-light.png')}}" alt="site logo" class="dark-logo">
+        <img src="{{url('fronted/images/logo-icon.png')}}" alt="site logo" class="logo-icon">
       </a>
     </div>
     <div class="sidebar-menu-area">
@@ -213,11 +213,12 @@
             {{-- <li>
               <a href="users-list.html"><i class="ri-circle-fill circle-icon text-primary-600 w-auto"></i> Users List</a>
             </li> --}}
-            {{-- <li>
-              <a href="users-grid.html"><i class="ri-circle-fill circle-icon text-warning-main w-auto"></i> Users Grid</a>
-            </li> --}}
+
             <li>
               <a href="{{url('add-user')}}"><i class="ri-circle-fill circle-icon text-info-main w-auto"></i> Add User</a>
+            </li>
+    <li>
+              <a href="{{url('list-user')}}"><i class="ri-circle-fill circle-icon text-warning-main w-auto"></i> List User</a>
             </li>
             {{-- <li>
               <a href="view-profile.html"><i class="ri-circle-fill circle-icon text-danger-main w-auto"></i> View Profile</a>
@@ -306,9 +307,8 @@
       </ul>
     </div>
   </aside>
-
   <main class="dashboard-main">
-      <div class="navbar-header">
+    <div class="navbar-header">
     <div class="row align-items-center justify-content-between">
       <div class="col-auto">
         <div class="d-flex flex-wrap align-items-center gap-4">
@@ -653,9 +653,10 @@
     </div>
   </div>
 
-      <div class="dashboard-main-body">
-          <div class="d-flex flex-wrap align-items-center justify-content-between gap-3 mb-24">
-    <h6 class="fw-semibold mb-0">Add User</h6>
+    <div class="dashboard-main-body">
+
+      <div class="d-flex flex-wrap align-items-center justify-content-between gap-3 mb-24">
+    <h6 class="fw-semibold mb-0">Basic Table</h6>
     <ul class="d-flex align-items-center gap-2">
       <li class="fw-medium">
         <a href="index.html" class="d-flex align-items-center gap-1 hover-text-primary">
@@ -664,85 +665,61 @@
         </a>
       </li>
       <li>-</li>
-      <li class="fw-medium">Add User</li>
+      <li class="fw-medium">Basic Table</li>
     </ul>
   </div>
 
-          <div class="card h-100 p-0 radius-12">
-              <div class="card-body p-24">
-                  <div class="row justify-content-center">
-                      <div class="col-xxl-6 col-xl-8 col-lg-10">
-                          <div class="card border">
-                              <div class="card-body">
-                                  <h6 class="text-md text-primary-light mb-16">Profile Image</h6>
+      <div class="card basic-data-table">
+        <div class="card-header">
+          <h5 class="card-title mb-0">Default Datatables</h5>
+        </div>
+        <div class="card-body">
+            <table class="table bordered-table mb-0" id="dataTable" data-page-length='10'>
+                <thead>
+                    <tr>
+                        <th scope="col">Id</th>
+                        <th scope="col">Image</th>
+                        <th scope="col">First Name</th>
+                        <th scope="col">Last Name</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Phone</th>
+                        <th scope="col">Address</th>
+                        <th scope="col">PinCode</th>
+                        <th scope="col">City</th>
+                        <th scope="col">State</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($users as $user)
+                        <tr>
+                            <td>{{ $user->id }}</td>
+                            <td>
+                                @if($user->file != "")
+                                    <img src="{{ asset('/storage/assets/uploads/'.$user->file) }}" width="50" height="50" alt="">
+                                @endif
+                            </td>
+                            <td>{{ $user->firstname }}</td>
+                            <td>{{ $user->lastname }}</td>
+                            <td>{{ $user->email }}</td>
+                            <td>{{ $user->phone }}</td>
+                            <td>{{ $user->address }}</td>
+                            <td>{{ $user->pincode }}</td>
+                            <td>{{ $user->city }}</td>
+                            <td>{{ $user->state }}</td>
+                            <td>
+                                <!-- Add action buttons here (e.g., Edit, Delete) -->
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
 
-                                  <!-- Upload Image Start -->
-                                  <div class="mb-24 mt-16">
-                                      <div class="avatar-upload">
-                                          <div class="avatar-edit position-absolute bottom-0 end-0 me-24 mt-16 z-1 cursor-pointer">
-                                              <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" hidden>
-                                              <label for="imageUpload" class="w-32-px h-32-px d-flex justify-content-center align-items-center bg-primary-50 text-primary-600 border border-primary-600 bg-hover-primary-100 text-lg rounded-circle">
-                                                  <iconify-icon icon="solar:camera-outline" class="icon"></iconify-icon>
-                                              </label>
-                                          </div>
-                                          <div class="avatar-preview">
-                                              <div id="imagePreview"> </div>
-                                          </div>
-                                      </div>
-                                  </div>
-                                  <!-- Upload Image End -->
-
-                                  <form action="#">
-                                      <div class="mb-20">
-                                          <label for="name" class="form-label fw-semibold text-primary-light text-sm mb-8">Full Name <span class="text-danger-600">*</span></label>
-                                          <input type="text" class="form-control radius-8" id="name" placeholder="Enter Full Name">
-                                      </div>
-                                      <div class="mb-20">
-                                          <label for="email" class="form-label fw-semibold text-primary-light text-sm mb-8">Email <span class="text-danger-600">*</span></label>
-                                          <input type="email" class="form-control radius-8" id="email" placeholder="Enter email address">
-                                      </div>
-                                      <div class="mb-20">
-                                          <label for="number" class="form-label fw-semibold text-primary-light text-sm mb-8">Phone</label>
-                                          <input type="email" class="form-control radius-8" id="number" placeholder="Enter phone number">
-                                      </div>
-                                      <div class="mb-20">
-                                          <label for="depart" class="form-label fw-semibold text-primary-light text-sm mb-8">Department <span class="text-danger-600">*</span> </label>
-                                          <select class="form-control radius-8 form-select" id="depart">
-                                              <option>Enter Event Title </option>
-                                              <option>Enter Event Title One </option>
-                                              <option>Enter Event Title Two</option>
-                                          </select>
-                                      </div>
-                                      <div class="mb-20">
-                                          <label for="desig" class="form-label fw-semibold text-primary-light text-sm mb-8">Designation <span class="text-danger-600">*</span> </label>
-                                          <select class="form-control radius-8 form-select" id="desig">
-                                              <option>Enter Designation Title </option>
-                                              <option>Enter Designation Title One </option>
-                                              <option>Enter Designation Title Two</option>
-                                          </select>
-                                      </div>
-                                      <div class="mb-20">
-                                          <label for="desc" class="form-label fw-semibold text-primary-light text-sm mb-8">Description</label>
-                                          <textarea name="#0" class="form-control radius-8" id="desc" placeholder="Write description..."></textarea>
-                                      </div>
-                                      <div class="d-flex align-items-center justify-content-center gap-3">
-                                          <button type="button" class="border border-danger-600 bg-hover-danger-200 text-danger-600 text-md px-56 py-11 radius-8">
-                                              Cancel
-                                          </button>
-                                          <button type="submit" class="btn btn-primary border border-primary-600 text-md px-56 py-12 radius-8">
-                                              Save
-                                          </button>
-                                      </div>
-                                  </form>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-          </div>
+        </div>
       </div>
+    </div>
 
-      <footer class="d-footer">
+    <footer class="d-footer">
     <div class="row align-items-center justify-content-between">
       <div class="col-auto">
         <p class="mb-0">© 2024 WowDash. All Rights Reserved.</p>
@@ -752,5 +729,6 @@
       </div>
     </div>
   </footer>
-    </main>
+  </main>
+
 @endsection

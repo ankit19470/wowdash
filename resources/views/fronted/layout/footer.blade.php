@@ -39,6 +39,8 @@
     initializePasswordToggle('.toggle-password');
   // ========================= Password Show Hide Js End ===========================
 </script>
-
+<script>
+    let table = new DataTable('#dataTable');
+  </script>
 </body>
 </html>
