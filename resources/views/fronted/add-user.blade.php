@@ -7,9 +7,9 @@
       <iconify-icon icon="radix-icons:cross-2"></iconify-icon>
     </button>
     <div>
-      <a href="index.html" class="sidebar-logo">
-        <img src="{{url('fronted/logo/dw_logo.png')}}" alt="site logo" class="light-logo">
-        <img src="{{url('fronted/images/logo-light.png')}}" alt="site logo" class="dark-logo">
+      <a href="{{url('add-user')}}" class="sidebar-logo">
+        <img src="{{url('fronted/logo/dw_logo.png')}}" width="168" height="40" alt="site logo" class="light-logo">
+        <img src="{{url('fronted/logo/dw_logo.png')}}" width="168" height="40" alt="site logo" class="dark-logo">
         <img src="{{url('fronted/images/logo-icon.png')}}" alt="site logo" class="logo-icon">
       </a>
     </div>
@@ -682,7 +682,53 @@
   <div class="col-lg-12">
     <div class="card">
         <div class="card-body">
-            <form class="row gy-3 needs-validation" action="{{ route('adding') }}" method="POST" enctype="multipart/form-data" novalidate>
+            <script>
+                function validateForm() {
+                    var isValid = true;
+                    var firstname = document.getElementById("firstname").value;
+                    var lastname = document.getElementById("lastname").value;
+                    var email = document.getElementById("email").value;
+                    var password = document.getElementById("password").value;
+                    var phone = document.getElementById("phone").value;
+                    var pincode = document.getElementById("zipCode").value;
+                    var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                    var phonePattern = /^[6-9]\d{9}$/;
+                    var pinPattern = /^\d{6}$/;
+
+                    if (firstname == "" || firstname.length > 255) {
+                        alert("First name is required and must be less than 255 characters");
+                        isValid = false;
+                    }
+
+                    if (lastname == "" || lastname.length > 255) {
+                        alert("Last name is required and must be less than 255 characters");
+                        isValid = false;
+                    }
+
+                    if (!emailPattern.test(email)) {
+                        alert("Please enter a valid email address");
+                        isValid = false;
+                    }
+
+                    if (password.length < 6) {
+                        alert("Password must be at least 6 characters long");
+                        isValid = false;
+                    }
+
+                    if (!phonePattern.test(phone)) {
+                        alert("Phone number must be 10 digits and start with 6-9");
+                        isValid = false;
+                    }
+
+                    if (!pinPattern.test(pincode)) {
+                        alert("Pin code must be 6 digits");
+                        isValid = false;
+                    }
+
+                    return isValid;
+                }
+            </script>
+            <form class="row gy-3 needs-validation" action="{{ route('adding') }}" method="POST" enctype="multipart/form-data"  onsubmit="return validateForm()" novalidate>
                 @csrf
 
                 <div class="col-md-6">
@@ -737,7 +783,7 @@
 
                 <div class="col-md-6">
                     <label for="phone" class="form-label">Phone</label>
-                    <input type="text" class="form-control @error('phone') is-invalid @enderror" id="phone" name="phone" placeholder="+91-8559083842" value="{{ old('phone') }}" required>
+                    <input type="text" class="form-control @error('phone') is-invalid @enderror" minlength="10" maxlength="10" id="phone" name="phone" placeholder="+91-8559083842" value="{{ old('phone') }}" required>
                     @error('phone')
                         <div class="invalid-feedback">
                             {{ $message }}
@@ -767,7 +813,7 @@
 
                 <div class="col-md-6">
                     <label for="pincode" class="form-label">Pin code</label>
-                    <input type="text" class="form-control @error('pincode') is-invalid @enderror" id="pincode" name="pincode" placeholder="144008" value="{{ old('pincode') }}" required>
+                    <input type="text" class="form-control @error('pincode') is-invalid @enderror" minlength="6" maxlength="6" id="pincode" name="pincode" placeholder="144008" value="{{ old('pincode') }}" required>
                     @error('pincode')
                         <div class="invalid-feedback">
                             {{ $message }}

@@ -20,15 +20,25 @@ class AddUserController extends Controller
     {
         // Define validation rules
         $validator = Validator::make($req->all(), [
+            // 'file' => 'required|mimes:jpeg,png,jpg|max:2048',
+            // 'firstname' => 'required|string|max:255',
+            // 'lastname' => 'required|string|max:255',
+            // 'email' => 'required|email|unique:users,email',
+            // 'password' => 'required|string|min:6',
+            // 'phone' => 'required|digits:10|regex:/^[6-9]\d{9}$/',
+            // 'address' => 'required|string|max:255',
+            // 'city' => 'required|string|max:255',
+            // 'pincode' => 'required|string|max:10',
+            // 'state' => 'required|string|max:255',
             'file' => 'required|mimes:jpeg,png,jpg|max:2048',
             'firstname' => 'required|string|max:255',
             'lastname' => 'required|string|max:255',
-            'email' => 'required|email|unique:users,email',
+            'email' => 'required|email|unique:users,email|max:255',
             'password' => 'required|string|min:6',
-            'phone' => 'required|string|max:20',
+            'phone' => 'required|digits:10|regex:/^[6-9]\d{9}$/',
             'address' => 'required|string|max:255',
             'city' => 'required|string|max:255',
-            'pincode' => 'required|string|max:10',
+            'pincode' => 'required|digits:6',
             'state' => 'required|string|max:255',
         ]);
 
