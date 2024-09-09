@@ -23,6 +23,11 @@ Route::get('add-user',[AddUserController::class,'index'])->name('add-user');
 Route::post('/adding',[AddUserController::class,'AddUser'])->name('adding');
 
 Route::get('list-user',[AddUserController::class,'showUser'])->name('list-user');
+// Route::delete('/user/{id}', [AddUserController::class, 'destroy'])->name('user.destroy');
+Route::delete('/users/{id}', [AddUserController::class, 'destroy'])->name('users.destroy');
+// Route::get("/update-user/{id}", [AddUserController::class, 'updateData']);
+Route::get('/update-user/{id}', [AddUserController::class, 'edit'])->name('user.edit');
+Route::put('/update-user/{id}', [AddUserController::class, 'update'])->name('users.update');
 
 
 // Route::get('/add-user', function () {

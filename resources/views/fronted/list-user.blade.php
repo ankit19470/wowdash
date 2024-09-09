@@ -220,6 +220,10 @@
     <li>
               <a href="{{url('list-user')}}"><i class="ri-circle-fill circle-icon text-warning-main w-auto"></i> List User</a>
             </li>
+
+            {{-- <li>
+                <a href="{{url('update-user')}}"><i class="ri-circle-fill circle-icon text-info-main w-auto"></i> Update User</a>
+              </li> --}}
             {{-- <li>
               <a href="view-profile.html"><i class="ri-circle-fill circle-icon text-danger-main w-auto"></i> View Profile</a>
             </li> --}}
@@ -655,24 +659,29 @@
     <div class="dashboard-main-body">
 
       <div class="d-flex flex-wrap align-items-center justify-content-between gap-3 mb-24">
-    <h6 class="fw-semibold mb-0">Basic Table</h6>
+    <h6 class="fw-semibold mb-0">User List</h6>
     <ul class="d-flex align-items-center gap-2">
       <li class="fw-medium">
-        <a href="index.html" class="d-flex align-items-center gap-1 hover-text-primary">
+        {{-- <a href="index.html" class="d-flex align-items-center gap-1 hover-text-primary">
           <iconify-icon icon="solar:home-smile-angle-outline" class="icon text-lg"></iconify-icon>
           Dashboard
-        </a>
+        </a> --}}
       </li>
-      <li>-</li>
-      <li class="fw-medium">Basic Table</li>
+      {{-- <li>-</li> --}}
+      {{-- <li class="fw-medium">User Table</li> --}}
     </ul>
   </div>
 
       <div class="card basic-data-table">
-        <div class="card-header">
+        {{-- <div class="card-header">
           <h5 class="card-title mb-0">Default Datatables</h5>
-        </div>
+        </div> --}}
         <div class="card-body">
+            @if(session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
             <table class="table bordered-table mb-0" id="dataTable" data-page-length='10'>
                 <thead>
                     <tr>
@@ -707,7 +716,11 @@
                             <td>{{ $user->city }}</td>
                             <td>{{ $user->state }}</td>
                             <td>
-                                <!-- Add action buttons here (e.g., Edit, Delete) -->
+                              {{-- <a href={{"/update/".$user->id}} class="text-primary ti ti-pencil"></a> --}}
+
+                                <a href={{"/update-user/".$user->id}} class="text-primary bi bi-pencil"></a>
+                                <a class="text-danger bi bi-trash deleteUser" data-id="{{ $user->id }}" data-bs-toggle="modal" data-bs-target="#deleteModal">
+                                </a>
                             </td>
                         </tr>
                     @endforeach
@@ -717,6 +730,28 @@
         </div>
       </div>
     </div>
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form id="deleteForm" method="POST" action="">
+                    @csrf
+                    @method('DELETE')
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="deleteModalLabel">Confirm Delete</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Are you sure you want to delete this user?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
 
     <footer class="d-footer">
     <div class="row align-items-center justify-content-between">

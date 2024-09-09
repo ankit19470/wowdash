@@ -379,15 +379,14 @@
                 </li>
               </ul>
             </div>
-          </div><!-- Profile dropdown end -->
+          </div>
         </div>
       </div>
     </div>
   </div>
-
       <div class="dashboard-main-body">
           <div class="d-flex flex-wrap align-items-center justify-content-between gap-3 mb-24">
-    <h6 class="fw-semibold mb-0">Add User</h6>
+    <h6 class="fw-semibold mb-0">Update User</h6>
     <ul class="d-flex align-items-center gap-2">
       <li class="fw-medium">
         <a href="index.html" class="d-flex align-items-center gap-1 hover-text-primary">
@@ -396,10 +395,17 @@
         </a>
       </li>
       <li>-</li>
-      <li class="fw-medium">Add User</li>
+      <li class="fw-medium">Update User</li>
 
     </ul>
+
   </div>
+  {{-- @if($user->file)
+  <div class="mb-2">
+    <img src="{{ asset('storage/assets/uploads/' . $user->file) }}" alt="User Image" class="img-fluid rounded-circle" style="max-width: 200px; height: auto;">
+</div>
+
+@endif --}}
   @if(session('success'))
   <div class="alert alert-primary">
   <p>{{session('success')}}</p>
@@ -421,7 +427,7 @@
                     var email = document.getElementById("email").value;
                     var password = document.getElementById("password").value;
                     var phone = document.getElementById("phone").value;
-                    var pincode = document.getElementById("zipCode").value;
+                    var pincode = document.getElementById("pincode").value;
                     var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
                     var phonePattern = /^[6-9]\d{9}$/;
                     var pinPattern = /^\d{6}$/;
@@ -441,7 +447,7 @@
                         isValid = false;
                     }
 
-                    if (password.length < 6) {
+                    if (password && password.length < 6) {
                         alert("Password must be at least 6 characters long");
                         isValid = false;
                     }
@@ -459,12 +465,16 @@
                     return isValid;
                 }
             </script>
-            <form class="row gy-3 needs-validation" action="{{ route('adding') }}" method="POST" enctype="multipart/form-data"  onsubmit="return validateForm()" novalidate>
+            {{-- <form class="row gy-3 needs-validation" action="{{ route('users.update', $user->id) }}" method="POST" enctype="multipart/form-data" onsubmit="return validateForm()" novalidate>
                 @csrf
+                @method('PUT') --}}
+                <form class="row gy-3 needs-validation" action="{{ route('users.update', $user->id) }}" method="POST" enctype="multipart/form-data" onsubmit="return validateForm()" novalidate>
+                    @csrf
+                    @method('PUT')
 
                 <div class="col-md-6">
                     <label for="file" class="form-label">Image</label>
-                    <input type="file" class="form-control @error('file') is-invalid @enderror" id="file" name="file" required>
+                    <input type="file" class="form-control @error('file') is-invalid @enderror" id="file" name="file">
                     @error('file')
                         <div class="invalid-feedback">
                             {{ $message }}
@@ -474,7 +484,7 @@
 
                 <div class="col-md-6">
                     <label for="firstname" class="form-label">First Name</label>
-                    <input type="text" class="form-control @error('firstname') is-invalid @enderror" id="firstname" name="firstname" placeholder="Enter First Name" value="{{ old('firstname') }}" required>
+                    <input type="text" class="form-control @error('firstname') is-invalid @enderror" id="firstname" name="firstname" placeholder="Enter First Name" value="{{ old('firstname', $user->firstname) }}" required>
                     @error('firstname')
                         <div class="invalid-feedback">
                             {{ $message }}
@@ -484,7 +494,7 @@
 
                 <div class="col-md-6">
                     <label for="lastname" class="form-label">Last Name</label>
-                    <input type="text" class="form-control @error('lastname') is-invalid @enderror" id="lastname" name="lastname" placeholder="Enter Last Name" value="{{ old('lastname') }}" required>
+                    <input type="text" class="form-control @error('lastname') is-invalid @enderror" id="lastname" name="lastname" placeholder="Enter Last Name" value="{{ old('lastname', $user->lastname) }}" required>
                     @error('lastname')
                         <div class="invalid-feedback">
                             {{ $message }}
@@ -494,7 +504,7 @@
 
                 <div class="col-md-6">
                     <label for="email" class="form-label">Email</label>
-                    <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email" placeholder="Enter Email" value="{{ old('email') }}" required>
+                    <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email" placeholder="Enter Email" value="{{ old('email', $user->email) }}" required>
                     @error('email')
                         <div class="invalid-feedback">
                             {{ $message }}
@@ -502,30 +512,10 @@
                     @enderror
                 </div>
 
-                <div class="col-md-6">
-                    <label for="password" class="form-label">Password</label>
-                    <input type="password" class="form-control @error('password') is-invalid @enderror" id="password" name="password" placeholder="*******" required>
-                    @error('password')
-                        <div class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-                    @enderror
-                </div>
-
-                <div class="col-md-6">
-                    <label for="phone" class="form-label">Phone</label>
-                    <input type="text" class="form-control @error('phone') is-invalid @enderror" minlength="10" maxlength="10" id="phone" name="phone" placeholder="+91-8559083842" value="{{ old('phone') }}" required>
-                    @error('phone')
-                        <div class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-                    @enderror
-                </div>
-
                 {{-- <div class="col-md-6">
-                    <label for="state" class="form-label">State</label>
-                    <input type="text" class="form-control @error('state') is-invalid @enderror" id="state" name="state" placeholder="Enter State" value="{{ old('state') }}" required>
-                    @error('state')
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" class="form-control @error('password') is-invalid @enderror" id="password" name="password" placeholder="*******">
+                    @error('password')
                         <div class="invalid-feedback">
                             {{ $message }}
                         </div>
@@ -533,13 +523,18 @@
                 </div> --}}
 
                 <div class="col-md-6">
+                    <label for="phone" class="form-label">Phone</label>
+                    <input type="text" class="form-control @error('phone') is-invalid @enderror" id="phone" name="phone" placeholder="+91-8559083842" value="{{ old('phone', $user->phone) }}" required>
+                    @error('phone')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                </div>
+
+                <div class="col-md-6">
                     <label for="state" class="form-label">State</label>
-                    <select class="form-select @error('state') is-invalid @enderror" id="state" name="state" required>
-                        <option value="" disabled {{ old('state') == '' ? 'selected' : '' }}>Select State</option>
-
-                        <option value="Punjab" {{ old('state') == 'Punjab' ? 'selected' : '' }}>Punjab</option>
-
-                    </select>
+                    <input type="text" class="form-control @error('state') is-invalid @enderror" id="state" name="state" placeholder="Enter State" value="{{ old('state', $user->state) }}" required>
                     @error('state')
                         <div class="invalid-feedback">
                             {{ $message }}
@@ -547,27 +542,19 @@
                     @enderror
                 </div>
 
-             <div class="col-md-6">
-    <label for="city" class="form-label">City</label>
-    <select class="form-select @error('city') is-invalid @enderror" id="city" name="city" required>
-        <option value="" disabled selected>Select City</option>
-
-        <option value="Jalandhar" {{ old('city') == 'Jalandhar' ? 'selected' : '' }}>Jalandhar</option>
-
-
-
-    </select>
-    @error('city')
-        <div class="invalid-feedback">
-            {{ $message }}
-        </div>
-    @enderror
-</div>
-
+                <div class="col-md-6">
+                    <label for="city" class="form-label">City</label>
+                    <input type="text" class="form-control @error('city') is-invalid @enderror" id="city" name="city" placeholder="Enter City" value="{{ old('city', $user->city) }}" required>
+                    @error('city')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                </div>
 
                 <div class="col-md-6">
                     <label for="pincode" class="form-label">Pin code</label>
-                    <input type="text" class="form-control @error('pincode') is-invalid @enderror" minlength="6" maxlength="6" id="pincode" name="pincode" placeholder="144008" value="{{ old('pincode') }}" required>
+                    <input type="text" class="form-control @error('pincode') is-invalid @enderror" id="pincode" name="pincode" placeholder="144008" value="{{ old('pincode', $user->pincode) }}" required>
                     @error('pincode')
                         <div class="invalid-feedback">
                             {{ $message }}
@@ -577,7 +564,7 @@
 
                 <div class="col-md-6">
                     <label for="address" class="form-label">Address</label>
-                    <input type="text" class="form-control @error('address') is-invalid @enderror" id="address" name="address" placeholder="Enter Address" value="{{ old('address') }}" required>
+                    <input type="text" class="form-control @error('address') is-invalid @enderror" id="address" name="address" placeholder="Enter Address" value="{{ old('address', $user->address) }}" required>
                     @error('address')
                         <div class="invalid-feedback">
                             {{ $message }}
@@ -585,92 +572,14 @@
                     @enderror
                 </div>
 
-              <div class="col-md-12">
-    <button class="btn btn-primary" type="submit">Submit</button>
-    <button class="btn btn-secondary" type="button" onclick="window.location.href='{{ url()->previous() }}'">Cancel</button>
-</div>
-
+                <div class="col-md-12">
+                    <button class="btn btn-primary" type="submit">Update User</button>
+                </div>
             </form>
         </div>
     </div>
 </div>
 
-  {{-- <div class="card h-100 p-0 radius-12">
-    <div class="card-body p-24">
-        <div class="row justify-content-center">
-            <div class="col-xxl-6 col-xl-8 col-lg-10">
-                <div class="card border">
-                    <div class="card-body">
-                        <h6 class="text-md text-primary-light mb-16">Profile Image</h6>
-                        <form action="#">
-                            @csrf
-                            <!-- Upload Image Start -->
-                            <div class="mb-24 mt-16">
-                                <div class="avatar-upload">
-                                    <div class="avatar-edit position-absolute bottom-0 end-0 me-24 mt-16 z-1 cursor-pointer">
-                                        <input type="file" id="imageUpload" name="imageUpload" accept=".png, .jpg, .jpeg" hidden>
-                                        <label for="imageUpload" class="w-32-px h-32-px d-flex justify-content-center align-items-center bg-primary-50 text-primary-600 border border-primary-600 bg-hover-primary-100 text-lg rounded-circle" aria-label="Upload Image">
-                                            <iconify-icon icon="solar:camera-outline" class="icon"></iconify-icon>
-                                        </label>
-                                    </div>
-                                    <div class="avatar-preview">
-                                        <div id="imagePreview"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Upload Image End -->
-
-                            <div class="mb-20">
-                                <label for="firstname" class="form-label fw-semibold text-primary-light text-sm mb-8">First Name <span class="text-danger-600">*</span></label>
-                                <input type="text" class="form-control radius-8" name="firstname" id="firstname" placeholder="john" required autofocus>
-                            </div>
-                            <div class="mb-20">
-                                <label for="lastname" class="form-label fw-semibold text-primary-light text-sm mb-8">Last Name <span class="text-danger-600">*</span></label>
-                                <input type="text" class="form-control radius-8" name="lastname" id="lastname" placeholder="Dee" required>
-                            </div>
-                            <div class="mb-20">
-                                <label for="email" class="form-label fw-semibold text-primary-light text-sm mb-8">Email <span class="text-danger-600">*</span></label>
-                                <input type="email" class="form-control radius-8" name="email" id="email" placeholder="info@gmail.com" required>
-                            </div>
-                            <div class="mb-20">
-                                <label for="password" class="form-label fw-semibold text-primary-light text-sm mb-8">Password <span class="text-danger-600">*</span></label>
-                                <input type="password" class="form-control radius-8" id="password" name="password" placeholder="*******" required>
-                            </div>
-                            <div class="mb-20">
-                                <label for="number" class="form-label fw-semibold text-primary-light text-sm mb-8">Phone</label>
-                                <input type="tel" class="form-control radius-8" name="number" id="number" placeholder="9865843468">
-                            </div>
-                            <div class="mb-20">
-                                <label for="address" class="form-label fw-semibold text-primary-light text-sm mb-8">Address</label>
-                                <input type="text" class="form-control radius-8" name="address" id="address" placeholder="H-NO. 979/17 ">
-                            </div>
-                            <div class="mb-20">
-                                <label for="State" class="form-label fw-semibold text-primary-light text-sm mb-8">state</label>
-                                <input type="text" class="form-control radius-8" name="state" id="state" placeholder="Punjab">
-                            </div>
-                            <div class="mb-20">
-                                <label for="city" class="form-label fw-semibold text-primary-light text-sm mb-8">city</label>
-                                <input type="text" class="form-control radius-8" name="city" id="city" placeholder="jalandhar">
-                            </div>
-                            <div class="mb-20">
-                                <label for="pincode" class="form-label fw-semibold text-primary-light text-sm mb-8">Pincode</label>
-                                <input type="text" class="form-control radius-8" name="pincode" id="pincode" placeholder="144008">
-                            </div>
-                            <div class="d-flex align-items-center justify-content-center gap-3">
-                                <button type="reset" class="border border-danger-600 bg-hover-danger-200 text-danger-600 text-md px-56 py-11 radius-8">
-                                    Cancel
-                                </button>
-                                <button type="submit" class="btn btn-primary border border-primary-600 text-md px-56 py-12 radius-8">
-                                    Save
-                                </button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div> --}}
 
       </div>
 

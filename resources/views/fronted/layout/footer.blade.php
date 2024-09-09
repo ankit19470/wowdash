@@ -20,7 +20,11 @@
   <!-- main js -->
   <script src="{{url('fronted/js/app.js')}}"></script>
   <script src="{{url('fronted/js/validation.js')}}"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
+  <!-- Include Toastr JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
       // ================== Password Show Hide Js Start ==========
@@ -42,5 +46,20 @@
 <script>
     let table = new DataTable('#dataTable');
   </script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var deleteUserButtons = document.querySelectorAll('.deleteUser');
+
+        deleteUserButtons.forEach(function(button) {
+            button.addEventListener('click', function() {
+                var userId = this.getAttribute('data-id');
+                var deleteForm = document.getElementById('deleteForm');
+                deleteForm.action = '/users/' + userId; // Adjust this to match your route
+            });
+        });
+    });
+    </script>
+    
 </body>
 </html>
