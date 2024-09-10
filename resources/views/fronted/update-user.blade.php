@@ -388,14 +388,14 @@
           <div class="d-flex flex-wrap align-items-center justify-content-between gap-3 mb-24">
     <h6 class="fw-semibold mb-0">Update User</h6>
     <ul class="d-flex align-items-center gap-2">
-      <li class="fw-medium">
+      {{-- <li class="fw-medium">
         <a href="index.html" class="d-flex align-items-center gap-1 hover-text-primary">
           <iconify-icon icon="solar:home-smile-angle-outline" class="icon text-lg"></iconify-icon>
           Dashboard
         </a>
       </li>
       <li>-</li>
-      <li class="fw-medium">Update User</li>
+      <li class="fw-medium">Update User</li> --}}
 
     </ul>
 
@@ -532,7 +532,7 @@
                     @enderror
                 </div>
 
-                <div class="col-md-6">
+                {{-- <div class="col-md-6">
                     <label for="state" class="form-label">State</label>
                     <input type="text" class="form-control @error('state') is-invalid @enderror" id="state" name="state" placeholder="Enter State" value="{{ old('state', $user->state) }}" required>
                     @error('state')
@@ -540,9 +540,39 @@
                             {{ $message }}
                         </div>
                     @enderror
+                </div> --}}
+                <div class="col-md-6">
+                    <label for="state" class="form-label">State</label>
+                    <select class="form-control @error('state') is-invalid @enderror" id="state" name="state" required>
+                        <option value="">Select State</option>
+                        <option value="Punjab" {{ old('state',$user->state) == 'Punjab' ? 'selected' : '' }}>Punjab</option>
+                        <option value="Himachal Pardesh" {{ old('state',$user->state) == 'Himachal Pardesh' ? 'selected' : '' }}>Himachal Pardesh</option>
+                        <option value="Jammu and kashmir" {{ old('state',$user->state) == 'Jammu and kashmir' ? 'selected' : '' }}>Jammu and kashmir</option>
+                    </select>
+                    @error('state')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                </div>
+                <div class="col-md-6">
+                    <label for="city" class="form-label">City</label>
+                    <select class="form-select @error('city') is-invalid @enderror" id="city" name="city" required>
+                        <option value="" disabled selected>Select City</option>
+
+                        <option value="Jalandhar" {{ old('city',$user->city) == 'Jalandhar' ? 'selected' : '' }}>Jalandhar</option>
+                        <option value="Amritsar" {{ old('city',$user->city) == 'Amritsar' ? 'selected' : '' }}>Amritsar</option>
+                        <option value="Delhi" {{ old('city',$user->city) == 'Delhi' ? 'selected' : '' }}>Delhi</option>
+                    </select>
+                    @error('city')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                    @enderror
                 </div>
 
-                <div class="col-md-6">
+
+                {{-- <div class="col-md-6">
                     <label for="city" class="form-label">City</label>
                     <input type="text" class="form-control @error('city') is-invalid @enderror" id="city" name="city" placeholder="Enter City" value="{{ old('city', $user->city) }}" required>
                     @error('city')
@@ -550,7 +580,7 @@
                             {{ $message }}
                         </div>
                     @enderror
-                </div>
+                </div> --}}
 
                 <div class="col-md-6">
                     <label for="pincode" class="form-label">Pin code</label>
@@ -571,9 +601,12 @@
                         </div>
                     @enderror
                 </div>
-
                 <div class="col-md-12">
+                    <!-- Update User Button -->
                     <button class="btn btn-primary" type="submit">Update User</button>
+
+                    <!-- Cancel Button -->
+                    <a href="{{ route('list-user') }}" class="btn btn-secondary">Cancel</a>
                 </div>
             </form>
         </div>

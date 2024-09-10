@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-use App\Models\User; // Make sure to include the User model
+use App\Models\User;
 
 class AddUserController extends Controller
 {
@@ -55,8 +55,11 @@ class AddUserController extends Controller
         $user->city = $req->city;
         $user->pincode = $req->pincode;
         $user->state = $req->state;
-        $user->save();
+        // $user->save();
         try {
+            $user->save();
+  Auth::login($user);
+  $req->session()->put('email', $user->email);
             return redirect()->route('add-user')->with('success', 'Added successfully !!');
         } catch (\Illuminate\Database\QueryException $e) {
             return redirect()->back()->with('error', 'An error occurred. Please try again.')->withInput();
@@ -65,8 +68,9 @@ class AddUserController extends Controller
 
     public function showUser()
 {
-    $users = User::all(); // Ensure the variable name is $users
-    return view('fronted.list-user', ['users' => $users]); // Pass $users to the view
+    $users = User::where('usertype','U')->get();
+    // $users = User::all();
+    return view('fronted.list-user', ['users' => $users]);
 }
 
 public function destroy($id)

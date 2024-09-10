@@ -25,6 +25,10 @@
   <!-- Include Toastr JS -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Ensure Iconify script is included -->
+  <script src="https://code.iconify.design/2/2.0.4/iconify.min.js"></script>
 
 <script>
       // ================== Password Show Hide Js Start ==========
@@ -60,6 +64,6 @@
         });
     });
     </script>
-    
+
 </body>
 </html>
