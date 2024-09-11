@@ -229,6 +229,25 @@
             </li> --}}
           </ul>
         </li>
+        <li class="dropdown">
+            <a href="javascript:void(0)">
+                {{-- <iconify-icon icon="gear:-group-outline" class="menu-icon"></iconify-icon> --}}
+                <iconify-icon icon="mdi:cog-outline" class="menu-icon"></iconify-icon>
+                <span>Roles & Permission</span>
+            </a>
+            <ul class="sidebar-submenu">
+
+
+                <li>
+                    <a href="{{ url('add-permission') }}"><i
+                            class="ri-circle-fill circle-icon text-info-main w-auto"></i> Permission</a>
+                </li>
+                {{-- <li>
+        <a href="{{url('list-user')}}"><i class="ri-circle-fill circle-icon text-warning-main w-auto"></i> List User</a>
+      </li> --}}
+
+            </ul>
+        </li>
 
         {{-- <li class="sidebar-menu-group-title">Application</li> --}}
 {{--
@@ -337,32 +356,9 @@
                             <img src="{{ url('fronted/images/user.png') }}" alt="User Image" class="w-40-px h-40-px object-fit-cover rounded-circle">
                         </button>
                         <div class="dropdown-menu to-top dropdown-menu-sm">
-                            <div class="py-12 px-16 radius-8 bg-primary-50 mb-16 d-flex align-items-center justify-content-between gap-2">
-                                <div>
-                                    <h6 class="text-lg text-primary-light fw-semibold mb-2">Shaidul Islam</h6>
-                                    <span class="text-secondary-light fw-medium text-sm">Admin</span>
-                                </div>
-                                <button type="button" class="hover-text-danger">
-                                    <iconify-icon icon="radix-icons:cross-1" class="icon text-xl"></iconify-icon>
-                                </button>
-                            </div>
+
                             <ul class="to-top-list">
-                                <li>
-                                    <a class="dropdown-item text-black px-0 py-8 hover-bg-transparent hover-text-primary d-flex align-items-center gap-3" href="view-profile.html">
-                                        <iconify-icon icon="solar:user-linear" class="icon text-xl"></iconify-icon> My Profile
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item text-black px-0 py-8 hover-bg-transparent hover-text-primary d-flex align-items-center gap-3" href="email.html">
-                                        <iconify-icon icon="tabler:message-check" class="icon text-xl"></iconify-icon> Inbox
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item text-black px-0 py-8 hover-bg-transparent hover-text-primary d-flex align-items-center gap-3" href="company.html">
-                                        <iconify-icon icon="icon-park-outline:setting-two" class="icon text-xl"></iconify-icon> Settings
-                                    </a>
-                                </li>
-{{-- <a href="/logout">Login</a> --}}
+
 
                                 <li>
                                     <a class="dropdown-item text-black px-0 py-8 hover-bg-transparent hover-text-danger d-flex align-items-center gap-3" href="/logout">

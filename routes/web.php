@@ -5,6 +5,8 @@ use App\Http\controllers\fronted\RegisterController;
 use App\Http\controllers\fronted\LoginController;
 use App\Http\controllers\fronted\AddUserController;
 use App\Http\controller\fronted\LogoutController;
+use App\Http\Controllers\fronted\PermissionController;
+
 
 
 
@@ -19,8 +21,6 @@ Route::POST('/register',[RegisterController::class,'register'])->name('register'
 
 // Route::get('/',[LoginController::class,'index'])->name('sign-in');
 Route::POST('/login', [LoginController::class, 'login'])->name('login');
-
-
 
 Route::get('/', [LoginController::class, 'index'])->name('sign-in');
 Route::get('/logout',function(){
@@ -44,9 +44,9 @@ Route::delete('/users/{id}', [AddUserController::class, 'destroy'])->name('users
 // Route::get("/update-user/{id}", [AddUserController::class, 'updateData']);
 Route::get('/update-user/{id}', [AddUserController::class, 'edit'])->name('user.edit');
 Route::put('/update-user/{id}', [AddUserController::class, 'update'])->name('users.update');
+// Route::get('/add-permission',[PermissionController::class,'index'])->name('add-permission');
+Route::get('add-permission', [PermissionController::class, 'index'])->name('permissions.index');
+Route::post('store-permission', [PermissionController::class, 'store'])->name('permissions.store');
 Route::post('/logout', [LogoutController::class, 'logout'])->name('logout');
 
 
-// Route::get('/add-user', function () {
-//     return view('fronted/add-user');
-// });
