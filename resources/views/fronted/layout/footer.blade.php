@@ -51,19 +51,7 @@
     let table = new DataTable('#dataTable');
   </script>
 
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        var deleteUserButtons = document.querySelectorAll('.deleteUser');
 
-        deleteUserButtons.forEach(function(button) {
-            button.addEventListener('click', function() {
-                var userId = this.getAttribute('data-id');
-                var deleteForm = document.getElementById('deleteForm');
-                deleteForm.action = '/users/' + userId; // Adjust this to match your route
-            });
-        });
-    });
-    </script>
 
 </body>
 </html>

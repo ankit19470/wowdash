@@ -46,7 +46,15 @@ Route::get('/update-user/{id}', [AddUserController::class, 'edit'])->name('user.
 Route::put('/update-user/{id}', [AddUserController::class, 'update'])->name('users.update');
 // Route::get('/add-permission',[PermissionController::class,'index'])->name('add-permission');
 Route::get('add-permission', [PermissionController::class, 'index'])->name('permissions.index');
+
 Route::post('store-permission', [PermissionController::class, 'store'])->name('permissions.store');
+
+Route::get('list-permission', [PermissionController::class, 'ListPermission'])->name('list-permission');
+Route::delete('permissions/{id}', [PermissionController::class, 'destroy'])->name('permissions.destroy');
+
+Route::get('update-permission/{id}', [PermissionController::class, 'edit'])->name('permissions.edit');
+Route::put('update-permission/{id}', [PermissionController::class, 'update'])->name('permissions.update');
+
 Route::post('/logout', [LogoutController::class, 'logout'])->name('logout');
 
 

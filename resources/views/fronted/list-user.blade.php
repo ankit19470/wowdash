@@ -242,6 +242,10 @@
                     <a href="{{ url('add-permission') }}"><i
                             class="ri-circle-fill circle-icon text-info-main w-auto"></i> Permission</a>
                 </li>
+                <li>
+                    <a href="{{ url('list-permission') }}"><i
+                            class="ri-circle-fill circle-icon text-info-main w-auto"></i> List Permission</a>
+                </li>
                 {{-- <li>
         <a href="{{url('list-user')}}"><i class="ri-circle-fill circle-icon text-warning-main w-auto"></i> List User</a>
       </li> --}}
@@ -467,6 +471,19 @@
             </div>
         </div>
     </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var deleteUserButtons = document.querySelectorAll('.deleteUser');
+
+            deleteUserButtons.forEach(function(button) {
+                button.addEventListener('click', function() {
+                    var userId = this.getAttribute('data-id');
+                    var deleteForm = document.getElementById('deleteForm');
+                    deleteForm.action = '/users/' + userId; // Adjust this to match your route
+                });
+            });
+        });
+        </script>
 
 
     <footer class="d-footer">
