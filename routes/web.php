@@ -6,6 +6,8 @@ use App\Http\controllers\fronted\LoginController;
 use App\Http\controllers\fronted\AddUserController;
 use App\Http\controller\fronted\LogoutController;
 use App\Http\Controllers\fronted\PermissionController;
+use App\Http\Controllers\fronted\RoleController;
+
 
 
 
@@ -57,4 +59,5 @@ Route::put('update-permission/{id}', [PermissionController::class, 'update'])->n
 
 Route::post('/logout', [LogoutController::class, 'logout'])->name('logout');
 
+Route::get('add-role',[RoleController::class,'index'])->name('add-role');
 
