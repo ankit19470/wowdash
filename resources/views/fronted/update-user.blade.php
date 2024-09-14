@@ -253,6 +253,7 @@
                     @enderror
                 </div>
 
+
                 {{-- <div class="col-md-6">
                     <label for="state" class="form-label">State</label>
                     <input type="text" class="form-control @error('state') is-invalid @enderror" id="state" name="state" placeholder="Enter State" value="{{ old('state', $user->state) }}" required>
@@ -322,6 +323,30 @@
                         </div>
                     @enderror
                 </div>
+                <div class="mb-3">
+                    <div class="row"> <!-- Bootstrap grid setup -->
+                        @if($roles->isNotEmpty())
+                            @foreach ($roles as $role)
+                                <div class="col-md-3 mt-3"> <!-- 4 columns per row (12/3 = 4) -->
+                                    <input
+                                        {{ in_array($role->id, $hasroles) ? 'checked' : '' }}
+                                        type="checkbox"
+                                        class="form-check-input"
+                                        name="role[]"
+                                        id="role-{{ $role->id }}"
+                                        value="{{ $role->name }}">
+
+                                    <label class="form-check-label" for="role-{{ $role->id }}">
+                                        {{ $role->name }}
+                                    </label>
+                                </div>
+                            @endforeach
+                        @else
+                            <p>No roles available.</p>
+                        @endif
+                    </div>
+                </div>
+
                 <div class="col-md-12">
                     <!-- Update User Button -->
                     <button class="btn btn-primary" type="submit">Update User</button>

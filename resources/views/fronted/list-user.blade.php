@@ -411,10 +411,13 @@
                         <th scope="col">Last Name</th>
                         <th scope="col">Email</th>
                         <th scope="col">Phone</th>
-                        <th scope="col">Address</th>
+                        {{-- <th scope="col">Address</th> --}}
                         <th scope="col">PinCode</th>
                         <th scope="col">City</th>
+
                         <th scope="col">State</th>
+                        <th scope="col">Role</th>
+
                         <th scope="col">Action</th>
                     </tr>
                 </thead>
@@ -431,10 +434,12 @@
                             <td>{{ $user->lastname }}</td>
                             <td>{{ $user->email }}</td>
                             <td>{{ $user->phone }}</td>
-                            <td>{{ $user->address }}</td>
+                            {{-- <td>{{ $user->address }}</td> --}}
                             <td>{{ $user->pincode }}</td>
                             <td>{{ $user->city }}</td>
                             <td>{{ $user->state }}</td>
+                            <td>{{ $user->roles->pluck('name')->implode(', ') }}</td>
+
                             <td>
                               {{-- <a href={{"/update/".$user->id}} class="text-primary ti ti-pencil"></a> --}}
 

@@ -316,7 +316,7 @@
                     @enderror
                 </div>
 
-                <div class="col-md-6">
+                {{-- <div class="col-md-6">
                     <label for="address" class="form-label">Address</label>
                     <input type="text" class="form-control @error('address') is-invalid @enderror" id="address" name="address" placeholder="Enter Address" value="{{ old('address') }}" required>
                     @error('address')
@@ -324,7 +324,7 @@
                             {{ $message }}
                         </div>
                     @enderror
-                </div>
+                </div> --}}
 
               <div class="col-md-12">
     <button class="btn btn-primary" type="submit">Submit</button>

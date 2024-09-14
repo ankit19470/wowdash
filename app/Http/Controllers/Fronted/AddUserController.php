@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use App\Models\User;
+use App\Models\Role;
+
 
 class AddUserController extends Controller
 {
@@ -27,7 +29,7 @@ class AddUserController extends Controller
             'email' => 'required|email|unique:users,email|max:255',
             'password' => 'required|string|min:6',
             'phone' => 'required|digits:10|regex:/^[6-9]\d{9}$/',
-            'address' => 'required|string|max:255',
+            // 'address' => 'required|string|max:255',
             'city' => 'required|string|max:255',
             'pincode' => 'required|digits:6',
             'state' => 'required|string|max:255',
@@ -51,7 +53,7 @@ class AddUserController extends Controller
         $user->email = $req->email;
         $user->password = Hash::make($req->password);
         $user->phone = $req->phone;
-        $user->address = $req->address;
+        // $user->address = $req->address;
         $user->city = $req->city;
         $user->pincode = $req->pincode;
         $user->state = $req->state;
@@ -71,7 +73,6 @@ class AddUserController extends Controller
     public function showUser()
 {
     $users = User::where('usertype','U')->get();
-    // $users = User::all();
     return view('fronted.list-user', ['users' => $users]);
 }
 
@@ -84,7 +85,10 @@ public function destroy($id)
 public function edit($id)
 {
     $user = User::findOrFail($id);
-    return view('fronted.update-user',compact('user'));
+    $roles = Role::orderBy('name', 'ASC')->get(); // Fetch all roles
+    $hasroles = $user->roles->pluck('id')->toArray(); // Get the user's current roles by ID
+
+    return view('fronted.update-user', compact('user', 'roles', 'hasroles')); // Pass user, roles, and hasroles
 }
 public function update(Request $req, $id)
 {
@@ -98,7 +102,7 @@ public function update(Request $req, $id)
         'email' => 'required|email|max:255|unique:users,email,' . $id,
         // 'password' => 'nullable|string|min:6',
         'phone' => 'required|digits:10|regex:/^[6-9]\d{9}$/',
-        'address' => 'required|string|max:255',
+        // 'address' => 'required|string|max:255',
         'city' => 'required|string|max:255',
         'pincode' => 'required|digits:6',
         'state' => 'required|string|max:255',
@@ -125,12 +129,18 @@ public function update(Request $req, $id)
     //     $user->password = Hash::make($req->password);
     // }
     $user->phone = $req->phone;
-    $user->address = $req->address;
+    // $user->address = $req->address;
     $user->city = $req->city;
     $user->pincode = $req->pincode;
     $user->state = $req->state;
     $user->save();
 
+    // $user->syncRoles($request->role);
+    if ($req->has('role')) {
+        $user->syncRoles($req->input('role', []));
+    } else {
+        $user->syncRoles([]);
+    }
     try {
         return redirect()->route('list-user')->with('success', 'User updated successfully !!');
     } catch (\Illuminate\Database\QueryException $e) {
