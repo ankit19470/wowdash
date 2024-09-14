@@ -10,7 +10,8 @@ class RegisterController extends Controller
 {
     public function index()
     {
-        return view('fronted.sign'); // Ensure this view exists
+        $users = User::where('usertype','A')->get();
+        return view('fronted.sign' ,['users' => $users]); // Ensure this view exists
     }
 
     public function register(Request $req)
@@ -27,6 +28,8 @@ class RegisterController extends Controller
         $user->name = $validatedData['name'];
         $user->email = $validatedData['email'];
         $user->password = Hash::make($validatedData['password']);
+        $user->usertype = 'A'; // Set the usertype value here
+
         $user->save();
 
         // Redirect to the sign-in page with a success message

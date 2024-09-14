@@ -55,6 +55,8 @@ class AddUserController extends Controller
         $user->city = $req->city;
         $user->pincode = $req->pincode;
         $user->state = $req->state;
+        $user->usertype = 'U'; // Set the usertype value here
+
         // $user->save();
         try {
             $user->save();

@@ -60,4 +60,6 @@ Route::put('update-permission/{id}', [PermissionController::class, 'update'])->n
 Route::post('/logout', [LogoutController::class, 'logout'])->name('logout');
 
 Route::get('add-role',[RoleController::class,'index'])->name('add-role');
-
+// Route::post('', [RoleController::class, 'store'])->name('add-role');
+Route::post('/roles', [RoleController::class, 'store'])->name('add-role');
+Route::get('list-role', [RoleController::class, 'showRole'])->name('list-role');
