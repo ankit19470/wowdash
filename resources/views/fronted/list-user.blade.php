@@ -237,6 +237,7 @@
             </a>
             <ul class="sidebar-submenu">
 
+                <li><a href="{{ url('add-module') }}"><i class="ri-circle-fill circle-icon text-warning-main w-auto"></i> Add Module</a></li>
 
                 <li>
                     <a href="{{ url('add-permission') }}"><i
@@ -246,6 +247,8 @@
                     <a href="{{ url('list-permission') }}"><i
                             class="ri-circle-fill circle-icon text-info-main w-auto"></i> List Permission</a>
                 </li>
+                <li><a href="{{ url('add-role') }}"><i class="ri-circle-fill circle-icon text-info-main w-auto"></i> Add Role</a></li>
+                <li><a href="{{ url('list-role') }}"><i class="ri-circle-fill circle-icon text-warning-main w-auto"></i> List Role</a></li>
                 {{-- <li>
         <a href="{{url('list-user')}}"><i class="ri-circle-fill circle-icon text-warning-main w-auto"></i> List User</a>
       </li> --}}

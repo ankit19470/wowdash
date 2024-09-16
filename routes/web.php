@@ -7,6 +7,8 @@ use App\Http\controllers\fronted\AddUserController;
 use App\Http\controller\fronted\LogoutController;
 use App\Http\Controllers\fronted\PermissionController;
 use App\Http\Controllers\fronted\RoleController;
+use App\Http\Controllers\fronted\ModuleController;
+
 
 
 
@@ -63,3 +65,14 @@ Route::get('add-role',[RoleController::class,'index'])->name('add-role');
 // Route::post('', [RoleController::class, 'store'])->name('add-role');
 Route::post('/roles', [RoleController::class, 'store'])->name('add-role');
 Route::get('list-role', [RoleController::class, 'showRole'])->name('list-role');
+Route::delete('/roles/{id}', [RoleController::class, 'destroy'])->name('roles.destroy');
+
+// Route::get('update-role/{id}', [RoleController::class, 'edit'])->name('role.edit');
+// Route::put('update-role/{id}', [RoleController::class, 'update'])->name('role.update');
+// web.php
+Route::get('roles/{id}/edit', [RoleController::class, 'edit'])->name('roles.edit');
+Route::put('roles/{id}', [RoleController::class, 'update'])->name('roles.update');
+
+
+Route::get('add-module', [ModuleController::class, 'index'])->name('modules.create'); // Route to display the form
+Route::post('add-module', [ModuleController::class, 'store'])->name('modules.store');

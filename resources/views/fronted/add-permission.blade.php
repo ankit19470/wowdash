@@ -27,11 +27,6 @@
                         <li><a href="{{ url('add-user') }}"><i class="ri-circle-fill circle-icon text-info-main w-auto"></i> Add User</a></li>
 
                         <li><a href="{{ url('list-user') }}"><i class="ri-circle-fill circle-icon text-warning-main w-auto"></i> List User</a></li>
-                        <li>
-                            <a href="{{ url('add-role') }}"><i
-                                    class="ri-circle-fill circle-icon text-info-main w-auto"></i> add role</a>
-                        </li>
-                    <li><a href="{{ url('list-role') }}"><i class="ri-circle-fill circle-icon text-warning-main w-auto"></i> List Role</a></li>
 
                     </ul>
                 </li>
@@ -41,11 +36,19 @@
                         <span>Roles & Permission</span>
                     </a>
                     <ul class="sidebar-submenu">
+                    <li><a href="{{ url('add-module') }}"><i class="ri-circle-fill circle-icon text-warning-main w-auto"></i> Add Module</a></li>
+
                         <li><a href="{{ url('add-permission') }}"><i class="ri-circle-fill circle-icon text-info-main w-auto"></i> Permission</a></li>
                         <li>
                             <a href="{{ url('list-permission') }}"><i
                                     class="ri-circle-fill circle-icon text-info-main w-auto"></i> List Permission</a>
                         </li>
+                        <li>
+                            <a href="{{ url('add-role') }}"><i
+                                    class="ri-circle-fill circle-icon text-info-main w-auto"></i> add role</a>
+                        </li>
+                    <li><a href="{{ url('list-role') }}"><i class="ri-circle-fill circle-icon text-warning-main w-auto"></i> List Role</a></li>
+
 
                     </ul>
                 </li>
@@ -122,6 +125,21 @@
                                 <label for="name" class="form-label">Permission Name</label>
                                 <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{ old('name') }}">
                                 @error('name')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="module" class="form-label">Module</label>
+                                <select class="form-control @error('module') is-invalid @enderror" id="module" name="module" required>
+                                    <option value="">Select a module</option>
+                                    @foreach ($modules as $module)
+                                        <option value="{{ $module->module }}">{{ $module->module }}</option>
+                                    @endforeach
+                                </select>
+                                @error('module')
                                     <div class="invalid-feedback">
                                         {{ $message }}
                                     </div>

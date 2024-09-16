@@ -5,28 +5,50 @@ namespace App\Http\Controllers\fronted;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Permission;
+use App\Models\Module;
 use Illuminate\Support\Facades\Validator;
 
 class PermissionController extends Controller
 {
     public function index(){
-        return view('fronted.add-permission');
+        $modules = Module::all();
+        return view('fronted.add-permission', compact('modules'));
     }
     public function store(Request $request)
     {
         $request->validate([
             'name' => 'required|string|max:255|unique:permissions,name',
+            'module' => 'required|string', // Assuming module is a string. If it's an ID, use 'required|exists:modules,id'.
         ]);
 
-        Permission::create(['name' => $request->name]);
+        // Create a new permission
+        $permission = new Permission;
+        $permission->name = $request->name;
+
+        // If you want to save a module ID or a module name, adjust this according to your needs.
+        $permission->module = $request->module;
+
+        $permission->save(); // Save the permission to the database
 
         return redirect()->route('permissions.index')->with('success', 'Permission added successfully!');
     }
 
-    public function ListPermission()
+//     public function ListPermission()
+// {
+//     $permissions=Permission::all();
+//     $modules = Module::all();
+
+//     return view('fronted.list-permission',['permissions'=>$permissions],['modules'=>$modules],);
+// }
+public function ListPermission()
 {
-    $permissions=Permission::all();
-    return view('fronted.list-permission',['permissions'=>$permissions]);
+    $permissions = Permission::all();
+    $modules = Module::all();
+
+    return view('fronted.list-permission', [
+        'permissions' => $permissions,
+        'modules' => $modules,
+    ]);
 }
 public function destroy($id)
 {
@@ -35,11 +57,27 @@ public function destroy($id)
 
     return redirect()->route('list-permission')->with('success', 'Permission deleted successfully');
 }
+// public function edit($id)
+// {
+//     $permission = Permission::findOrFail($id);
+//     // $product = Product::find($id);
+//     $modules = Module::find($id);
+
+
+//     return view('fronted.update-permission', compact('permission,modules'));
+// }
 public function edit($id)
 {
+    // Fetch the permission by ID
     $permission = Permission::findOrFail($id);
-    return view('fronted.update-permission', compact('permission'));
+
+    // Fetch all modules
+    $modules = Module::all();
+
+    // Pass both permission and modules to the view
+    return view('fronted.update-permission', compact('permission', 'modules'));
 }
+
 public function update(Request $request, $id)
 {
     // Find the permission by ID
@@ -48,6 +86,7 @@ public function update(Request $request, $id)
     // Define validation rules
     $validator = Validator::make($request->all(), [
         'name' => 'required|string|max:255|unique:permissions,name,' . $id,
+        'module' => 'required|string', // Ensure module is validated correctly
     ]);
 
     // Check if validation fails
@@ -57,6 +96,9 @@ public function update(Request $request, $id)
 
     // Update permission details
     $permission->name = $request->name;
+    $permission->module = $request->module; // Assign the module from the request
+
+    // Save the updated permission
     $permission->save();
 
     try {
@@ -65,5 +107,6 @@ public function update(Request $request, $id)
         return redirect()->back()->with('error', 'An error occurred. Please try again.')->withInput();
     }
 }
+
 
 }

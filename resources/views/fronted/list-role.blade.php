@@ -30,11 +30,11 @@
                     <span>Roles & Permission</span>
                 </a>
                 <ul class="sidebar-submenu">
+                    <li><a href="{{ url('add-module') }}"><i class="ri-circle-fill circle-icon text-warning-main w-auto"></i> Add Module</a></li>
                     <li><a href="{{ url('add-permission') }}"><i class="ri-circle-fill circle-icon text-info-main w-auto"></i> Permission</a></li>
                     <li><a href="{{ url('list-permission') }}"><i class="ri-circle-fill circle-icon text-info-main w-auto"></i> List Permission</a></li>
                     <li><a href="{{ url('add-role') }}"><i class="ri-circle-fill circle-icon text-info-main w-auto"></i> Add Role</a></li>
                     <li><a href="{{ url('list-role') }}"><i class="ri-circle-fill circle-icon text-warning-main w-auto"></i> List Role</a></li>
-
                 </ul>
             </li>
         </ul>
@@ -98,39 +98,44 @@
                         {{ session('success') }}
                     </div>
                 @endif
-              <!-- resources/views/fronted/list-role.blade.php -->
-              <table class="table bordered-table mb-0" id="dataTable" data-page-length='10'>
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Role Name</th>
-                        <th>Permissions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @forelse ($roles as $role)
+                <table class="table bordered-table mb-0" id="dataTable" data-page-length='10'>
+                    <thead>
                         <tr>
-                            <td>{{ $loop->iteration }}</td>
-                            <td>{{ $role->name }}</td>
-                            <td>
-                                @if($role->permissions->isNotEmpty())
-                                    @foreach ($role->permissions as $permission)
-                                        <span class="badge bg-secondary">{{ $permission->name }}</span>
-                                    @endforeach
-                                @else
-                                    <span>No permissions available.</span>
-                                @endif
-                            </td>
+                            <th>Id</th>
+                            <th>Role Name</th>
+                            <th>Permissions</th>
+                            <th>Actions</th>
                         </tr>
-                    @empty
-                        <tr>
-                            <td colspan="3" class="text-center">No roles found.</td>
-                        </tr>
-                    @endforelse
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        @forelse ($roles as $role)
+                            <tr>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $role->name }}</td>
+                                <td>
+                                    @if($role->permissions->isNotEmpty())
+                                        @foreach ($role->permissions as $permission)
+                                            <span class="badge bg-secondary">{{ $permission->name }}</span>
+                                        @endforeach
+                                    @else
+                                        <span>No permissions available.</span>
+                                    @endif
+                                </td>
+                                <td>
+                                    <!-- Edit button with proper route helper -->
+                                    <a href="{{ route('roles.edit', $role->id) }}" class="text-primary bi bi-pencil" title="Edit Role"></a>
 
-
+                                    <!-- Delete button with modal trigger -->
+                                    <a href="#" class="text-danger bi bi-trash" data-id="{{ $role->id }}" data-bs-toggle="modal" data-bs-target="#deleteModal" title="Delete Role"></a>
+                                </td>
+                            </tr>
+                        @empty
+                            <tr>
+                                <td colspan="4" class="text-center">No roles found.</td>
+                            </tr>
+                        @endforelse
+                    </tbody>
+                </table>
 
             </div>
         </div>
@@ -166,7 +171,7 @@
 
             // Update the form action with the correct role ID
             var form = document.getElementById('deleteForm');
-            form.action = "/roles/" + roleId; // Update this URL to match your route
+            form.action = "{{ url('roles') }}/" + roleId; // Update this URL to match your route
         });
     </script>
 
@@ -182,4 +187,3 @@
     </footer>
 </main>
 @endsection
-

@@ -25,7 +25,9 @@
                     </a>
                     <ul class="sidebar-submenu">
                         <li><a href="{{ url('add-user') }}"><i class="ri-circle-fill circle-icon text-info-main w-auto"></i> Add User</a></li>
+
                         <li><a href="{{ url('list-user') }}"><i class="ri-circle-fill circle-icon text-warning-main w-auto"></i> List User</a></li>
+
                     </ul>
                 </li>
                 <li class="dropdown">
@@ -37,9 +39,16 @@
                     <li><a href="{{ url('add-module') }}"><i class="ri-circle-fill circle-icon text-warning-main w-auto"></i> Add Module</a></li>
 
                         <li><a href="{{ url('add-permission') }}"><i class="ri-circle-fill circle-icon text-info-main w-auto"></i> Permission</a></li>
-                        <li><a href="{{ url('list-permission') }}"><i class="ri-circle-fill circle-icon text-info-main w-auto"></i> List Permission</a></li>
-                        <li><a href="{{ url('add-role') }}"><i class="ri-circle-fill circle-icon text-info-main w-auto"></i> Add Role</a></li>
+                        <li>
+                            <a href="{{ url('list-permission') }}"><i
+                                    class="ri-circle-fill circle-icon text-info-main w-auto"></i> List Permission</a>
+                        </li>
+                        <li>
+                            <a href="{{ url('add-role') }}"><i
+                                    class="ri-circle-fill circle-icon text-info-main w-auto"></i> add role</a>
+                        </li>
                     <li><a href="{{ url('list-role') }}"><i class="ri-circle-fill circle-icon text-warning-main w-auto"></i> List Role</a></li>
+
 
                     </ul>
                 </li>
@@ -89,7 +98,7 @@
 
         <div class="dashboard-main-body">
             <div class="d-flex flex-wrap align-items-center justify-content-between gap-3 mb-24">
-                <h6 class="fw-semibold mb-0">Add Role</h6>
+                <h6 class="fw-semibold mb-0">Add Module</h6>
                 <ul class="d-flex align-items-center gap-2">
                     <!-- Additional buttons or links can go here -->
                 </ul>
@@ -110,37 +119,20 @@
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-body">
-                        <form action="{{route('add-role')}}" method="POST">
+                        <form action="{{ route('modules.store') }}" method="POST">
                             @csrf
                             <div class="mb-3">
-                                <label for="name" class="form-label">Name</label>
-                                <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{ old('name') }}">
-                                @error('name')
+                                <label for="module" class="form-label">Add Module</label>
+                                <input type="text" class="form-control @error('module') is-invalid @enderror" id="module" name="module" value="{{ old('module') }}">
+                                @error('module')
                                     <div class="invalid-feedback">
                                         {{ $message }}
                                     </div>
                                 @enderror
                             </div>
-
-                            <div class="mb-3">
-                                <div class="row"> <!-- Bootstrap grid setup -->
-                                    @if($permissions->isNotEmpty())
-                                        @foreach ($permissions as $permission)
-                                            <div class="col-md-3 mt-3"> <!-- 4 columns per row (12/3 = 4) -->
-                                                <input type="checkbox" class="form-check-input" name="permission[]" id="permission-{{ $permission->id }}" value="{{ $permission->name }}">
-                                                <label class="form-check-label" for="permission-{{ $permission->id }}">
-                                                    {{ $permission->name }}
-                                                </label>
-                                            </div>
-                                        @endforeach
-                                    @else
-                                        <p>No permissions available.</p>
-                                    @endif
-                                </div>
-                            </div>
-
-                            <button type="submit" class="btn btn-primary">Add Role</button>
+                            <button type="submit" class="btn btn-primary">Add Module</button>
                         </form>
+
                     </div>
                 </div>
             </div>

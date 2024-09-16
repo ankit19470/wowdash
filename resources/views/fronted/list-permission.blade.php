@@ -41,6 +41,7 @@
             </a>
             <ul class="sidebar-submenu">
 
+                <li><a href="{{ url('add-module') }}"><i class="ri-circle-fill circle-icon text-warning-main w-auto"></i> Add Module</a></li>
 
                 <li>
                     <a href="{{ url('add-permission') }}"><i
@@ -129,6 +130,7 @@
                 <tr>
                     <th>Id</th>
                     <th>Permission Name</th>
+                    <th>Module</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -137,6 +139,8 @@
                     <tr>
                         <td>{{ $permission->id }}</td>
                         <td>{{ $permission->name }}</td>
+                        <td>{{ $permission->module }}</td>
+
                         <td>
                             {{-- <a href={{"/update-permission/".$permission->id}} class="text-primary bi bi-pencil"></a> --}}
                             <a href={{"/update-permission/".$permission->id }} class="text-primary bi bi-pencil"></a>

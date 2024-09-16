@@ -46,6 +46,54 @@ class RoleController extends Controller
         return view('fronted.list-role', compact('roles')); // Pass the roles to the view
     }
 
+    public function destroy($id)
+    {
+        try {
+            $role = Role::findOrFail($id);
+            $role->delete();
+
+            return redirect()->route('list-role')->with('success', 'Role deleted successfully!');
+        } catch (\Exception $e) {
+            return redirect()->route('list-role')->with('error', 'An error occurred while deleting the role.');
+        }
+    }
+    public function edit($id)
+{
+    $role = Role::findOrFail($id); // Find the role by ID
+    $permissions = Permission::all(); // Get all permissions
+
+    return view('fronted.update-role', compact('role', 'permissions'));
+}
+public function update(Request $request, $id)
+{
+    // Find the role by ID
+    $role = Role::findOrFail($id);
+
+    // Define validation rules
+    $validator = Validator::make($request->all(), [
+        'name' => 'required|string|max:255|unique:roles,name,' . $id, // Ignore the current role during validation
+        'permissions' => 'array',
+        'permissions.*' => 'exists:permissions,name', // Validate each permission
+    ]);
+
+    // Check if validation fails
+    if ($validator->fails()) {
+        return redirect()->back()->withErrors($validator)->withInput();
+    }
+
+    // Update the role's name
+    $role->name = $request->input('name');
+    $role->save();
+
+    // Sync permissions with the role
+    if ($request->has('permissions')) {
+        $role->syncPermissions($request->input('permissions'));
+    } else {
+        $role->syncPermissions([]); // Remove all permissions if none are selected
+    }
+
+    return redirect()->route('list-role')->with('success', 'Role updated successfully!');
+}
 
 
 }

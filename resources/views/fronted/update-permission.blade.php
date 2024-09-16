@@ -35,6 +35,8 @@
                     <ul class="sidebar-submenu">
                         <li><a href="{{ url('add-permission') }}"><i class="ri-circle-fill circle-icon text-info-main w-auto"></i> Add Permission</a></li>
                         <li><a href="{{ url('list-permission') }}"><i class="ri-circle-fill circle-icon text-info-main w-auto"></i> List Permission</a></li>
+                        <li><a href="{{ url('add-role') }}"><i class="ri-circle-fill circle-icon text-info-main w-auto"></i> Add Role</a></li>
+                        <li><a href="{{ url('list-role') }}"><i class="ri-circle-fill circle-icon text-warning-main w-auto"></i> List Role</a></li>
                     </ul>
                 </li>
             </ul>
@@ -118,6 +120,22 @@
                                     </div>
                                 @enderror
                             </div>
+                            <div class="mb-3">
+        <label for="module" class="form-label">Module*</label>
+        <select class="form-control @error('module') is-invalid @enderror" id="module" name="module" required>
+            <option value="">Select a module</option>
+            @foreach ($modules as $module)
+                <option value="{{ $module->module }}" {{ $module->module == $permission->module ? 'selected' : '' }}>
+                    {{ $module->module }}
+                </option>
+            @endforeach
+        </select>
+        @error('module')
+            <div class="invalid-feedback">
+                {{ $message }}
+            </div>
+        @enderror
+    </div>
 
                             <button type="submit" class="btn btn-primary">Update Permission</button>
                             <a href="{{ route('list-permission') }}" class="btn btn-secondary">Cancel</a>
