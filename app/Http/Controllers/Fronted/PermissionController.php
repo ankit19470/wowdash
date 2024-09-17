@@ -4,9 +4,11 @@ namespace App\Http\Controllers\fronted;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Permission;
+// use App\Models\Permission;
+
 use App\Models\Module;
 use Illuminate\Support\Facades\Validator;
+use Spatie\Permission\Models\Permission;
 
 class PermissionController extends Controller
 {
@@ -85,8 +87,8 @@ public function update(Request $request, $id)
 
     // Define validation rules
     $validator = Validator::make($request->all(), [
-        'name' => 'required|string|max:255|unique:permissions,name,' . $id,
-        'module' => 'required|string', // Ensure module is validated correctly
+        'name' => 'required|string|max:255|unique:permissions,name,'.$role->$id,
+        // 'module' => 'required|string', // Ensure module is validated correctly
     ]);
 
     // Check if validation fails

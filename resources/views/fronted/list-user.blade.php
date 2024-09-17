@@ -1,5 +1,6 @@
 
 @extends('fronted.layout.main')
+
 @section('main-container')
 <aside class="sidebar">
     <button type="button" class="sidebar-close-btn">
@@ -409,7 +410,7 @@
                 <thead>
                     <tr>
                         <th scope="col">Id</th>
-                        <th scope="col">Image</th>
+                        {{-- <th scope="col">Image</th> --}}
                         <th scope="col">First Name</th>
                         <th scope="col">Last Name</th>
                         <th scope="col">Email</th>
@@ -428,11 +429,11 @@
                     @foreach($users as $user)
                         <tr>
                             <td>{{ $user->id }}</td>
-                            <td>
+                            {{-- <td>
                                 @if($user->file != "")
                                     <img src="{{ asset('/storage/assets/uploads/'.$user->file) }}" width="50" height="50" alt="">
                                 @endif
-                            </td>
+                            </td> --}}
                             <td>{{ $user->firstname }}</td>
                             <td>{{ $user->lastname }}</td>
                             <td>{{ $user->email }}</td>
@@ -441,7 +442,14 @@
                             <td>{{ $user->pincode }}</td>
                             <td>{{ $user->city }}</td>
                             <td>{{ $user->state }}</td>
-                            <td>{{ $user->roles->pluck('name')->implode(', ') }}</td>
+                            <td>
+                                @if(!empty($user->getRoleNames()))
+                                  @foreach($user->getRoleNames() as $v)
+                                     <label class="badge bg-danger" style="color: white">{{ $v }}</label>
+                                  @endforeach
+                                @endif
+                              </td>
+                            {{-- <td>{{ $user->roles->pluck('name')->implode(', ') }}</td> --}}
 
                             <td>
                               {{-- <a href={{"/update/".$user->id}} class="text-primary ti ti-pencil"></a> --}}

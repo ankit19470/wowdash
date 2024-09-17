@@ -129,19 +129,22 @@
                                 @enderror
                             </div>
 
+
                             <div class="mb-3">
+                                <label for="">Permissions</label>
                                 <div class="row">
-                                    @forelse ($permissions as $permission)
-                                        <div class="col-md-3 mt-3">
-                                            <input type="checkbox" class="form-check-input" name="permission[]" id="permission-{{ $permission->id }}" value="{{ $permission->name }}"
-                                                {{ $role->permissions->contains($permission->name) ? 'checked' : '' }}>
-                                            <label class="form-check-label" for="permission-{{ $permission->id }}">
+                                    @foreach ($permissions as $permission)
+                                        <div class="col-md-3">
+                                            <label>
+                                                <input type="checkbox"
+                                                    class="form-check-input"
+                                                    name="permissions[]"
+                                                    value="{{ $permission->name }}"
+                                                    {{ $role->permissions->pluck('name')->contains($permission->name) ? 'checked' : '' }}>
                                                 {{ $permission->name }}
                                             </label>
                                         </div>
-                                    @empty
-                                        <p>No permissions available.</p>
-                                    @endforelse
+                                    @endforeach
                                 </div>
                             </div>
 

@@ -122,12 +122,12 @@
                                 @enderror
                             </div>
 
-                            <div class="mb-3">
+                            {{-- <div class="mb-3">
                                 <div class="row"> <!-- Bootstrap grid setup -->
-                                    @if($permissions->isNotEmpty())
-                                        @foreach ($permissions as $permission)
+                                    @if($permissions->isNotEmpty()) <!-- Use $permissions here -->
+                                        @foreach ($permissions as $permission) <!-- Use $permissions for the array and $permission for each item -->
                                             <div class="col-md-3 mt-3"> <!-- 4 columns per row (12/3 = 4) -->
-                                                <input type="checkbox" class="form-check-input" name="permission[]" id="permission-{{ $permission->id }}" value="{{ $permission->name }}">
+                                                <input type="checkbox" class="form-check-input" name="permissions[]" id="permission-{{ $permission->id }}" value="{{ $permission->name }}">
                                                 <label class="form-check-label" for="permission-{{ $permission->id }}">
                                                     {{ $permission->name }}
                                                 </label>
@@ -137,7 +137,7 @@
                                         <p>No permissions available.</p>
                                     @endif
                                 </div>
-                            </div>
+                            </div> --}}
 
                             <button type="submit" class="btn btn-primary">Add Role</button>
                         </form>

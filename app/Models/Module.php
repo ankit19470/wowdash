@@ -13,4 +13,9 @@ class Module extends Model
         // 'another_attribute',
         // 'yet_another_attribute',
     ];
+    public function modules()
+{
+    return $this->belongsToMany(Module::class);
+}
+
 }

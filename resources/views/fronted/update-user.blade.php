@@ -195,6 +195,7 @@
                     @csrf
                     @method('PUT')
 
+
                 <div class="col-md-6">
                     <label for="file" class="form-label">Image</label>
                     <input type="file" class="form-control @error('file') is-invalid @enderror" id="file" name="file">
@@ -316,7 +317,7 @@
                     @enderror
                 </div>
 
-                <div class="col-md-6">
+                <div class="col-md-12">
                     <label for="address" class="form-label">Address</label>
                     <input type="text" class="form-control @error('address') is-invalid @enderror" id="address" name="address" placeholder="Enter Address" value="{{ old('address', $user->address) }}" required>
                     @error('address')
@@ -325,29 +326,33 @@
                         </div>
                     @enderror
                 </div>
-                <div class="mb-3">
-                    <div class="row"> <!-- Bootstrap grid setup -->
-                        @if($roles->isNotEmpty())
-                            @foreach ($roles as $role)
-                                <div class="col-md-3 mt-3"> <!-- 4 columns per row (12/3 = 4) -->
-                                    <input
-                                        {{ in_array($role->id, $hasroles) ? 'checked' : '' }}
-                                        type="checkbox"
-                                        class="form-check-input"
-                                        name="role[]"
-                                        id="role-{{ $role->id }}"
-                                        value="{{ $role->name }}">
-
-                                    <label class="form-check-label" for="role-{{ $role->id }}">
-                                        {{ $role->name }}
-                                    </label>
-                                </div>
-                            @endforeach
-                        @else
-                            <p>No roles available.</p>
-                        @endif
+                <div class="col-md-6">
+                    <label class="form-label">Role</label>
+                    <div class="row">
+                        @foreach ($roles as $role_id => $role_name)
+                            <div class="col-md-3 mt-3">
+                                <label>
+                                <input
+                                    type="checkbox"
+                                    class="form-check-input"
+                                    name="roles[]"
+                                    {{-- id="role-{{ $role_id }}" --}}
+                                    value="{{ $role_name }}"
+                                    {{ in_array($role_id, old('roles', $userRole ?? [])) ? 'checked' : '' }}>
+                                {{-- <label class="form-check-label" for="role-{{ $role_id }}"> --}}
+                                    {{ $role_name }}
+                                </label>
+                            </div>
+                        @endforeach
                     </div>
+                    @error('roles')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                    @enderror
                 </div>
+
+
 
                 <div class="col-md-12">
                     <!-- Update User Button -->

@@ -103,7 +103,7 @@
                         <tr>
                             <th>Id</th>
                             <th>Role Name</th>
-                            <th>Permissions</th>
+                            {{-- <th>Permissions</th> --}}
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -112,7 +112,7 @@
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $role->name }}</td>
-                                <td>
+                                {{-- <td>
                                     @if($role->permissions->isNotEmpty())
                                         @foreach ($role->permissions as $permission)
                                             <span class="badge bg-secondary">{{ $permission->name }}</span>
@@ -120,7 +120,7 @@
                                     @else
                                         <span>No permissions available.</span>
                                     @endif
-                                </td>
+                                </td> --}}
                                 <td>
                                     <!-- Edit button with proper route helper -->
                                     <a href="{{ route('roles.edit', $role->id) }}" class="text-primary bi bi-pencil" title="Edit Role"></a>

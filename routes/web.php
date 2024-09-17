@@ -70,9 +70,22 @@ Route::delete('/roles/{id}', [RoleController::class, 'destroy'])->name('roles.de
 // Route::get('update-role/{id}', [RoleController::class, 'edit'])->name('role.edit');
 // Route::put('update-role/{id}', [RoleController::class, 'update'])->name('role.update');
 // web.php
-Route::get('roles/{id}/edit', [RoleController::class, 'edit'])->name('roles.edit');
-Route::put('roles/{id}', [RoleController::class, 'update'])->name('roles.update');
+// Route::get('roles/{id}/edit', [RoleController::class, 'edit'])->name('roles.edit');
+// Route::put('roles/{id}', [RoleController::class, 'update'])->name('roles.update');
+Route::get('/roles/{role}/edit', [RoleController::class, 'edit'])->name('roles.edit');
+Route::put('/roles/{role}', [RoleController::class, 'update'])->name('roles.update');
+
+// route::get('roles/{$role->id}/give-permissions',[RoleController::class,'addPermissionToRole']);
 
 
 Route::get('add-module', [ModuleController::class, 'index'])->name('modules.create'); // Route to display the form
 Route::post('add-module', [ModuleController::class, 'store'])->name('modules.store');
+// Route::resource('user', UserController::class);
+// Route::group(['middleware' => ['auth']], function() {
+//     Route::resource('roles', RoleController::class);
+//     Route::resource('users', UserController::class);
+// });
+
+// Route::group([],function(){
+
+// });
