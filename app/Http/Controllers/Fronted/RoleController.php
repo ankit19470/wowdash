@@ -17,8 +17,9 @@ class RoleController extends Controller
 {
     public function index()
     {
+        $modules = Module::all(); // Get all modules
 
-        return view('fronted.add-roles');
+        return view('fronted.add-roles',compact('modules'));
     }
 
 
@@ -60,30 +61,36 @@ class RoleController extends Controller
     }
     public function edit(Role $role)
     {
+
         // $role = Role::findOrFail($id); // Find the role by ID
          $permissions = Permission::get(); // Get all permissions
-        // $modules = Module::all(); // Get all modules
+         $modules = Module::with('permissions')->get();
 
-        return view('fronted.update-role', compact('role','permissions'));
+        return view('fronted.update-role', compact('role','permissions','modules'));
     }
 
     public function update(Request $request, $id)
     {
+        // dd($request->all());
         // Find the role by ID
         $role = Role::findOrFail($id);
+
 
         // Define validation rules
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255|unique:roles,name,' .$id, // Ignore the current role during validation
             'permissions' => 'array', // Ensure permissions is an array
-        'permissions.*' => 'exists:permissions,name',
+            'permissions.*' => 'exists:permissions,name',
+            'modules' => 'required', // Ensure modules is an array
+            'modules.*' => 'exists:modules,id',
 
         ]);
 
         // Check if validation fails
-        if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->withInput();
-        }
+        // if ($validator->fails()) {
+        // dd($role);
+        //     return redirect()->back()->withErrors($validator)->withInput();
+        // }
 
 
         $role->name = $request->input('name');
@@ -98,6 +105,12 @@ class RoleController extends Controller
         } else {
             $role->syncPermissions([]); // Remove all permissions if none are selected
         }
+
+        // if ($request->has('modules')) {
+        //     $role->syncmodules()($request->input('modules')); // Sync selected modules
+        // } else {
+        //     $role->syncmodules([]); // Remove all modules if none are selected
+        // }
         return redirect()->route('list-role')->with('success', 'Role updated successfully!');
     }
 

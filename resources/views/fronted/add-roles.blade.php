@@ -110,11 +110,12 @@
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-body">
-                        <form action="{{route('add-role')}}" method="POST">
+                        <form action="{{ route('add-role') }}" method="POST">
                             @csrf
+                            <!-- Role Name Field -->
                             <div class="mb-3">
                                 <label for="name" class="form-label">Name</label>
-                                <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{ old('name') }}">
+                                <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{ old('name') }}" required>
                                 @error('name')
                                     <div class="invalid-feedback">
                                         {{ $message }}
@@ -122,28 +123,31 @@
                                 @enderror
                             </div>
 
-                            {{-- <div class="mb-3">
-                                <div class="row"> <!-- Bootstrap grid setup -->
-                                    @if($permissions->isNotEmpty()) <!-- Use $permissions here -->
-                                        @foreach ($permissions as $permission) <!-- Use $permissions for the array and $permission for each item -->
-                                            <div class="col-md-3 mt-3"> <!-- 4 columns per row (12/3 = 4) -->
-                                                <input type="checkbox" class="form-check-input" name="permissions[]" id="permission-{{ $permission->id }}" value="{{ $permission->name }}">
-                                                <label class="form-check-label" for="permission-{{ $permission->id }}">
-                                                    {{ $permission->name }}
-                                                </label>
-                                            </div>
-                                        @endforeach
-                                    @else
-                                        <p>No permissions available.</p>
-                                    @endif
-                                </div>
-                            </div> --}}
+                            <!-- Module Selection -->
+                            <div class="mb-3">
+                                <label for="modules" class="form-label">Module</label>
+                                <select class="form-select @error('modules') is-invalid @enderror" name="modules" id="modules" required>
+                                    <option value="" disabled {{ old('modules') == '' ? 'selected' : '' }}>Select Module</option>
+                                    @foreach ($modules as $module)
+                                        <option value="{{ $module->id }}" {{ old('modules') == $module->id ? 'selected' : '' }}>
+                                            {{ $module->module }} <!-- Assuming 'module' is the field that holds the module name -->
+                                        </option>
+                                    @endforeach
+                                </select>
+                                @error('modules')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
 
+                            <!-- Submit Button -->
                             <button type="submit" class="btn btn-primary">Add Role</button>
                         </form>
                     </div>
                 </div>
             </div>
+
         </div>
 
         <footer class="d-footer">

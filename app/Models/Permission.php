@@ -18,4 +18,10 @@ class Permission extends Model
 {
     return $this->belongsToMany(Permission::class);
 }
+// Permission.php
+public function module()
+{
+    return $this->belongsTo(Module::class);
+}
+
 }

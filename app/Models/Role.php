@@ -11,6 +11,14 @@ class Role extends SpatieRole
     // {
     //     return $this->belongsToMany(Module::class);
     // }
+//     public function modules()
+// {
+//     return $this->belongsToMany(Module::class); // Adjust the relationship type if different
+// }
     // The relationship is already defined in Spatie\Permission\Models\Role
+    public function modules()
+    {
+        return $this->belongsToMany(Module::class, 'module_role', 'role_id', 'module_id');
+    }
 }
 
