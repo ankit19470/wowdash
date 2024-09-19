@@ -8,6 +8,8 @@ use App\Http\controller\fronted\LogoutController;
 use App\Http\Controllers\fronted\PermissionController;
 use App\Http\Controllers\fronted\RoleController;
 use App\Http\Controllers\fronted\ModuleController;
+use App\Http\Controllers\ProfileController;
+
 
 
 
@@ -80,6 +82,15 @@ Route::put('/roles/{role}', [RoleController::class, 'update'])->name('roles.upda
 
 Route::get('add-module', [ModuleController::class, 'index'])->name('modules.create'); // Route to display the form
 Route::post('add-module', [ModuleController::class, 'store'])->name('modules.store');
+
+// Route::get('/view-profile', [ProfileController::class, 'show'])->name('profile.show');
+// Route to view the user profile
+Route::get('view-profile', [ProfileController::class, 'profile'])->name('profile.view');
+
+// Route::post('update-profile', [ProfileController::class, 'updateProfile'])->name('profile.update');
+Route::post('/profile/update', [ProfileController::class, 'updateProfile'])->name('user.updateProfile');
+
+
 // Route::resource('user', UserController::class);
 // Route::group(['middleware' => ['auth']], function() {
 //     Route::resource('roles', RoleController::class);

@@ -367,7 +367,11 @@
 
                             <ul class="to-top-list">
 
-
+                                {{-- l class="to-top-list"> --}}
+                                <li>
+                                    <a class="dropdown-item text-black px-0 py-8 hover-bg-transparent hover-text-primary d-flex align-items-center gap-3" href="{{ route('profile.view') }}">
+                                    <iconify-icon icon="solar:user-linear" class="icon text-xl"></iconify-icon>  My Profile</a>
+                                  </li>
                                 <li>
                                     <a class="dropdown-item text-black px-0 py-8 hover-bg-transparent hover-text-danger d-flex align-items-center gap-3" href="/logout">
                                     <iconify-icon icon="lucide:power" class="icon text-xl"></iconify-icon>  Log Out</a>
