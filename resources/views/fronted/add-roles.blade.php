@@ -67,15 +67,43 @@
                 </div>
                 <div class="col-auto">
                     <div class="d-flex flex-wrap align-items-center gap-3">
-                        <button type="button" data-theme-toggle class="w-40-px h-40-px bg-neutral-200 rounded-circle d-flex justify-content-center align-items-center"></button>
+                        <!-- Theme toggle button -->
+                        <button type="button" data-theme-toggle
+                            class="w-40-px h-40-px bg-neutral-200 rounded-circle d-flex justify-content-center align-items-center">
+                        </button>
+
+                        <!-- Profile dropdown -->
                         <div class="dropdown">
-                            <button class="d-flex justify-content-center align-items-center rounded-circle" type="button" data-bs-toggle="dropdown">
-                                <img src="{{ url('fronted/images/user.png') }}" alt="User Image" class="w-40-px h-40-px object-fit-cover rounded-circle">
+                            <button class="d-flex justify-content-center align-items-center rounded-circle" type="button"
+                                data-bs-toggle="dropdown">
+
+                                @php
+                                    $user = auth()->user();
+                                @endphp
+
+                                @if($user && $user->file != "")
+
+                                    <img src="{{ asset('/storage/assets/uploads/' . $user->file) }}"
+                                         class="w-40-px h-40-px object-fit-cover rounded-circle"
+                                         alt="User Image">
+                                @else
+
+                                    <img src="{{ url('fronted/images/user.png') }}"
+                                         class="w-40-px h-40-px object-fit-cover rounded-circle"
+                                         alt="User Image">
+                                @endif
                             </button>
+
+                            <!-- Dropdown menu -->
                             <div class="dropdown-menu to-top dropdown-menu-sm">
                                 <ul class="to-top-list">
                                     <li>
-                                        <a class="dropdown-item text-black px-0 py-8 hover-bg-transparent hover-text-danger d-flex align-items-center gap-3" href="/logout">
+                                        <a class="dropdown-item text-black px-0 py-8 hover-bg-transparent hover-text-primary d-flex align-items-center gap-3" href="{{ route('profile.view') }}">
+                                        <iconify-icon icon="solar:user-linear" class="icon text-xl"></iconify-icon>  My Profile</a>
+                                      </li>
+                                    <li>
+                                        <a class="dropdown-item text-black px-0 py-8 hover-bg-transparent hover-text-primary d-flex align-items-center gap-3"
+                                           href="/logout">
                                             <iconify-icon icon="lucide:power" class="icon text-xl"></iconify-icon> Log Out
                                         </a>
                                     </li>
@@ -84,6 +112,7 @@
                         </div><!-- Profile dropdown end -->
                     </div>
                 </div>
+
             </div>
         </div>
 

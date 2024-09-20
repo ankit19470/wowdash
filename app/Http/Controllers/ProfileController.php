@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Validator;
-
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Models\Role;
@@ -10,6 +10,29 @@ use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
 {
+    public function changePassword(Request $request)
+    {
+        // Validate the input data
+        $request->validate([
+            'current_password' => 'required', // current password field
+            'new_password' => 'required|string|min:8|confirmed', // confirmed = new_password + new_password_confirmation
+        ]);
+
+        // Get the current authenticated user
+        $user = Auth::user();
+
+        // Check if the current password matches the user's password in the database
+        if (!Hash::check($request->current_password, $user->password)) {
+            return back()->withErrors(['current_password' => 'Your current password does not match.']);
+        }
+
+        // Update the user's password in the database
+        $user->password = Hash::make($request->new_password);
+        $user->save();
+
+        // Return success message
+        return back()->with('success', 'Your password has been changed successfully.');
+    }
     public function profile()
     {
         // Fetch user data and return view
@@ -19,7 +42,7 @@ class ProfileController extends Controller
         $roles = Role::all();
         return view('fronted.view-profile', compact('user','role','roles'));
     }
-    
+
     public function updateProfile(Request $request)
     {
         $user = Auth::user();

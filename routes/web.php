@@ -90,6 +90,9 @@ Route::get('view-profile', [ProfileController::class, 'profile'])->name('profile
 // Route::post('update-profile', [ProfileController::class, 'updateProfile'])->name('profile.update');
 Route::post('/profile/update', [ProfileController::class, 'updateProfile'])->name('user.updateProfile');
 
+Route::post('/profile/change-password', [ProfileController::class, 'changePassword'])->name('profile.change-password');
+Route::get('/users', [AddUserController::class, 'filter'])->name('users.filter');
+
 
 // Route::resource('user', UserController::class);
 // Route::group(['middleware' => ['auth']], function() {

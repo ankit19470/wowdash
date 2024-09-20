@@ -4,15 +4,15 @@
     <section class="auth bg-base d-flex flex-wrap">
         <div class="auth-left d-lg-block d-none">
             <div class="d-flex align-items-center flex-column h-100 justify-content-center">
-                <img src="{{ url('fronted/images/auth/auth-img.png') }}" alt="">
+                <img src="{{url('fronted/logo/1.png')}}" alt="" class="img-fluid w-75">
             </div>
         </div>
         <div class="auth-right py-32 px-24 d-flex flex-column justify-content-center">
             <div class="max-w-464-px mx-auto w-100">
                 <div>
-                    <a href="{{ url('/') }}" class="mb-40 max-w-290-px">
-                        <img src="{{ url('fronted/images/logo.png') }}" alt="">
-                    </a>
+                    {{-- <a href="{{ url('/') }}" class="mb-40 max-w-290-px">
+                        <img src="{{ url('fronted/logo/dw_logo.png') }}" alt="">
+                    </a> --}}
                     <h4 class="mb-12">Sign Up to your Account</h4>
                     <p class="mb-32 text-secondary-light text-lg">Welcome! Please enter your details</p>
                 </div>
@@ -22,53 +22,42 @@
                     <div class="mb-16">
                         <div class="position-relative">
                             <div class="icon-field">
-                                {{-- <div class="icon-field mb-16"> --}}
-                                <span class="icon top-50 translate-middle-y">
-                                    <iconify-icon icon="f7:person"></iconify-icon>
-                                </span>
                                 <input type="text" name="name" class="form-control h-56-px bg-neutral-50 radius-12"
                                     placeholder="Username" value="{{ old('name') }}">
                             </div>
-                            </div>
-                            @error('name')
-                                <span class="text-danger">{{ $message }}</span>
-                            @enderror
                         </div>
-                            <div class="mb-16">
-                                <div class="position-relative">
-                                    <div class="icon-field">
-                                        <span class="icon top-50 translate-middle-y">
-                                            <iconify-icon icon="mage:email"></iconify-icon>
-                                        </span>
-                                        <input type="email" name="email"
-                                            class="form-control h-56-px bg-neutral-50 radius-12" placeholder="Email"
-                                            value="{{ old('email') }}">
-                                    </div>
-                                </div>
-                                @error('email')
-                                    <div class="text-danger">{{ $message }}</div>
-                                @enderror
+                        @error('name')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
+                    </div>
+                    <div class="mb-16">
+                        <div class="position-relative">
+                            <div class="icon-field">
+                                <input type="email" name="email"
+                                    class="form-control h-56-px bg-neutral-50 radius-12" placeholder="Email"
+                                    value="{{ old('email') }}">
                             </div>
-                            <div class="mb-16">
-                                <div class="position-relative">
-                                    <div class="icon-field">
-                                        <span class="icon top-50 translate-middle-y">
-                                            <iconify-icon icon="solar:lock-password-outline"></iconify-icon>
-                                        </span>
-                                        <input type="password" name="password"
-                                            class="form-control h-56-px bg-neutral-50 radius-12" id="your-password"
-                                            placeholder="Password">
-                                    </div>
-                                    <span
-                                        class="toggle-password ri-eye-line cursor-pointer position-absolute end-0 top-50 translate-middle-y me-16 text-secondary-light"
-                                        data-toggle="#your-password"></span>
-                                </div>
-                                @error('password')
-                                    <div class="text-danger">{{ $message }}</div>
-                                @enderror
-                                <!-- Optional password hint -->
-                                {{-- <span class="mt-12 text-sm text-secondary-light">Your password must have at least 6 characters</span> --}}
+                        </div>
+                        @error('email')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="mb-16">
+                        <div class="position-relative">
+                            <div class="icon-field">
+                                <input type="password" name="password"
+                                    class="form-control h-56-px bg-neutral-50 radius-12" id="your-password"
+                                    placeholder="Password">
                             </div>
+                            <span
+                                class="toggle-password ri-eye-line cursor-pointer position-absolute end-0 top-50 translate-middle-y me-16 text-secondary-light"
+                                data-toggle="#your-password"></span>
+                        </div>
+                        @error('password')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+
 
                             <div class="mb-16">
                                 <div class="d-flex align-items-start">

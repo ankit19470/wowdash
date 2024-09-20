@@ -123,7 +123,7 @@
                                     <li>
                                         <a class="dropdown-item text-black px-0 py-8 hover-bg-transparent hover-text-primary d-flex align-items-center gap-3"
                                             href="{{ url('profile.view') }}">
-                                            <iconify-icon icon="lucide:power" class="icon text-xl"></iconify-icon>
+                                            <iconify-icon icon="solar:user-linear" class="icon text-xl"></iconify-icon>
                                             {{-- <iconify-icon icon="solar:user-linear" class="icon text-xl"></iconify-icon> --}}
                                             My Profile</a>
                                     </li>
@@ -145,14 +145,14 @@
             <div class="d-flex flex-wrap align-items-center justify-content-between gap-3 mb-24">
                 <h6 class="fw-semibold mb-0">View Profile</h6>
                 <ul class="d-flex align-items-center gap-2">
-                    <li class="fw-medium">
+                    {{-- <li class="fw-medium">
                         <a href="index.html" class="d-flex align-items-center gap-1 hover-text-primary">
                             <iconify-icon icon="solar:home-smile-angle-outline" class="icon text-lg"></iconify-icon>
                             Dashboard
                         </a>
                     </li>
                     <li>-</li>
-                    <li class="fw-medium">View Profile</li>
+                    <li class="fw-medium">View Profile</li> --}}
                 </ul>
             </div>
 
@@ -210,7 +210,11 @@
                                     </li>
                                     <li class="d-flex align-items-center gap-2 mb-12">
                                         <span class="w-30 text-md fw-semibold text-primary-light">Role</span>
-                                        <span class="w-70 text-secondary-light fw-medium">: {{ $role }}</span>
+                                        <span class="w-70 text-secondary-light fw-medium">:      @if(!empty($user->getRoleNames()))
+                                            @foreach($user->getRoleNames() as $v)
+                                               <label class="badge bg-danger" style="color: white">{{ $v }}</label>
+                                            @endforeach
+                                          @endif</span>
                                     </li>
                                 </ul>
                             </div>
@@ -240,14 +244,14 @@
                                         Change Password
                                     </button>
                                 </li>
-                                <li class="nav-item" role="presentation">
+                                {{-- <li class="nav-item" role="presentation">
                                     <button class="nav-link d-flex align-items-center px-24" id="pills-notification-tab"
                                         data-bs-toggle="pill" data-bs-target="#pills-notification" type="button"
                                         role="tab" aria-controls="pills-notification" aria-selected="false"
                                         tabindex="-1">
                                         Notification Settings
                                     </button>
-                                </li>
+                                </li> --}}
                             </ul>
 
                             <div class="tab-content" id="pills-tabContent">
@@ -426,7 +430,7 @@
 
                                         </div>
                                         <div class="d-flex align-items-center justify-content-center gap-3">
-                                            <a href="{{ url()->previous() }}"
+                                            <a href="{{ url('list-user')}}"
                                                 class="border border-danger-600 bg-hover-danger-200 text-danger-600 text-md px-56 py-11 radius-8">Cancel</a>
                                             <button type="submit"
                                                 class="btn btn-primary border border-primary-600 text-md px-56 py-12 radius-8">Save</button>
@@ -436,32 +440,58 @@
                                 </div>
 
                                 <div class="tab-pane fade" id="pills-change-passwork" role="tabpanel"
-                                    aria-labelledby="pills-change-passwork-tab" tabindex="0">
+                                aria-labelledby="pills-change-passwork-tab" tabindex="0">
+                                @if (session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+@endif
+
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+                                <form method="POST" action="{{ route('profile.change-password') }}">
+                                    @csrf <!-- Laravel CSRF protection -->
+
+                                    <!-- Current Password -->
                                     <div class="mb-20">
-                                        <label for="your-password"
-                                            class="form-label fw-semibold text-primary-light text-sm mb-8">New Password
-                                            <span class="text-danger-600">*</span></label>
-                                        <div class="position-relative">
-                                            <input type="password" class="form-control radius-8" id="your-password"
-                                                placeholder="Enter New Password*">
-                                            <span
-                                                class="toggle-password ri-eye-line cursor-pointer position-absolute end-0 top-50 translate-middle-y me-16 text-secondary-light"
-                                                data-toggle="#your-password"></span>
-                                        </div>
+                                        <label for="current-password" class="form-label fw-semibold text-primary-light text-sm mb-8">
+                                            Current Password <span class="text-danger-600">*</span>
+                                        </label>
+                                        <input type="password" name="current_password" class="form-control radius-8" id="current-password"
+                                            placeholder="Enter Current Password*" required>
                                     </div>
+
+                                    <!-- New Password -->
                                     <div class="mb-20">
-                                        <label for="confirm-password"
-                                            class="form-label fw-semibold text-primary-light text-sm mb-8">Confirmed
-                                            Password <span class="text-danger-600">*</span></label>
-                                        <div class="position-relative">
-                                            <input type="password" class="form-control radius-8" id="confirm-password"
-                                                placeholder="Confirm Password*">
-                                            <span
-                                                class="toggle-password ri-eye-line cursor-pointer position-absolute end-0 top-50 translate-middle-y me-16 text-secondary-light"
-                                                data-toggle="#confirm-password"></span>
-                                        </div>
+                                        <label for="new-password" class="form-label fw-semibold text-primary-light text-sm mb-8">
+                                            New Password <span class="text-danger-600">*</span>
+                                        </label>
+                                        <input type="password" name="new_password" class="form-control radius-8" id="new-password"
+                                            placeholder="Enter New Password*" required>
                                     </div>
-                                </div>
+
+                                    <!-- Confirm New Password -->
+                                    <div class="mb-20">
+                                        <label for="new-password_confirmation" class="form-label fw-semibold text-primary-light text-sm mb-8">
+                                            Confirm New Password <span class="text-danger-600">*</span>
+                                        </label>
+                                        <input type="password" name="new_password_confirmation" class="form-control radius-8" id="new-password_confirmation"
+                                            placeholder="Confirm New Password*" required>
+                                    </div>
+
+                                    <!-- Submit Button -->
+                                    <button type="submit" class="btn btn-primary">Change Password</button>
+                                </form>
+
+                            </div>
+
 
                                 <div class="tab-pane fade" id="pills-notification" role="tabpanel"
                                     aria-labelledby="pills-notification-tab" tabindex="0">

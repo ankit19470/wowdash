@@ -1,21 +1,22 @@
-
 @extends('fronted.layout.main')
 
 @section('main-container')
-<aside class="sidebar">
-    <button type="button" class="sidebar-close-btn">
-      <iconify-icon icon="radix-icons:cross-2"></iconify-icon>
-    </button>
-    <div>
-        <a href="{{url('add-user')}}" class="sidebar-logo">
-            <img src="{{url('fronted/logo/dw_logo.png')}}" width="168" height="40" alt="site logo" class="light-logo">
-            <img src="{{url('fronted/logo/dw_logo.png')}}" width="168" height="40" alt="site logo" class="dark-logo">
-            <img src="{{url('fronted/images/logo-icon.png')}}" alt="site logo" class="logo-icon">
-          </a>
-    </div>
-    <div class="sidebar-menu-area">
-      <ul class="sidebar-menu" id="sidebar-menu">
-        {{-- <li class="dropdown">
+    <aside class="sidebar">
+        <button type="button" class="sidebar-close-btn">
+            <iconify-icon icon="radix-icons:cross-2"></iconify-icon>
+        </button>
+        <div>
+            <a href="{{ url('add-user') }}" class="sidebar-logo">
+                <img src="{{ url('fronted/logo/dw_logo.png') }}" width="168" height="40" alt="site logo"
+                    class="light-logo">
+                <img src="{{ url('fronted/logo/dw_logo.png') }}" width="168" height="40" alt="site logo"
+                    class="dark-logo">
+                <img src="{{ url('fronted/images/logo-icon.png') }}" alt="site logo" class="logo-icon">
+            </a>
+        </div>
+        <div class="sidebar-menu-area">
+            <ul class="sidebar-menu" id="sidebar-menu">
+                {{-- <li class="dropdown">
           <a href="javascript:void(0)">
             <iconify-icon icon="solar:home-smile-angle-outline" class="menu-icon"></iconify-icon>
             <span>Dashboard</span>
@@ -38,26 +39,26 @@
             </li>
           </ul>
         </li> --}}
-        {{-- <li class="sidebar-menu-group-title">Application</li> --}}
-        {{-- <li>
+                {{-- <li class="sidebar-menu-group-title">Application</li> --}}
+                {{-- <li>
           <a href="email.html">
             <iconify-icon icon="mage:email" class="menu-icon"></iconify-icon>
             <span>Email</span>
           </a>
         </li> --}}
-        {{-- <li>
+                {{-- <li>
           <a href="chat-message.html">
             <iconify-icon icon="bi:chat-dots" class="menu-icon"></iconify-icon>
             <span>Chat</span>
           </a>
         </li> --}}
-        {{-- <li>
+                {{-- <li>
           <a href="calendar-main.html">
             <iconify-icon icon="solar:calendar-outline" class="menu-icon"></iconify-icon>
             <span>Calendar</span>
           </a>
         </li> --}}
-        {{-- <li class="dropdown">
+                {{-- <li class="dropdown">
           <a href="javascript:void(0)">
             <iconify-icon icon="hugeicons:invoice-03" class="menu-icon"></iconify-icon>
             <span>Invoice</span>
@@ -78,9 +79,9 @@
           </ul>
         </li> --}}
 
-        {{-- <li class="sidebar-menu-group-title">Application</li> --}}
+                {{-- <li class="sidebar-menu-group-title">Application</li> --}}
 
-        {{-- <li class="dropdown">
+                {{-- <li class="dropdown">
           <a href="javascript:void(0)">
             <iconify-icon icon="solar:document-text-outline" class="menu-icon"></iconify-icon>
             <span>Components</span>
@@ -151,7 +152,7 @@
             </li>
           </ul>
         </li> --}}
-        {{-- <li class="dropdown">
+                {{-- <li class="dropdown">
           <a href="javascript:void(0)">
             <iconify-icon icon="heroicons:document" class="menu-icon"></iconify-icon>
             <span>Forms</span>
@@ -168,7 +169,7 @@
             </li>
           </ul>
         </li> --}}
-        {{-- <li class="dropdown">
+                {{-- <li class="dropdown">
           <a href="javascript:void(0)">
             <iconify-icon icon="mingcute:storage-line" class="menu-icon"></iconify-icon>
             <span>Table</span>
@@ -182,7 +183,7 @@
             </li>
           </ul>
         </li> --}}
-        {{-- <li class="dropdown">
+                {{-- <li class="dropdown">
           <a href="javascript:void(0)">
             <iconify-icon icon="solar:pie-chart-outline" class="menu-icon"></iconify-icon>
             <span>Chart</span>
@@ -205,60 +206,65 @@
             <span>Widgets</span>
           </a>
         </li> --}}
-        <li class="dropdown">
-          <a href="javascript:void(0)">
-            <iconify-icon icon="flowbite:users-group-outline" class="menu-icon"></iconify-icon>
-            <span>Users</span>
-          </a>
-          <ul class="sidebar-submenu">
-            {{-- <li>
+                <li class="dropdown">
+                    <a href="javascript:void(0)">
+                        <iconify-icon icon="flowbite:users-group-outline" class="menu-icon"></iconify-icon>
+                        <span>Users</span>
+                    </a>
+                    <ul class="sidebar-submenu">
+                        {{-- <li>
               <a href="users-list.html"><i class="ri-circle-fill circle-icon text-primary-600 w-auto"></i> Users List</a>
             </li> --}}
 
-            <li>
-              <a href="{{url('add-user')}}"><i class="ri-circle-fill circle-icon text-info-main w-auto"></i> Add User</a>
-            </li>
-    <li>
-              <a href="{{url('list-user')}}"><i class="ri-circle-fill circle-icon text-warning-main w-auto"></i> List User</a>
-            </li>
+                        <li>
+                            <a href="{{ url('add-user') }}"><i class="ri-circle-fill circle-icon text-info-main w-auto"></i>
+                                Add User</a>
+                        </li>
+                        <li>
+                            <a href="{{ url('list-user') }}"><i
+                                    class="ri-circle-fill circle-icon text-warning-main w-auto"></i> List User</a>
+                        </li>
 
-            {{-- <li>
+                        {{-- <li>
                 <a href="{{url('update-user')}}"><i class="ri-circle-fill circle-icon text-info-main w-auto"></i> Update User</a>
               </li> --}}
-            {{-- <li>
+                        {{-- <li>
               <a href="view-profile.html"><i class="ri-circle-fill circle-icon text-danger-main w-auto"></i> View Profile</a>
             </li> --}}
-          </ul>
-        </li>
-        <li class="dropdown">
-            <a href="javascript:void(0)">
-                {{-- <iconify-icon icon="gear:-group-outline" class="menu-icon"></iconify-icon> --}}
-                <iconify-icon icon="mdi:cog-outline" class="menu-icon"></iconify-icon>
-                <span>Roles & Permission</span>
-            </a>
-            <ul class="sidebar-submenu">
-
-                <li><a href="{{ url('add-module') }}"><i class="ri-circle-fill circle-icon text-warning-main w-auto"></i> Add Module</a></li>
-
-                <li>
-                    <a href="{{ url('add-permission') }}"><i
-                            class="ri-circle-fill circle-icon text-info-main w-auto"></i> Permission</a>
+                    </ul>
                 </li>
-                <li>
-                    <a href="{{ url('list-permission') }}"><i
-                            class="ri-circle-fill circle-icon text-info-main w-auto"></i> List Permission</a>
-                </li>
-                <li><a href="{{ url('add-role') }}"><i class="ri-circle-fill circle-icon text-info-main w-auto"></i> Add Role</a></li>
-                <li><a href="{{ url('list-role') }}"><i class="ri-circle-fill circle-icon text-warning-main w-auto"></i> List Role</a></li>
-                {{-- <li>
+                <li class="dropdown">
+                    <a href="javascript:void(0)">
+                        {{-- <iconify-icon icon="gear:-group-outline" class="menu-icon"></iconify-icon> --}}
+                        <iconify-icon icon="mdi:cog-outline" class="menu-icon"></iconify-icon>
+                        <span>Roles & Permission</span>
+                    </a>
+                    <ul class="sidebar-submenu">
+
+                        <li><a href="{{ url('add-module') }}"><i
+                                    class="ri-circle-fill circle-icon text-warning-main w-auto"></i> Add Module</a></li>
+
+                        <li>
+                            <a href="{{ url('add-permission') }}"><i
+                                    class="ri-circle-fill circle-icon text-info-main w-auto"></i> Permission</a>
+                        </li>
+                        <li>
+                            <a href="{{ url('list-permission') }}"><i
+                                    class="ri-circle-fill circle-icon text-info-main w-auto"></i> List Permission</a>
+                        </li>
+                        <li><a href="{{ url('add-role') }}"><i class="ri-circle-fill circle-icon text-info-main w-auto"></i>
+                                Add Role</a></li>
+                        <li><a href="{{ url('list-role') }}"><i
+                                    class="ri-circle-fill circle-icon text-warning-main w-auto"></i> List Role</a></li>
+                        {{-- <li>
         <a href="{{url('list-user')}}"><i class="ri-circle-fill circle-icon text-warning-main w-auto"></i> List User</a>
       </li> --}}
 
-            </ul>
-        </li>
+                    </ul>
+                </li>
 
-        {{-- <li class="sidebar-menu-group-title">Application</li> --}}
-{{--
+                {{-- <li class="sidebar-menu-group-title">Application</li> --}}
+                {{--
         <li class="dropdown">
           <a href="javascript:void(0)">
             <iconify-icon icon="simple-line-icons:vector" class="menu-icon"></iconify-icon>
@@ -294,7 +300,7 @@
             <span>FAQs.</span>
           </a>
         </li> --}}
-        {{-- <li>
+                {{-- <li>
           <a href="error.html">
             <iconify-icon icon="streamline:straight-face" class="menu-icon"></iconify-icon>
             <span>404</span>
@@ -306,7 +312,7 @@
             <span>Terms & Conditions</span>
           </a>
         </li> --}}
-        {{-- <li class="dropdown">
+                {{-- <li class="dropdown">
           <a href="javascript:void(0)">
             <iconify-icon icon="icon-park-outline:setting-two" class="menu-icon"></iconify-icon>
             <span>Settings</span>
@@ -335,187 +341,239 @@
             </li>
           </ul>
         </li> --}}
-      </ul>
-    </div>
-  </aside>
-  <main class="dashboard-main">
-    <div class="navbar-header">
-        <div class="row align-items-center justify-content-between">
-            <div class="col-auto">
-                <div class="d-flex flex-wrap align-items-center gap-4">
-                    <button type="button" class="sidebar-toggle">
-                        <iconify-icon icon="heroicons:bars-3-solid" class="icon text-2xl non-active"></iconify-icon>
-                        <iconify-icon icon="iconoir:arrow-right" class="icon text-2xl active"></iconify-icon>
-                    </button>
-                    <button type="button" class="sidebar-mobile-toggle">
-                        <iconify-icon icon="heroicons:bars-3-solid" class="icon"></iconify-icon>
-                    </button>
-                    <form class="navbar-search">
-                        <input type="text" name="search" placeholder="Search">
-                        <iconify-icon icon="ion:search-outline" class="icon"></iconify-icon>
-                    </form>
-                </div>
-            </div>
-            <div class="col-auto">
-                <div class="d-flex flex-wrap align-items-center gap-3">
-                    <button type="button" data-theme-toggle class="w-40-px h-40-px bg-neutral-200 rounded-circle d-flex justify-content-center align-items-center"></button>
-                    <div class="dropdown">
-                        <button class="d-flex justify-content-center align-items-center rounded-circle" type="button" data-bs-toggle="dropdown">
-                            <img src="{{ url('fronted/images/user.png') }}" alt="User Image" class="w-40-px h-40-px object-fit-cover rounded-circle">
+            </ul>
+        </div>
+    </aside>
+    <main class="dashboard-main">
+        <div class="navbar-header">
+            <div class="row align-items-center justify-content-between">
+                <div class="col-auto">
+                    <div class="d-flex flex-wrap align-items-center gap-4">
+                        <button type="button" class="sidebar-toggle">
+                            <iconify-icon icon="heroicons:bars-3-solid" class="icon text-2xl non-active"></iconify-icon>
+                            <iconify-icon icon="iconoir:arrow-right" class="icon text-2xl active"></iconify-icon>
                         </button>
-                        <div class="dropdown-menu to-top dropdown-menu-sm">
-
-                            <ul class="to-top-list">
-
-                                {{-- l class="to-top-list"> --}}
-                                <li>
-                                    <a class="dropdown-item text-black px-0 py-8 hover-bg-transparent hover-text-primary d-flex align-items-center gap-3" href="{{ route('profile.view') }}">
-                                    <iconify-icon icon="solar:user-linear" class="icon text-xl"></iconify-icon>  My Profile</a>
-                                  </li>
-                                <li>
-                                    <a class="dropdown-item text-black px-0 py-8 hover-bg-transparent hover-text-danger d-flex align-items-center gap-3" href="/logout">
-                                    <iconify-icon icon="lucide:power" class="icon text-xl"></iconify-icon>  Log Out</a>
-                                  </li>
-                            </ul>
-                        </div>
-                    </div><!-- Profile dropdown end -->
+                        <button type="button" class="sidebar-mobile-toggle">
+                            <iconify-icon icon="heroicons:bars-3-solid" class="icon"></iconify-icon>
+                        </button>
+                        <form class="navbar-search">
+                            <input type="text" name="search" placeholder="Search">
+                            <iconify-icon icon="ion:search-outline" class="icon"></iconify-icon>
+                        </form>
+                    </div>
                 </div>
+                <div class="col-auto">
+                    <div class="d-flex flex-wrap align-items-center gap-3">
+                        <!-- Theme toggle button -->
+                        <button type="button" data-theme-toggle
+                            class="w-40-px h-40-px bg-neutral-200 rounded-circle d-flex justify-content-center align-items-center">
+                        </button>
+
+                        <!-- Profile dropdown -->
+                        <div class="dropdown">
+                            <button class="d-flex justify-content-center align-items-center rounded-circle" type="button"
+                                data-bs-toggle="dropdown">
+
+                                @php
+                                    $user = auth()->user();
+                                @endphp
+
+                                @if($user && $user->file != "")
+
+                                    <img src="{{ asset('/storage/assets/uploads/' . $user->file) }}"
+                                         class="w-40-px h-40-px object-fit-cover rounded-circle"
+                                         alt="User Image">
+                                @else
+
+                                    <img src="{{ url('fronted/images/user.png') }}"
+                                         class="w-40-px h-40-px object-fit-cover rounded-circle"
+                                         alt="User Image">
+                                @endif
+                            </button>
+
+                            <!-- Dropdown menu -->
+                            <div class="dropdown-menu to-top dropdown-menu-sm">
+                                <ul class="to-top-list">
+                                    <li>
+                                        <a class="dropdown-item text-black px-0 py-8 hover-bg-transparent hover-text-primary d-flex align-items-center gap-3" href="{{ route('profile.view') }}">
+                                        <iconify-icon icon="solar:user-linear" class="icon text-xl"></iconify-icon>  My Profile</a>
+                                      </li>
+                                    <li>
+                                        <a class="dropdown-item text-black px-0 py-8 hover-bg-transparent hover-text-primary d-flex align-items-center gap-3"
+                                           href="/logout">
+                                            <iconify-icon icon="lucide:power" class="icon text-xl"></iconify-icon> Log Out
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div><!-- Profile dropdown end -->
+                    </div>
+                </div>
+
             </div>
         </div>
-      </div>
 
-    <div class="dashboard-main-body">
+        <div class="dashboard-main-body">
 
-      <div class="d-flex flex-wrap align-items-center justify-content-between gap-3 mb-24">
-    <h6 class="fw-semibold mb-0">User List</h6>
-    <ul class="d-flex align-items-center gap-2">
-      <li class="fw-medium">
-        {{-- <a href="index.html" class="d-flex align-items-center gap-1 hover-text-primary">
+            <div class="d-flex flex-wrap align-items-center justify-content-between gap-3 mb-24">
+                <h6 class="fw-semibold mb-0">User List</h6>
+                <ul class="d-flex align-items-center gap-2">
+                    <li class="fw-medium">
+                        {{-- <a href="index.html" class="d-flex align-items-center gap-1 hover-text-primary">
           <iconify-icon icon="solar:home-smile-angle-outline" class="icon text-lg"></iconify-icon>
           Dashboard
         </a> --}}
-      </li>
-      {{-- <li>-</li> --}}
-      {{-- <li class="fw-medium">User Table</li> --}}
-    </ul>
-  </div>
+                    </li>
+                    {{-- <li>-</li> --}}
+                    {{-- <li class="fw-medium">User Table</li> --}}
+                </ul>
+            </div>
 
-      <div class="card basic-data-table">
-        {{-- <div class="card-header">
+            <div class="card basic-data-table">
+                {{-- <div class="card-header">
           <h5 class="card-title mb-0">Default Datatables</h5>
         </div> --}}
-        <div class="card-body">
-            @if(session('success'))
-            <div class="alert alert-success">
-                {{ session('success') }}
-            </div>
-        @endif
-            <table class="table bordered-table mb-0" id="dataTable" data-page-length='10'>
-                <thead>
-                    <tr>
-                        <th scope="col">Id</th>
-                        {{-- <th scope="col">Image</th> --}}
-                        <th scope="col">First Name</th>
-                        <th scope="col">Last Name</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">Phone</th>
-                        {{-- <th scope="col">Address</th> --}}
-                        <th scope="col">PinCode</th>
-                        <th scope="col">City</th>
+                <div class="card-body">
+                    @if (session('success'))
+                        <div class="alert alert-success">
+                            {{ session('success') }}
+                        </div>
+                    @endif
+                    <form method="GET" action="{{ route('users.filter') }}">
+                        @csrf
 
-                        <th scope="col">State</th>
-                        <th scope="col">Role</th>
+                        <div class="row">
+                            <!-- Start Date -->
+                            <div class="col-md-5 mb-3">
+                                {{-- <label for="start_date" class="form-label">Start Date:</label> --}}
+                                <input type="date" name="start_date" class="form-control" value="{{ request('start_date') }}">
+                            </div>
 
-                        <th scope="col">Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach($users as $user)
-                        <tr>
-                            <td>{{ $user->id }}</td>
-                            {{-- <td>
-                                @if($user->file != "")
+                            <!-- End Date -->
+                            <div class="col-md-5 mb-3">
+                                {{-- <label for="end_date" class="form-label">End Date:</label> --}}
+                                <input type="date" name="end_date" class="form-control" value="{{ request('end_date') }}">
+                            </div>
+
+                            <!-- Submit Button -->
+                            <div class="col-md-2 mb-3 ">
+                                <button type="submit" class="btn btn-primary">Filter</button>
+                            </div>
+                        </div>
+                    </form>
+
+
+                    <table class="table bordered-table mb-0" id="dataTable" data-page-length='10'>
+
+
+                        <thead>
+                            <tr>
+                                <th scope="col">Id</th>
+                                {{-- <th scope="col">Image</th> --}}
+                                <th scope="col">First Name</th>
+                                <th scope="col">Last Name</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Phone</th>
+                                {{-- <th scope="col">Address</th> --}}
+                                <th scope="col">PinCode</th>
+                                <th scope="col">City</th>
+
+                                <th scope="col">State</th>
+                                <th scope="col">Role</th>
+
+                                <th scope="col">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($users as $user)
+                                <tr>
+                                    <td>{{ $user->id }}</td>
+                                    {{-- <td>{{ $user->created_at->format('Y-m-d') }}</td> --}}
+                                    {{-- <td>
+                                @if ($user->file != '')
                                     <img src="{{ asset('/storage/assets/uploads/'.$user->file) }}" width="50" height="50" alt="">
                                 @endif
                             </td> --}}
-                            <td>{{ $user->firstname }}</td>
-                            <td>{{ $user->lastname }}</td>
-                            <td>{{ $user->email }}</td>
-                            <td>{{ $user->phone }}</td>
-                            {{-- <td>{{ $user->address }}</td> --}}
-                            <td>{{ $user->pincode }}</td>
-                            <td>{{ $user->city }}</td>
-                            <td>{{ $user->state }}</td>
-                            <td>
-                                @if(!empty($user->getRoleNames()))
-                                  @foreach($user->getRoleNames() as $v)
-                                     <label class="badge bg-danger" style="color: white">{{ $v }}</label>
-                                  @endforeach
-                                @endif
-                              </td>
-                            {{-- <td>{{ $user->roles->pluck('name')->implode(', ') }}</td> --}}
+                                    <td>{{ $user->firstname }}</td>
+                                    <td>{{ $user->lastname }}</td>
+                                    <td>{{ $user->email }}</td>
+                                    <td>{{ $user->phone }}</td>
+                                    {{-- <td>{{ $user->address }}</td> --}}
+                                    <td>{{ $user->pincode }}</td>
+                                    <td>{{ $user->city }}</td>
+                                    <td>{{ $user->state }}</td>
+                                    <td>
+                                        @if (!empty($user->getRoleNames()))
+                                            @foreach ($user->getRoleNames() as $v)
+                                                <label class="badge bg-danger"
+                                                    style="color: white">{{ $v }}</label>
+                                            @endforeach
+                                        @endif
+                                    </td>
+                                    {{-- <td>{{ $user->roles->pluck('name')->implode(', ') }}</td> --}}
 
-                            <td>
-                              {{-- <a href={{"/update/".$user->id}} class="text-primary ti ti-pencil"></a> --}}
+                                    <td>
+                                        {{-- <a href={{"/update/".$user->id}} class="text-primary ti ti-pencil"></a> --}}
 
-                                <a href={{"/update-user/".$user->id}} class="text-primary bi bi-pencil"></a>
-                                <a class="text-danger bi bi-trash deleteUser" data-id="{{ $user->id }}" data-bs-toggle="modal" data-bs-target="#deleteModal">
-                                </a>
-                            </td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
+                                        <a href={{ '/update-user/' . $user->id }} class="text-primary bi bi-pencil"></a>
+                                        <a class="text-danger bi bi-trash deleteUser" data-id="{{ $user->id }}"
+                                            data-bs-toggle="modal" data-bs-target="#deleteModal">
+                                        </a>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
 
-        </div>
-      </div>
-    </div>
-    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <form id="deleteForm" method="POST" action="">
-                    @csrf
-                    @method('DELETE')
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="deleteModalLabel">Confirm Delete</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        Are you sure you want to delete this user?
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                        <button type="submit" class="btn btn-danger">Delete</button>
-                    </div>
-                </form>
+                </div>
             </div>
         </div>
-    </div>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            var deleteUserButtons = document.querySelectorAll('.deleteUser');
+        <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <form id="deleteForm" method="POST" action="">
+                        @csrf
+                        @method('DELETE')
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="deleteModalLabel">Confirm Delete</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            Are you sure you want to delete this user?
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                var deleteUserButtons = document.querySelectorAll('.deleteUser');
 
-            deleteUserButtons.forEach(function(button) {
-                button.addEventListener('click', function() {
-                    var userId = this.getAttribute('data-id');
-                    var deleteForm = document.getElementById('deleteForm');
-                    deleteForm.action = '/users/' + userId; // Adjust this to match your route
+                deleteUserButtons.forEach(function(button) {
+                    button.addEventListener('click', function() {
+                        var userId = this.getAttribute('data-id');
+                        var deleteForm = document.getElementById('deleteForm');
+                        deleteForm.action = '/users/' + userId; // Adjust this to match your route
+                    });
                 });
             });
-        });
         </script>
 
 
-    <footer class="d-footer">
-    <div class="row align-items-center justify-content-between">
-      <div class="col-auto">
-        <p class="mb-0">© 2024 WowDash. All Rights Reserved.</p>
-      </div>
-      <div class="col-auto">
-        <p class="mb-0">Made by <span class="text-primary-600">wowtheme7</span></p>
-      </div>
-    </div>
-  </footer>
-  </main>
-
+        <footer class="d-footer">
+            <div class="row align-items-center justify-content-between">
+                <div class="col-auto">
+                    <p class="mb-0">© 2024 WowDash. All Rights Reserved.</p>
+                </div>
+                <div class="col-auto">
+                    <p class="mb-0">Made by <span class="text-primary-600">wowtheme7</span></p>
+                </div>
+            </div>
+        </footer>
+    </main>
 @endsection

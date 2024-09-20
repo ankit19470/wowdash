@@ -16,6 +16,7 @@ class AddUserController extends Controller
     public function index()
     {
         $roles = Role::pluck('name', 'name')->all(); // Fetching roles
+
         return view('fronted.add-user', compact('roles'));
     }
 
@@ -30,12 +31,13 @@ class AddUserController extends Controller
             'email' => 'required|email|unique:users,email|max:255',
             'password' => 'required|string|min:6',
             'phone' => 'required|digits:10|regex:/^[6-9]\d{9}$/',
-            // 'address' => 'required|string|max:255',
+            'address' => 'required|string|max:255',
             'city' => 'required|string|max:255',
             'pincode' => 'required|digits:6',
             'state' => 'required|string|max:255',
              'roles' => 'required'
         ]);
+
 
         // Check if validation fails
         if ($validator->fails()) {
@@ -56,7 +58,7 @@ class AddUserController extends Controller
         $user->email = $req->email;
         $user->password = Hash::make($req->password);
         $user->phone = $req->phone;
-        // $user->address = $req->address;
+        $user->address = $req->address;
         $user->city = $req->city;
         $user->pincode = $req->pincode;
         $user->state = $req->state;
@@ -169,6 +171,50 @@ public function update(Request $req, $id)
         return redirect()->back()->with('error', 'An error occurred. Please try again.')->withInput();
     }
 }
+
+public function filter(Request $request)
+{
+    // Validate the incoming request
+    $request->validate([
+        // 'search' => 'nullable|string',
+        'start_date' => 'nullable|date',
+        'end_date' => 'nullable|date|after_or_equal:start_date',
+    ]);
+
+    // Get the search query, start date, and end date from the request
+    // $search = $request->input('search');
+    $startDate = $request->input('start_date');
+    $endDate = $request->input('end_date');
+
+    // Build the query for filtering users
+    $users = User::query();
+
+    // If search query is provided, filter by name or email
+    // if ($search) {
+    //     $users->where(function($query) use ($search) {
+    //         $query->where('firstname', 'like', '%' . $search . '%')
+    //               ->orWhere('lastname', 'like', '%' . $search . '%')
+    //               ->orWhere('email', 'like', '%' . $search . '%');
+    //     });
+    // }
+
+    // If start date is provided
+    if ($startDate) {
+        $users->whereDate('created_at', '>=', $startDate);
+    }
+
+    // If end date is provided
+    if ($endDate) {
+        $users->whereDate('created_at', '<=', $endDate);
+    }
+
+    // Execute the query and get the filtered results
+    $users = $users->get();
+
+    // Return the view with the filtered data
+    return view('fronted.list-user', compact('users'));
+}
+
 
 
 

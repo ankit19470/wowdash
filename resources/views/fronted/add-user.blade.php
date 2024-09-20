@@ -179,7 +179,7 @@
                                 var email = document.getElementById("email").value;
                                 var password = document.getElementById("password").value;
                                 var phone = document.getElementById("phone").value;
-                                var pincode = document.getElementById("zipCode").value;
+                        address = document.getElementById("zipCode").value;
                                 var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
                                 var phonePattern = /^[6-9]\d{9}$/;
                                 var pinPattern = /^\d{6}$/;
@@ -235,6 +235,7 @@
                             </div>
                         @enderror
                     </div>
+                    
 
                     <div class="col-md-6">
                         <label for="firstname" class="form-label">First Name</label>
@@ -316,10 +317,19 @@
                         @enderror
                     </div>
 
-                    <div class="col-md-12">
+                    <div class="col-md-6">
                         <label for="pincode" class="form-label">Pin code</label>
                         <input type="text" class="form-control @error('pincode') is-invalid @enderror" id="pincode" name="pincode" placeholder="144008" minlength="6" maxlength="6" value="{{ old('pincode') }}" required>
                         @error('pincode')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                    </div>
+                    <div class="col-md-6">
+                        <label for="address" class="form-label">Address</label>
+                        <input type="text" class="form-control @error('address') is-invalid @enderror" id="address" name="address" placeholder="enter address" value="{{ old('address') }}" required>
+                        @error('address')
                             <div class="invalid-feedback">
                                 {{ $message }}
                             </div>
