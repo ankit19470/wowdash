@@ -14,9 +14,13 @@ class Module extends Model
         // 'yet_another_attribute',
     ];
 
+// public function permissions()
+// {
+//     return $this->hasMany(Permission::class);
+// }
 public function permissions()
 {
-    return $this->hasMany(Permission::class);
+    return $this->belongsToMany(Permission::class, 'module_permission');
 }
 
 // Permission.php

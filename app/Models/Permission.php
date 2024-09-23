@@ -19,9 +19,13 @@ class Permission extends Model
     return $this->belongsToMany(Permission::class);
 }
 // Permission.php
-public function module()
-{
-    return $this->belongsTo(Module::class);
-}
+// public function module()
+// {
+//     return $this->belongsTo(Module::class);
+// }
 
+public function modules()
+{
+    return $this->belongsToMany(Module::class, 'module_permission');
+}
 }
