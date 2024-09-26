@@ -162,7 +162,7 @@
                             <tr>
                                 <th>Id</th>
                                 <th>Permission Name</th>
-                                <th>Module</th>
+                                {{-- <th>Module</th> --}}
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -171,7 +171,8 @@
                                 <tr>
                                     <td>{{ $permission->id }}</td>
                                     <td>{{ $permission->name }}</td>
-                                    <td>{{ $permission->module }}</td>
+                                    {{-- <td>{{ $permission->module }}</td> --}}
+                                    {{-- <td>{{ $permission->module->module_id ?? 'N/A' }}</td> <!-- Accessing module name --> --}}
 
                                     <td>
                                         {{-- <a href={{"/update-permission/".$permission->id}} class="text-primary bi bi-pencil"></a> --}}

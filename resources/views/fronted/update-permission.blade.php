@@ -157,6 +157,24 @@
                             </div>
                             <div class="mb-3">
                                 <label for="module" class="form-label">Module*</label>
+                                <select class="form-control @error('module_id') is-invalid @enderror" id="module"
+                                    name="module_id" required> <!-- Changed to module_id -->
+                                    <option value="">Select a module</option>
+                                    @foreach ($modules as $module)
+                                        <option value="{{ $module->id }}"
+                                            {{ $module->id == $permission->module_id ? 'selected' : '' }}> <!-- Match the ID -->
+                                            {{ $module->module }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                                @error('module_id')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+                            {{-- <div class="mb-3">
+                                <label for="module" class="form-label">Module*</label>
                                 <select class="form-control @error('module') is-invalid @enderror" id="module"
                                     name="module" required>
                                     <option value="">Select a module</option>
@@ -172,7 +190,7 @@
                                         {{ $message }}
                                     </div>
                                 @enderror
-                            </div>
+                            </div> --}}
 
                             <button type="submit" class="btn btn-primary">Update Permission</button>
                             <a href="{{ route('list-permission') }}" class="btn btn-secondary">Cancel</a>

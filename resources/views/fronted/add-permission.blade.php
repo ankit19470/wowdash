@@ -161,19 +161,20 @@
                             </div>
 
                             <div class="mb-3">
-                                <label for="module" class="form-label">Module</label>
-                                <select class="form-control @error('module') is-invalid @enderror" id="module" name="module" required>
+                                <label for="module_id" class="form-label">Select Module</label>
+                                <select name="module_id" id="module_id" class="form-select @error('module_id') is-invalid @enderror" required>
                                     <option value="">Select a module</option>
-                                    @foreach ($modules as $module)
-                                        <option value="{{ $module->module }}">{{ $module->module }}</option>
+                                    @foreach($modules as $module)
+                                        <option value="{{ $module->id }}">{{ $module->module }}</option>
                                     @endforeach
                                 </select>
-                                @error('module')
+                                @error('module_id') <!-- Ensure the error is for the correct field -->
                                     <div class="invalid-feedback">
                                         {{ $message }}
                                     </div>
                                 @enderror
                             </div>
+
                             <button type="submit" class="btn btn-primary">Add Permission</button>
                         </form>
                     </div>

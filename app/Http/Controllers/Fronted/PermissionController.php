@@ -14,21 +14,24 @@ class PermissionController extends Controller
 {
     public function index(){
         $modules = Module::all();
+
         return view('fronted.add-permission', compact('modules'));
     }
     public function store(Request $request)
     {
         $request->validate([
             'name' => 'required|string|max:255|unique:permissions,name',
-            'module' => 'required|string', // Assuming module is a string. If it's an ID, use 'required|exists:modules,id'.
+            // 'module' => 'required|string',
+            'module_id' => 'required|exists:modules,id',  // Assuming module is a string. If it's an ID, use 'required|exists:modules,id'.
         ]);
 
         // Create a new permission
         $permission = new Permission;
         $permission->name = $request->name;
+        $permission->module_id = $request->input('module_id');
 
         // If you want to save a module ID or a module name, adjust this according to your needs.
-        $permission->module = $request->module;
+        // $permission->module = $request->module;
 
         $permission->save(); // Save the permission to the database
 
@@ -46,6 +49,7 @@ public function ListPermission()
 {
     $permissions = Permission::all();
     $modules = Module::all();
+    
 
     return view('fronted.list-permission', [
         'permissions' => $permissions,
@@ -87,7 +91,7 @@ public function update(Request $request, $id)
 
     // Define validation rules
     $validator = Validator::make($request->all(), [
-        'name' => 'required|string|max:255|unique:permissions,name,'.$role->$id,
+        'name' => 'required|string|max:255|unique:permissions,name,'.$permission->id, // Corrected here
         // 'module' => 'required|string', // Ensure module is validated correctly
     ]);
 
@@ -98,12 +102,11 @@ public function update(Request $request, $id)
 
     // Update permission details
     $permission->name = $request->name;
-    $permission->module = $request->module; // Assign the module from the request
+    $permission->module_id = $request->input('module_id'); // Ensure the module_id is being updated
 
     // Save the updated permission
-    $permission->save();
-
     try {
+        $permission->save();
         return redirect()->route('list-permission')->with('success', 'Permission updated successfully!');
     } catch (\Illuminate\Database\QueryException $e) {
         return redirect()->back()->with('error', 'An error occurred. Please try again.')->withInput();

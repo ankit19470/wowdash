@@ -13,12 +13,22 @@ use Spatie\Permission\Models\Role;
 
 class AddUserController extends Controller
 {
-    public function index()
-    {
-        $roles = Role::pluck('name', 'name')->all(); // Fetching roles
+    // public function index()
+    // {
+    //     $roles = Role::pluck('name', 'name')->all(); // Fetching roles
 
-        return view('fronted.add-user', compact('roles'));
-    }
+    //     return view('fronted.add-user', compact('roles'));
+    // }
+    public function index()
+{
+    $roles = Role::pluck('name', 'name')->all(); // Fetching roles
+    // $users = User::all(); // Fetch all users for reporting manager selection
+    $users = User::where('usertype','U')->get();
+
+
+    return view('fronted.add-user', compact('roles', 'users'));
+}
+
 
     public function AddUser(Request $req)
     {
@@ -35,7 +45,8 @@ class AddUserController extends Controller
             'city' => 'required|string|max:255',
             'pincode' => 'required|digits:6',
             'state' => 'required|string|max:255',
-             'roles' => 'required'
+             'roles' => 'required',
+             'reporting_manager_id' => 'nullable|exists:users,id'
         ]);
 
 
@@ -78,9 +89,10 @@ class AddUserController extends Controller
 
     // Assign roles
     $user->syncRoles($rolesToAssign);
+    $user->reporting_manager_id = $req->reporting_manager_id;
         try {
             $user->save();
-            $user->assignRole($req->input('roles'));
+            // $user->assignRole($req->input('roles'));
   Auth::login($user);
   $req->session()->put('email', $user->email);
             return redirect()->route('add-user')->with('success', 'Added successfully !!');
@@ -109,18 +121,33 @@ public function destroy($id)
 
 //     return view('fronted.update-user', compact('user', 'roles', 'userRole')); // Pass 'user', 'roles', and 'userRole' to the view
 // }
+// public function edit($id)
+// {
+//     $user = User::findOrFail($id);
+
+//     // Fetch all roles as an associative array: ['id' => 'name']
+//     $roles = Role::pluck('name', 'id')->toArray();
+//     $users = User::where('id', '!=', $user->id)->get();
+
+//     // Fetch user's assigned roles as an array of role IDs
+//     $userRole = $user->roles()->pluck('id')->toArray();  // Array of assigned role IDs
+
+//     return view('fronted.update-user', compact('user', 'roles', 'userRole'));
+// }
+
 public function edit($id)
 {
     $user = User::findOrFail($id);
-
-    // Fetch all roles as an associative array: ['id' => 'name']
     $roles = Role::pluck('name', 'id')->toArray();
+    // Fetch users with usertype 'U'
+    $users = User::where('usertype', 'U')->get();
+    $userRole = $user->roles()->pluck('id')->toArray(); // Get user's assigned role IDs
 
-    // Fetch user's assigned roles as an array of role IDs
-    $userRole = $user->roles()->pluck('id')->toArray();  // Array of assigned role IDs
-
-    return view('fronted.update-user', compact('user', 'roles', 'userRole'));
+    return view('fronted.update-user', compact('user', 'roles', 'userRole', 'users'));
 }
+
+
+
 
 public function update(Request $req, $id)
 {
@@ -136,7 +163,8 @@ public function update(Request $req, $id)
         'city' => 'required|string|max:255',
         'pincode' => 'required|digits:6',
         'state' => 'required|string|max:255',
-        'roles' => 'required|array'
+        'roles' => 'required|array',
+        'reporting_manager_id' => 'nullable|exists:users,id'
     ]);
 
     // Check if validation fails
@@ -160,6 +188,7 @@ public function update(Request $req, $id)
     $user->city = $req->city;
     $user->pincode = $req->pincode;
     $user->state = $req->state;
+    $user->reporting_manager_id = $req->reporting_manager_id;
     $user->save();
 
     // Sync roles with the user

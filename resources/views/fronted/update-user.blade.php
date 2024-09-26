@@ -104,16 +104,12 @@
                                     $user = auth()->user();
                                 @endphp
 
-                                @if($user && $user->file != "")
-
+                                @if ($user && $user->file != '')
                                     <img src="{{ asset('/storage/assets/uploads/' . $user->file) }}"
-                                         class="w-40-px h-40-px object-fit-cover rounded-circle"
-                                         alt="User Image">
+                                        class="w-40-px h-40-px object-fit-cover rounded-circle" alt="User Image">
                                 @else
-
                                     <img src="{{ url('fronted/images/user.png') }}"
-                                         class="w-40-px h-40-px object-fit-cover rounded-circle"
-                                         alt="User Image">
+                                        class="w-40-px h-40-px object-fit-cover rounded-circle" alt="User Image">
                                 @endif
                             </button>
 
@@ -121,12 +117,14 @@
                             <div class="dropdown-menu to-top dropdown-menu-sm">
                                 <ul class="to-top-list">
                                     <li>
-                                        <a class="dropdown-item text-black px-0 py-8 hover-bg-transparent hover-text-primary d-flex align-items-center gap-3" href="{{ route('profile.view') }}">
-                                        <iconify-icon icon="solar:user-linear" class="icon text-xl"></iconify-icon>  My Profile</a>
-                                      </li>
+                                        <a class="dropdown-item text-black px-0 py-8 hover-bg-transparent hover-text-primary d-flex align-items-center gap-3"
+                                            href="{{ route('profile.view') }}">
+                                            <iconify-icon icon="solar:user-linear" class="icon text-xl"></iconify-icon> My
+                                            Profile</a>
+                                    </li>
                                     <li>
                                         <a class="dropdown-item text-black px-0 py-8 hover-bg-transparent hover-text-primary d-flex align-items-center gap-3"
-                                           href="/logout">
+                                            href="/logout">
                                             <iconify-icon icon="lucide:power" class="icon text-xl"></iconify-icon> Log Out
                                         </a>
                                     </li>
@@ -381,6 +379,23 @@
                                     </div>
                                 @enderror
                             </div>
+                            <div class="col-md-6">
+                                <label for="reporting_manager_id" class="form-label">Report Manager</label>
+                                <select class="form-control @error('reporting_manager_id') is-invalid @enderror" id="reporting_manager_id" name="reporting_manager_id" required>
+                                    <option value="" disabled selected>Select Report Manager</option>
+                                    @foreach ($users as $manager)
+                                        <option value="{{ $manager->id }}" {{ old('reporting_manager_id', $user->reporting_manager_id) == $manager->id ? 'selected' : '' }}>
+                                            {{ $manager->firstname }} {{ $manager->lastname }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                                @error('reporting_manager_id')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+
                             <div class="col-md-6">
                                 <label class="form-label">Role</label>
                                 <div class="row">

@@ -18,14 +18,18 @@ class Module extends Model
 // {
 //     return $this->hasMany(Permission::class);
 // }
-public function permissions()
-{
-    return $this->belongsToMany(Permission::class, 'module_permission');
-}
+// public function permissions()
+// {
+//     return $this->belongsToMany(Permission::class, 'module_permission');
+// }
 
 // Permission.php
-public function module()
+
+
+
+public function permissions()
 {
-    return $this->belongsTo(Module::class);
+    return $this->hasMany(Permission::class);
 }
 }
+

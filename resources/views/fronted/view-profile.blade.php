@@ -122,7 +122,7 @@
                                 <ul class="to-top-list">
                                     <li>
                                         <a class="dropdown-item text-black px-0 py-8 hover-bg-transparent hover-text-primary d-flex align-items-center gap-3"
-                                            href="{{ url('profile.view') }}">
+                                            href="{{ url('add-user') }}">
                                             <iconify-icon icon="solar:user-linear" class="icon text-xl"></iconify-icon>
                                             {{-- <iconify-icon icon="solar:user-linear" class="icon text-xl"></iconify-icon> --}}
                                             My Profile</a>
@@ -207,6 +207,17 @@
                                     <li class="d-flex align-items-center gap-2 mb-12">
                                         <span class="w-30 text-md fw-semibold text-primary-light">Pincode</span>
                                         <span class="w-70 text-secondary-light fw-medium">: {{ $user->pincode }}</span>
+                                    </li>
+                                    <li class="d-flex align-items-center gap-2 mb-12">
+                                        <span class="w-30 text-md fw-semibold text-primary-light">Reporting Manager</span>
+                                        <span class="w-70 text-secondary-light fw-medium">
+                                            :
+                                            @if($user->reporting_manager_id)
+                                                {{ optional($users->firstWhere('id', $user->reporting_manager_id))->firstname }} {{ optional($users->firstWhere('id', $user->reporting_manager_id))->lastname }}
+                                            @else
+                                                Not assigned
+                                            @endif
+                                        </span>
                                     </li>
                                     <li class="d-flex align-items-center gap-2 mb-12">
                                         <span class="w-30 text-md fw-semibold text-primary-light">Role</span>
@@ -404,6 +415,44 @@
                                                     @enderror
                                                 </div>
                                             </div>
+                                            <div class="col-sm-6">
+                                                <div class="mb-20">
+                                                    <label for="reporting_manager_id">Reporting Manager</label>
+                                                    <select class="form-control @error('reporting_manager_id') is-invalid @enderror" id="reporting_manager_id" name="reporting_manager_id">
+                                                        <option value="" disabled selected>Select Reporting Manager</option>
+                                                        @foreach ($users as $manager) <!-- Loop through each user in the collection -->
+                                                            <option value="{{ $manager->id }}" {{ old('reporting_manager_id', $user->reporting_manager_id) == $manager->id ? 'selected' : '' }}>
+                                                                {{ $manager->firstname }} {{ $manager->lastname }}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+                                                    @error('reporting_manager_id')
+                                                        <div class="invalid-feedback">
+                                                            {{ $message }}
+                                                        </div>
+                                                    @enderror
+                                                </div>
+                                            </div>
+
+                                            {{-- <div class="form-group">
+                                                <label for="reporting_manager_id">Reporting Manager</label>
+                                                <select class="form-control @error('reporting_manager_id') is-invalid @enderror" id="reporting_manager_id" name="reporting_manager_id">
+                                                    <option value="" disabled selected>Select Reporting Manager</option>
+                                                    @foreach ($users as $manager) // Loop through each user in the collection
+                                                        <option value="{{ $manager->id }}" {{ old('reporting_manager_id', $user->reporting_manager_id) == $manager->id ? 'selected' : '' }}>
+                                                            {{ $manager->firstname }} {{ $manager->lastname }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                                @error('reporting_manager_id')
+                                                    <div class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
+                                            </div> --}}
+
+
+
                                             <div class="col-sm-12">
                                                 <div class="mb-20">
                                                     <label class="form-label">Role</label>

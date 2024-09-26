@@ -164,7 +164,7 @@
                                     </div>
                                 @enderror
                             </div>
-                            <div class="mb-3">
+                            {{-- <div class="mb-3">
                                 <label for=""></label>
                                 <div class="row">
                                     @foreach ($modules as $module)
@@ -187,8 +187,8 @@
                                         </div>
                                     @endforeach
                                 </div>
-                            </div>
-                            {{--
+                            </div> --}}
+{{--
 
                             <div class="mb-3">
                                 <label for="">Permissions</label>
@@ -208,39 +208,35 @@
                                 </div>
                             </div> --}}
 
-
-                            {{-- <div class="mb-3">
+                            <div class="mb-3">
                                 <label for="">Modules & Permissions</label>
                                 <div class="row">
-                                    @if ($modules)
-                                        @foreach ($modules as $module)
-                                            <div class="col-md-12">
-                                                <h5>{{ $module->module }}</h5> <!-- Display the module name -->
-                                                <div class="row">
-                                                    @if ($module->permissions)
-                                                        @foreach ($module->permissions as $permission)
-                                                            <div class="col-md-3">
-                                                                <label>
-                                                                    <input type="checkbox"
-                                                                        class="form-check-input"
-                                                                        name="permissions[]"
-                                                                        value="{{ $permission->name }}"
-                                                                        {{ $role->permissions->pluck('name')->contains($permission->name) ? 'checked' : '' }}>
-                                                                    {{ $permission->name }}
-                                                                </label>
-                                                            </div>
-                                                        @endforeach
-                                                    @else
-                                                        <p>No permissions available for this module.</p>
-                                                    @endif
-                                                </div>
+                                    @foreach ($modules as $module)
+                                        <div class="col-md-12">
+                                            <h5>{{ $module->module }}</h5> <!-- Display the module name -->
+                                            <div class="row">
+                                                @if ($module->permissions->isNotEmpty())
+                                                    @foreach ($module->permissions as $permission)
+                                                        <div class="col-md-3">
+                                                            <label>
+                                                                <input type="checkbox"
+                                                                       class="form-check-input"
+                                                                       name="permissions[]"
+                                                                       value="{{ $permission->name }}"
+                                                                       {{ $role->permissions->pluck('name')->contains($permission->name) ? 'checked' : '' }}>
+                                                                {{ $permission->name }}
+                                                            </label>
+                                                        </div>
+                                                    @endforeach
+                                                @else
+                                                    <p>No permissions available for this module.</p>
+                                                @endif
                                             </div>
-                                        @endforeach
-                                    @else
-                                        <p>No modules available.</p>
-                                    @endif
+                                        </div>
+                                    @endforeach
                                 </div>
-                            </div> --}}
+                            </div>
+
 
 
 

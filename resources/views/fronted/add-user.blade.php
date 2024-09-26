@@ -235,7 +235,7 @@
                             </div>
                         @enderror
                     </div>
-                    
+
 
                     <div class="col-md-6">
                         <label for="firstname" class="form-label">First Name</label>
@@ -335,6 +335,25 @@
                             </div>
                         @enderror
                     </div>
+
+    <div class="col-md-12">
+        <label for="reporting_manager" class="form-label">Reporting Manager</label>
+        <select name="reporting_manager_id" id="reporting_manager" class="form-control @error('reporting_manager_id') is-invalid @enderror">
+            <option value="">Select Manager</option>
+            @foreach($users as $user)
+                <option value="{{ $user->id }}" {{ old('reporting_manager_id') == $user->id ? 'selected' : '' }}>
+                    {{ $user->firstname }} {{ $user->lastname }}
+                </option>
+            @endforeach
+        </select>
+        @error('reporting_manager_id')
+            <div class="invalid-feedback">
+                {{ $message }}
+            </div>
+        @enderror
+    </div>
+
+
                     <div class="col-md-6">
                         <label class="form-label">Role</label>
                         <div class="row">

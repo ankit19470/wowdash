@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Storage;
-
+use App\Models\User;
 class ProfileController extends Controller
 {
     public function changePassword(Request $request)
@@ -35,13 +35,17 @@ class ProfileController extends Controller
     }
     public function profile()
     {
-        // Fetch user data and return view
-        // Assuming you use Laravel's authentication system
-        $user = Auth::user();
+        $user = Auth::user(); // This should be a single user instance
         $role = $user->getRoleNames()->first();
         $roles = Role::all();
-        return view('fronted.view-profile', compact('user','role','roles'));
+        // $users = User::where('id', '!=', $user->id)->get(); // Collection of users
+    $users = User::where('usertype', 'U')->get();
+
+
+        return view('fronted.view-profile', compact('user', 'role', 'roles', 'users'));
     }
+
+
 
     public function updateProfile(Request $request)
     {
@@ -58,7 +62,7 @@ class ProfileController extends Controller
             'pincode' => 'required|string|max:6',
             'address' => 'required|string|max:255',
             'file' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
-            'roles' => 'required|array'
+            'roles' => 'required|array',
         ]);
 
         if ($validator->fails()) {
@@ -82,6 +86,8 @@ class ProfileController extends Controller
         $user->city = $request->input('city');
         $user->pincode = $request->input('pincode');
         $user->address = $request->input('address');
+          // Update reporting manager relationship if exists
+
         $user->save();
 
         // Sync roles
