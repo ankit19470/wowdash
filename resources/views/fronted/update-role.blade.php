@@ -209,20 +209,32 @@
                             </div> --}}
 
                             <div class="mb-3">
-                                <label for="">Modules & Permissions</label>
-                                <div class="row">
+                                <label for="">Roles & Permissions</label>
+                                <label class="ms-3">
+                                    <input type="checkbox" class="form-check-input select-all-modules"> Select All
+                                </label>
+                                <div class="row mt-2">
                                     @foreach ($modules as $module)
-                                        <div class="col-md-12">
-                                            <h5>{{ $module->module }}</h5> <!-- Display the module name -->
+                                        <div class="col-md-12 mt-3">
                                             <div class="row">
                                                 @if ($module->permissions->isNotEmpty())
+                                                    <div class="col-md-12 mb-2">
+                                                        <label>
+                                                            <input type="checkbox" class="form-check-input select-module"
+                                                                   id="module-{{ $module->id }}"
+                                                                   data-module-id="{{ $module->id }}">
+                                                            <span class="fw-bold">{{ $module->module }}</span>
+                                                        </label>
+                                                    </div>
                                                     @foreach ($module->permissions as $permission)
                                                         <div class="col-md-3">
                                                             <label>
                                                                 <input type="checkbox"
-                                                                       class="form-check-input"
+                                                                       class="form-check-input permission-checkbox"
                                                                        name="permissions[]"
                                                                        value="{{ $permission->name }}"
+                                                                       data-module-id="{{ $module->id }}"
+                                                                       id="permission-{{ $module->id }}-{{ $permission->name }}"
                                                                        {{ $role->permissions->pluck('name')->contains($permission->name) ? 'checked' : '' }}>
                                                                 {{ $permission->name }}
                                                             </label>
@@ -240,6 +252,7 @@
 
 
 
+
                             <button type="submit" class="btn btn-primary">Update Role</button>
                             <a href="{{ route('list-role') }}" class="btn btn-secondary">Cancel</a>
 
@@ -253,6 +266,55 @@
             <!-- Footer content remains the same -->
         </footer>
     </main>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+    const selectAllModulesCheckbox = document.querySelector('.select-all-modules');
+
+    // Event listener for "Select All Modules"
+    selectAllModulesCheckbox.addEventListener('change', function() {
+        const isChecked = selectAllModulesCheckbox.checked;
+
+        // Select or deselect all module checkboxes
+        document.querySelectorAll('.select-module').forEach(moduleCheckbox => {
+            moduleCheckbox.checked = isChecked; // Check or uncheck the module checkbox
+
+            // Select or deselect all permissions for this module
+            const permissionsForModule = document.querySelectorAll(`input[data-module-id="${moduleCheckbox.dataset.moduleId}"]`);
+            permissionsForModule.forEach(permission => {
+                permission.checked = isChecked; // Sync permission checkbox
+            });
+        });
+    });
+
+    // Event listeners for individual module checkboxes
+    document.querySelectorAll('.select-module').forEach(moduleCheckbox => {
+        moduleCheckbox.addEventListener('change', function() {
+            const permissionsForModule = document.querySelectorAll(`input[data-module-id="${moduleCheckbox.dataset.moduleId}"]`);
+
+            // Set permissions checked status based on module checkbox
+            permissionsForModule.forEach(permission => {
+                permission.checked = moduleCheckbox.checked; // Sync permission checkboxes
+            });
+        });
+    });
+
+    // Event listener for individual permission checkboxes
+    document.querySelectorAll('.permission-checkbox').forEach(permissionCheckbox => {
+        permissionCheckbox.addEventListener('change', function() {
+            const moduleId = this.getAttribute('data-module-id');
+            const moduleCheckbox = document.querySelector(`#module-${moduleId}`);
+            const allPermissions = document.querySelectorAll(`input[data-module-id="${moduleId}"].permission-checkbox`);
+
+            // Check if all permissions for the module are checked
+            const allChecked = [...allPermissions].every(checkbox => checkbox.checked);
+
+            // Update the module checkbox based on permissions
+            moduleCheckbox.checked = allChecked;
+        });
+    });
+});
+
+    </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 @endsection

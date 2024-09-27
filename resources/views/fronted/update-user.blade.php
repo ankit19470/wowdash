@@ -101,15 +101,19 @@
                                 data-bs-toggle="dropdown">
 
                                 @php
-                                    $user = auth()->user();
+                                    $curUser = auth()->user();
                                 @endphp
 
-                                @if ($user && $user->file != '')
-                                    <img src="{{ asset('/storage/assets/uploads/' . $user->file) }}"
-                                        class="w-40-px h-40-px object-fit-cover rounded-circle" alt="User Image">
+                                @if($curUser && $curUser->file != "")
+
+                                    <img src="{{ asset('/storage/assets/uploads/' . $curUser->file) }}"
+                                         class="w-40-px h-40-px object-fit-cover rounded-circle"
+                                         alt="User Image">
                                 @else
+
                                     <img src="{{ url('fronted/images/user.png') }}"
-                                        class="w-40-px h-40-px object-fit-cover rounded-circle" alt="User Image">
+                                         class="w-40-px h-40-px object-fit-cover rounded-circle"
+                                         alt="User Image">
                                 @endif
                             </button>
 
@@ -117,14 +121,12 @@
                             <div class="dropdown-menu to-top dropdown-menu-sm">
                                 <ul class="to-top-list">
                                     <li>
-                                        <a class="dropdown-item text-black px-0 py-8 hover-bg-transparent hover-text-primary d-flex align-items-center gap-3"
-                                            href="{{ route('profile.view') }}">
-                                            <iconify-icon icon="solar:user-linear" class="icon text-xl"></iconify-icon> My
-                                            Profile</a>
-                                    </li>
+                                        <a class="dropdown-item text-black px-0 py-8 hover-bg-transparent hover-text-primary d-flex align-items-center gap-3" href="{{ route('profile.view') }}">
+                                        <iconify-icon icon="solar:user-linear" class="icon text-xl"></iconify-icon>  My Profile</a>
+                                      </li>
                                     <li>
                                         <a class="dropdown-item text-black px-0 py-8 hover-bg-transparent hover-text-primary d-flex align-items-center gap-3"
-                                            href="/logout">
+                                           href="/logout">
                                             <iconify-icon icon="lucide:power" class="icon text-xl"></iconify-icon> Log Out
                                         </a>
                                     </li>
@@ -241,7 +243,7 @@
                                 <label for="firstname" class="form-label">First Name</label>
                                 <input type="text" class="form-control @error('firstname') is-invalid @enderror"
                                     id="firstname" name="firstname" placeholder="Enter First Name"
-                                    value="{{ old('firstname', $user->firstname) }}" required>
+                                    value="{{ $user->firstname }}" required>
                                 @error('firstname')
                                     <div class="invalid-feedback">
                                         {{ $message }}
@@ -368,7 +370,7 @@
                                 @enderror
                             </div>
 
-                            <div class="col-md-12">
+                            <div class="col-md-6">
                                 <label for="address" class="form-label">Address</label>
                                 <input type="text" class="form-control @error('address') is-invalid @enderror"
                                     id="address" name="address" placeholder="Enter Address"
@@ -395,7 +397,6 @@
                                     </div>
                                 @enderror
                             </div>
-
                             <div class="col-md-6">
                                 <label class="form-label">Role</label>
                                 <div class="row">

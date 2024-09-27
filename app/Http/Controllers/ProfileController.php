@@ -63,6 +63,8 @@ class ProfileController extends Controller
             'address' => 'required|string|max:255',
             'file' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
             'roles' => 'required|array',
+        'reporting_manager_id' => 'nullable|exists:users,id'
+
         ]);
 
         if ($validator->fails()) {
@@ -86,6 +88,8 @@ class ProfileController extends Controller
         $user->city = $request->input('city');
         $user->pincode = $request->input('pincode');
         $user->address = $request->input('address');
+    $user->reporting_manager_id = $request->input('reporting_manager_id');
+
           // Update reporting manager relationship if exists
 
         $user->save();
