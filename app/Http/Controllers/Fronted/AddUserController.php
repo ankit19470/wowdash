@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\Validator;
 use App\Models\User;
 use Spatie\Permission\Models\Role;
 
-
 class AddUserController extends Controller
 {
     // public function index()
@@ -145,9 +144,6 @@ public function edit($id)
 
     return view('fronted.update-user', compact('user', 'roles', 'userRole', 'users'));
 }
-
-
-
 
 public function update(Request $req, $id)
 {
