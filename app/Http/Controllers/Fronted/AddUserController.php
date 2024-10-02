@@ -18,15 +18,15 @@ class AddUserController extends Controller
 
     //     return view('fronted.add-user', compact('roles'));
     // }
-    public function index()
-{
-    $roles = Role::pluck('name', 'name')->all(); // Fetching roles
-    // $users = User::all(); // Fetch all users for reporting manager selection
-    $users = User::where('usertype','U')->get();
+    public function index(Request $req) // Make sure to include the $req parameter
+    {
+        $roleId = $req->query('role_id'); // Retrieve the role ID from the query string
+        $roles = Role::pluck('name', 'name')->all(); // Fetching all role names
+        $users = User::where('usertype', 'U')->get(); // Fetch users for reporting manager selection
 
+        return view('fronted.add-user', compact('roles', 'users', 'roleId')); // Pass all data to the view
+    }
 
-    return view('fronted.add-user', compact('roles', 'users'));
-}
 
 
     public function AddUser(Request $req)

@@ -9,6 +9,8 @@ use App\Http\Controllers\fronted\PermissionController;
 use App\Http\Controllers\fronted\RoleController;
 use App\Http\Controllers\fronted\ModuleController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserRoleLogin;
+
 
 
 
@@ -93,6 +95,7 @@ Route::post('/profile/update', [ProfileController::class, 'updateProfile'])->nam
 Route::post('/profile/change-password', [ProfileController::class, 'changePassword'])->name('profile.change-password');
 Route::get('/users', [AddUserController::class, 'filter'])->name('users.filter');
 
+Route::get('/user-role-show', [UserRoleLogin::class, 'showRoles'])->name('user-role-show');
 
 // Route::resource('user', UserController::class);
 // Route::group(['middleware' => ['auth']], function() {
