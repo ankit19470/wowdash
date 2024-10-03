@@ -96,7 +96,10 @@ Route::post('/profile/change-password', [ProfileController::class, 'changePasswo
 Route::get('/users', [AddUserController::class, 'filter'])->name('users.filter');
 
 Route::get('/user-role-show', [UserRoleLogin::class, 'showRoles'])->name('user-role-show');
-Route::get('/role/{id}/modules', [UserRoleLogin::class, 'showModulesAndPermissions'])->name('role.modules');
+Route::put('/role/{id}/permissions', [UserRoleLogin::class, 'assignPermissions']);
+
+Route::get('/role/{id}/modules', [UserRoleLogin::class, 'showModulesAndPermissions']);
+
 
 
 // Route::resource('user', UserController::class);

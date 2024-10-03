@@ -30,9 +30,13 @@ protected $fillable = ['name', 'guard_name', 'module_id'];
 // {
 //     return $this->belongsToMany(Module::class, 'module_permission');
 // }
-public function module()
+// public function module()
+// {
+//     return $this->belongsTo(Module::class);
+// }
+public function modules()
 {
-    return $this->belongsTo(Module::class);
+    return $this->belongsToMany(Module::class, 'module_permission');
 }
 
 }
