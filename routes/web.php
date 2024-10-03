@@ -96,6 +96,8 @@ Route::post('/profile/change-password', [ProfileController::class, 'changePasswo
 Route::get('/users', [AddUserController::class, 'filter'])->name('users.filter');
 
 Route::get('/user-role-show', [UserRoleLogin::class, 'showRoles'])->name('user-role-show');
+Route::get('/role/{id}/modules', [UserRoleLogin::class, 'showModulesAndPermissions'])->name('role.modules');
+
 
 // Route::resource('user', UserController::class);
 // Route::group(['middleware' => ['auth']], function() {

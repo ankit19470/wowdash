@@ -20,5 +20,9 @@ class Role extends SpatieRole
     {
         return $this->belongsToMany(Module::class, 'module_role', 'role_id', 'module_id');
     }
+    public function permissions()
+    {
+        return $this->belongsToMany(Permission::class);
+    }
 }
 

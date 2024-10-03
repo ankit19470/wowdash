@@ -18,6 +18,18 @@
             <ul class="sidebar-menu" id="sidebar-menu">
                 <li class="dropdown">
                     <a href="javascript:void(0)">
+                        <iconify-icon icon="" class="menu-icon"></iconify-icon>
+                        <span>Switch</span>
+                    </a>
+                    <ul class="sidebar-submenu">
+                        <li>
+                            <a href="{{ url('user-role-show') }}"><i class="ri-circle-fill circle-icon text-info-main w-auto"></i>
+                                Switch Role</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="javascript:void(0)">
                         <iconify-icon icon="flowbite:users-group-outline" class="menu-icon"></iconify-icon>
                         <span>Users</span>
                     </a>

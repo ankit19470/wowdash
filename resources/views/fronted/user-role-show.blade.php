@@ -8,24 +8,24 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 <!-- Modal -->
-<div class="modal fade" id="rolesModal" tabindex="-1" role="dialog" aria-labelledby="rolesModalLabel" aria-hidden="true">
+{{-- <div class="modal fade" id="rolesModal" tabindex="-1" role="dialog" aria-labelledby="rolesModalLabel" aria-hidden="true"> --}}
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="rolesModalLabel">Select Role</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                {{-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
-                </button>
+                </button> --}}
             </div>
             <div class="modal-body">
-                <ul>
+                <p>
                     @if($roles->isNotEmpty())
                         @foreach($roles as $role)
-                            <li>
-                                <button type="button" class="btn btn-link role-select" data-role="{{ $role->name }}" data-role-id="{{ $role->id }}">
+                            <p>
+                                <button type="button" class="btn btn-primary role-select" data-role="{{ $role->name }}" data-role-id="{{ $role->id }}">
                                     {{ $role->name }}
                                 </button>
-                            </li>
+                            </p>
                         @endforeach
                     @else
                         <li>No roles available.</li>
@@ -34,7 +34,7 @@
             </div>
         </div>
     </div>
-</div>
+{{-- </div> --}}
 
 <script>
     $(document).ready(function() {
