@@ -46,9 +46,16 @@
         // Handle role selection
         $('.role-select').on('click', function() {
             var selectedRoleId = $(this).data('role-id'); // Get the selected role ID
+            var selectedRoleName = $(this).data('role'); // Get the selected role name
 
-            // Redirect to the add-user route
-            window.location.href = '/add-user?role_id=' + selectedRoleId; // Adjust this URL as necessary
+            // Check if the selected role is 'Admin'
+            if (selectedRoleName === 'Admin') {
+                // Redirect to the user page
+                window.location.href = '/user-page'; // Adjust this URL as necessary
+            } else {
+                // Redirect to the add-user route
+                window.location.href = '/add-user?role_id=' + selectedRoleId; // Adjust this URL as necessary
+            }
         });
     });
 </script>

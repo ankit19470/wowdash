@@ -8,8 +8,11 @@ use App\Http\controller\fronted\LogoutController;
 use App\Http\Controllers\fronted\PermissionController;
 use App\Http\Controllers\fronted\RoleController;
 use App\Http\Controllers\fronted\ModuleController;
+
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserRoleLogin;
+use App\Http\Controllers\fronted\AddCategory;
+
 
 
 
@@ -100,6 +103,7 @@ Route::put('/role/{id}/permissions', [UserRoleLogin::class, 'assignPermissions']
 
 Route::get('/role/{id}/modules', [UserRoleLogin::class, 'showModulesAndPermissions']);
 
+Route::get('user-page',[AddCategory::class,'showUsers'])->name('user-page');
 
 
 // Route::resource('user', UserController::class);
