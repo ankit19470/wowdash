@@ -13,4 +13,7 @@ class AddCategory extends Controller
         $users = User::where('usertype','U')->get();
         return view('fronted.user-page', ['users' => $users]);
     }
+
+    
+
 }
