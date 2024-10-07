@@ -5,6 +5,13 @@ use Spatie\Permission\Models\Role;
 
 class UserRoleLogin extends Controller
 {
+    public function index()
+    {
+        if (session()->has('user-page')) {
+            return redirect()->route('user-role-show');
+        }
+        return view('fronted.sign-in');
+    }
     public function showRoles(Request $request)
     {
         $roles = Role::all(); // Fetch all roles

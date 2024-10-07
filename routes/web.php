@@ -101,13 +101,13 @@ Route::put('/role/{id}/permissions', [UserRoleLogin::class, 'assignPermissions']
 
 Route::get('/role/{id}/modules', [UserRoleLogin::class, 'showModulesAndPermissions']);
 
-// Route::get('user-page',[AddCategory::class,'showUsers'])->name('user-page');
+Route::get('user-page',[AddCategory::class,'showUsers'])->name('user-page');
 
 // use App\Http\Controllers\fronted\AddCategory;
 
-Route::middleware(['web', 'checkRole:admin'])->group(function () {
-    Route::get('user-page', [AddCategory::class, 'showUsers'])->name('user-page');
-});
+// Route::middleware(['web', 'checkRole:admin'])->group(function () {
+//     Route::get('user-page', [AddCategory::class, 'showUsers'])->name('user-page');
+// });
 
 
 
