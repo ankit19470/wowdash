@@ -13,6 +13,7 @@ class LoginController extends Controller
         if (session()->has('email')) {
             return redirect()->route('user-role-show');
         }
+        
         return view('fronted.sign-in');
     }
 
