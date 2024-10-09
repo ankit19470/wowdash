@@ -11,7 +11,7 @@ use App\Http\Controllers\fronted\ModuleController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserRoleLogin;
 use App\Http\Controllers\fronted\AddCategory;
-
+use App\Http\Middleware\CheckMultipleRoles;
 
 
 
@@ -101,7 +101,10 @@ Route::put('/role/{id}/permissions', [UserRoleLogin::class, 'assignPermissions']
 
 Route::get('/role/{id}/modules', [UserRoleLogin::class, 'showModulesAndPermissions']);
 
-Route::get('user-page',[AddCategory::class,'showUsers'])->name('user-page');
+// Route::get('user-page',[AddCategory::class,'showUsers'])->name('user-page');
+Route::get('user-page', [AddCategory::class, 'showUsers'])
+    ->middleware([CheckMultipleRoles::class])
+    ->name('user-page');
 
 // use App\Http\Controllers\fronted\AddCategory;
 

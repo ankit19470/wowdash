@@ -14,6 +14,6 @@ class AddCategory extends Controller
         return view('fronted.user-page', ['users' => $users]);
     }
 
-    
+
 
 }
