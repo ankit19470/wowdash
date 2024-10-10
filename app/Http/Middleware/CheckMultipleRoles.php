@@ -12,12 +12,17 @@ class CheckMultipleRoles
     {
         $user = Auth::user();
 
-        if ($user && $user->roles->count() <= 1) {
-            return redirect('/add-user');
+        if ($user && $user->hasRole('Admin')) {
+            return $next($request);
         }
 
-        return $next($request);
+        // Redirect to /add-user if the user has only the 'employee' role or no roles
+        if ($user && $user->hasRole('employe')) {
+            return redirect('/add-user')->with('error', 'Access denied! Employees cannot access this page.');
+        }
+
+        // Handle the case where the user is not authenticated or has no roles
+        return redirect('/add-user')->with('error', 'Access denied! You do not have permission to access this page.');
     }
 }
-
 

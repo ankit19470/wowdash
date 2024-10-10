@@ -1,57 +1,46 @@
 @extends('fronted.layout.main')
 
 @section('main-container')
-    <aside class="sidebar">
-        <button type="button" class="sidebar-close-btn">
-            <iconify-icon icon="radix-icons:cross-2"></iconify-icon>
-        </button>
-        <div>
-            <a href="{{ url('add-user') }}" class="sidebar-logo">
-                <img src="{{ url('fronted/logo/dw_logo.png') }}" width="168" height="40" alt="site logo"
-                    class="light-logo">
-                <img src="{{ url('fronted/logo/dw_logo.png') }}" width="168" height="40" alt="site logo"
-                    class="dark-logo">
-                <img src="{{ url('fronted/images/logo-icon.png') }}" alt="site logo" class="logo-icon">
-            </a>
-        </div>
-        <div class="sidebar-menu-area">
-            <ul class="sidebar-menu" id="sidebar-menu">
+<aside class="sidebar">
+    <button type="button" class="sidebar-close-btn">
+        <iconify-icon icon="radix-icons:cross-2"></iconify-icon>
+    </button>
+    <div>
+        <a href="{{ url('add-user') }}" class="sidebar-logo">
+            <img src="{{ url('fronted/logo/dw_logo.png') }}" width="168" height="40" alt="site logo"
+                class="light-logo">
+            <img src="{{ url('fronted/logo/dw_logo.png') }}" width="168" height="40" alt="site logo"
+                class="dark-logo">
+            <img src="{{ url('fronted/images/logo-icon.png') }}" alt="site logo" class="logo-icon">
+        </a>
+    </div>
+    <div class="sidebar-menu-area">
+        <ul class="sidebar-menu" id="sidebar-menu">
 
-                <li class="dropdown">
-                    <a href="javascript:void(0)">
-                        <iconify-icon icon="" class="menu-icon"></iconify-icon>
-                        <span>Switch</span>
-                    </a>
-                    <ul class="sidebar-submenu">
+            <li class="dropdown">
+                <a href="javascript:void(0)">
+                    <iconify-icon icon="flowbite:users-group-outline" class="menu-icon"></iconify-icon>
+                    <span>Users</span>
+                </a>
+                <ul class="sidebar-submenu">
+                    <li>
+                        <a href="{{ url('user-page') }}"><i
+                                class="ri-circle-fill circle-icon text-warning-main w-auto"></i> View</a>
+                    </li>
+
+                    <!-- Show the User Role Show button only if the user has two or more roles -->
+                    @if (Auth::user()->roles->count() > 1)
                         <li>
-                            <a href="{{ url('user-role-show') }}"><i class="ri-circle-fill circle-icon text-info-main w-auto"></i>
-                                Switch Role</a>
+                            <a href="{{ route('user-role-show') }}"><i
+                                    class="ri-circle-fill circle-icon text-warning-main w-auto"></i> User Role Show</a>
                         </li>
-                    </ul>
-                </li>
-                <li class="dropdown">
-                    <a href="javascript:void(0)">
-                        <iconify-icon icon="flowbite:users-group-outline" class="menu-icon"></iconify-icon>
-                        <span>Users</span>
-                    </a>
-                    <ul class="sidebar-submenu">
+                    @endif
 
-                        <li>
-                            <a href="{{ url('user-page') }}"><i
-                                    class="ri-circle-fill circle-icon text-warning-main w-auto"></i> view</a>
-                        </li>
-
-                        {{-- <li>
-                <a href="{{url('update-user')}}"><i class="ri-circle-fill circle-icon text-info-main w-auto"></i> Update User</a>
-              </li> --}}
-                        {{-- <li>
-              <a href="view-profile.html"><i class="ri-circle-fill circle-icon text-danger-main w-auto"></i> View Profile</a>
-            </li> --}}
-                    </ul>
-                </li>
-            </ul>
-        </div>
-    </aside>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</aside>
     <main class="dashboard-main">
         <div class="navbar-header">
             <div class="row align-items-center justify-content-between">
@@ -102,10 +91,10 @@
                             <!-- Dropdown menu -->
                             <div class="dropdown-menu to-top dropdown-menu-sm">
                                 <ul class="to-top-list">
-                                    <li>
+                                    {{-- <li>
                                         <a class="dropdown-item text-black px-0 py-8 hover-bg-transparent hover-text-primary d-flex align-items-center gap-3" href="{{ route('profile.view') }}">
                                         <iconify-icon icon="solar:user-linear" class="icon text-xl"></iconify-icon>  My Profile</a>
-                                      </li>
+                                      </li> --}}
                                     <li>
                                         <a class="dropdown-item text-black px-0 py-8 hover-bg-transparent hover-text-primary d-flex align-items-center gap-3"
                                            href="/logout">
