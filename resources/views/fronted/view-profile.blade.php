@@ -18,7 +18,7 @@
         </div>
         <div class="sidebar-menu-area">
             <ul class="sidebar-menu" id="sidebar-menu">
-                <li class="dropdown">
+                {{-- <li class="dropdown">
                     <a href="javascript:void(0)">
                         <iconify-icon icon="" class="menu-icon"></iconify-icon>
                         <span>Switch</span>
@@ -29,7 +29,7 @@
                                 Switch Role</a>
                         </li>
                     </ul>
-                </li>
+                </li> --}}
                 <li class="dropdown">
                     <a href="javascript:void(0)">
                         <iconify-icon icon="flowbite:users-group-outline" class="menu-icon"></iconify-icon>

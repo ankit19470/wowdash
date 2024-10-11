@@ -206,7 +206,24 @@
             <span>Widgets</span>
           </a>
         </li> --}}
-                <li class="dropdown">
+        <li class="dropdown">
+
+            <ul class="sidebar-submenu">
+                <a href="javascript:void(0)">
+                    <iconify-icon icon="" class="menu-icon"></iconify-icon>
+                    <span>Switch</span>
+                </a>
+                <!-- Show the User Role Show button only if the user has two or more roles -->
+                @if (Auth::user()->roles->count() > 1)
+                    <li>
+                        <a href="{{ route('user-role-show') }}"><i
+                                class="ri-circle-fill circle-icon text-warning-main w-auto"></i> User Role Show</a>
+                    </li>
+                @endif
+
+            </ul>
+        </li>
+                {{-- <li class="dropdown">
                     <a href="javascript:void(0)">
                         <iconify-icon icon="" class="menu-icon"></iconify-icon>
                         <span>Switch</span>
@@ -217,7 +234,7 @@
                                 Switch Role</a>
                         </li>
                     </ul>
-                </li>
+                </li> --}}
                 <li class="dropdown">
                     <a href="javascript:void(0)">
                         <iconify-icon icon="flowbite:users-group-outline" class="menu-icon"></iconify-icon>

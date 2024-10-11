@@ -38,11 +38,16 @@ class LoginController extends Controller
             if ($userRoles->count() === 0) {
                 return redirect()->route('add-user')->with('success', 'Login Successfully !!');
             }
-
-            // If the user has exactly one role
-            if ($userRoles->count() === 1) {
-                return redirect()->route('add-user')->with('success', 'Login Successfully !!');
+            if ($user && $user->hasRole('Admin') && $user->roles->count() === 1) {
+                return redirect()->route('user-page'); // Redirect to user-page if user has only the Admin role
             }
+            if ($user && $user->hasRole('employe') && $user->roles->count() === 1) {
+                return redirect()->route('add-user'); // Redirect to user-page if user has only the Admin role
+            }
+            // If the user has exactly one role
+            // if ($userRoles->count() === 1) {
+            //     return redirect()->route('add-user')->with('success', 'Login Successfully !!');
+            // }
 
             // If the user has more than one role
             if ($userRoles->count() >= 2) {

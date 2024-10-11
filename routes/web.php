@@ -105,7 +105,7 @@ Route::get('/role/{id}/modules', [UserRoleLogin::class, 'showModulesAndPermissio
 Route::get('user-page', [AddCategory::class, 'showUsers'])
     ->middleware([CheckMultipleRoles::class])
     ->name('user-page');
-        
+
 
 // use App\Http\Controllers\fronted\AddCategory;
 

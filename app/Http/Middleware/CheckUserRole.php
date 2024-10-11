@@ -8,19 +8,16 @@ use Illuminate\Support\Facades\Auth;
 
 class CheckUserRole
 {
-    /**
-     * Handle an incoming request.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
-     * @param  string  $role
-     * @return mixed
-     */
     public function handle(Request $request, Closure $next)
     {
-        // Check if user is authenticated and has a specific role
-        if (!Auth::check() || !Auth::user()->hasRole('admin')) { // Adjust role as needed
-            return redirect('/'); // Redirect to home or login if not authorized
+        $user = Auth::user();
+
+        // Check if the session has 'current_page' set to 'user-page'
+        if ($user && $request->session()->get('current_page') === 'user-page') {
+            // Redirect the user to 'user-page' if they try to access anything else
+            if ($request->path() !== 'user-page') {
+                return redirect('user-page')->with('error', 'You are restricted to the user-page.');
+            }
         }
 
         return $next($request);
