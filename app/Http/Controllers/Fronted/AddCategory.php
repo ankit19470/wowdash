@@ -24,7 +24,7 @@ class AddCategory extends Controller
     {
         $users = User::where('usertype', 'U')->get();
         // Set the current page in the session
-        // $request->session()->put('current_page', 'user-page');
+        $request->session()->put('current_page', 'user-page');
         return view('fronted.user-page', ['users' => $users]);
     }
 }

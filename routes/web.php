@@ -12,6 +12,11 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserRoleLogin;
 use App\Http\Controllers\fronted\AddCategory;
 use App\Http\Middleware\CheckMultipleRoles;
+use App\Http\Middleware\IsAdmin;
+use App\Http\Middleware\IsEmployee;
+
+
+
 
 
 
@@ -43,7 +48,9 @@ return redirect('/');
 // Route::post("/user",[LoginCover::class,'check'])->name('user');
 
 
-Route::group(['middleware' => ['role:employe']], function() {
+// Route::group(['middleware' => ['role:employe']], function() {
+    // Route::group(['middleware' => [isEmployee::class]], function () {
+        Route::group(['middleware' => [isEmployee::class]], function () {
     Route::get('add-user',[AddUserController::class,'index'])->name('add-user');
     Route::post('/adding',[AddUserController::class,'AddUser'])->name('adding');
 
@@ -101,16 +108,24 @@ Route::group(['middleware' => ['role:employe']], function() {
 
     Route::get('/role/{id}/modules', [UserRoleLogin::class, 'showModulesAndPermissions']);
 });
+Route::group(['middleware' => [IsAdmin::class]], function () {
+    Route::get('user-page', [AddCategory::class, 'showUsers'])->name('user-page');
 
+});
+// Routes for Admin role
+// Route::group(['middleware' => ['role:Admin', CheckMultipleRoles::class]], function () {
+//     Route::group(['middleware' => ['isAdmin']], function () {
+//     Route::get('user-page',[AddCategory::class,'showUsers'])->name('user-page');
+// });
 
 // Route::get('user-page',[AddCategory::class,'showUsers'])->name('user-page');
 // Route::get('user-page', [AddCategory::class, 'showUsers'])
 //     ->middleware([CheckMultipleRoles::class])
 //     ->name('user-page');
-Route::group(['middleware' => ['role:Admin']], function () {
-Route::get('user-page',[AddCategory::class,'showUsers'])->name('user-page');
+// Route::group(['middleware' => ['role:Admin']], function () {
+// Route::get('user-page',[AddCategory::class,'showUsers'])->name('user-page');
 
-});
+// });
 
 
 // use App\Http\Controllers\fronted\AddCategory;

@@ -16,7 +16,7 @@
         </div>
         <div class="sidebar-menu-area">
             <ul class="sidebar-menu" id="sidebar-menu">
-                <li class="dropdown">
+                {{-- <li class="dropdown">
                     <a href="javascript:void(0)">
                         <iconify-icon icon="" class="menu-icon"></iconify-icon>
                         <span>Switch</span>
@@ -27,8 +27,36 @@
                                 Switch Role</a>
                         </li>
                     </ul>
-                </li>
+                </li> --}}
                 <li class="dropdown">
+                    <a href="javascript:void(0)">
+                        <iconify-icon icon="flowbite:users-group-outline" class="menu-icon"></iconify-icon>
+                        <span>Users</span>
+                    </a>
+                    <ul class="sidebar-submenu">
+
+
+                        <li>
+                            <a href="{{ url('add-user') }}"><i class="ri-circle-fill circle-icon text-info-main w-auto"></i>
+                                Add User</a>
+                        </li>
+                        <li>
+                            <a href="{{ url('list-user') }}"><i
+                                    class="ri-circle-fill circle-icon text-warning-main w-auto"></i> List User</a>
+                        </li>
+                        @if (Auth::user()->roles->count() > 1)
+                        <li>
+                            <a href="{{ route('user-role-show') }}"><i
+                                    class="ri-circle-fill circle-icon text-warning-main w-auto"></i> User Role Show</a>
+                        </li>
+                    @endif
+                        {{-- <li>
+                <a href="{{url('update-user')}}"><i class="ri-circle-fill circle-icon text-info-main w-auto"></i> Update User</a>
+              </li> --}}
+
+                    </ul>
+                </li>
+                {{-- <li class="dropdown">
                     <a href="javascript:void(0)">
                         <iconify-icon icon="flowbite:users-group-outline" class="menu-icon"></iconify-icon>
                         <span>Users</span>
@@ -39,7 +67,7 @@
                         <li><a href="{{ url('list-user') }}"><i
                                     class="ri-circle-fill circle-icon text-warning-main w-auto"></i> List User</a></li>
                     </ul>
-                </li>
+                </li> --}}
                 <li class="dropdown">
                     <a href="javascript:void(0)">
                         <iconify-icon icon="mdi:cog-outline" class="menu-icon"></iconify-icon>
