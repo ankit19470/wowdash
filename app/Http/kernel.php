@@ -9,7 +9,7 @@ class Kernel extends HttpKernel
 
     protected $routeMiddleware = [
         'auth' => \App\Http\Middleware\Authenticate::class,
-        // 'checkRoles' => \App\Http\Middleware\CheckMultipleRoles::class,
+        'checkRoles' => \App\Http\Middleware\CheckMultipleRoles::class,
         'isAdmin' => \App\Http\Middleware\IsAdmin::class,
         'isEmployee' => \App\Http\Middleware\IsEmployee::class,
 

@@ -11,7 +11,7 @@ class LoginController extends Controller
     public function index()
     {
         if (session()->has('email')) {
-            return redirect('/logout');
+            return redirect('/add-user');
         }
 
         return view('fronted.sign-in');

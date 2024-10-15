@@ -11,9 +11,9 @@ use App\Http\Controllers\fronted\ModuleController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserRoleLogin;
 use App\Http\Controllers\fronted\AddCategory;
-// use App\Http\Middleware\CheckMultipleRoles;
-use App\Http\Middleware\IsAdmin;
-use App\Http\Middleware\IsEmployee;
+use App\Http\Middleware\CheckMultipleRoles;
+// use App\Http\Middleware\IsAdmin;
+// use App\Http\Middleware\IsEmployee;
 
 
 
@@ -46,12 +46,15 @@ return redirect('/');
     // Route::group(['middleware' => [isEmployee::class]], function () {
 Route::get('/user-role-show', [UserRoleLogin::class, 'showRoles'])->name('user-role-show');
 
+Route::group(['middleware' => ['role:Admin']], function() {
 
-Route::group(['middleware' => [IsAdmin::class]], function () {
+// Route::group(['middleware' => [IsAdmin::class]], function () {
     Route::get('user-page', [AddCategory::class, 'showUsers'])->name('user-page');
 
 });
-Route::group(['middleware' => [IsEmployee::class]], function () {
+// Route::group(['middleware' => [IsEmployee::class]], function () {
+Route::group(['middleware' => ['role:user']], function() {
+
     Route::get('add-user',[AddUserController::class,'index'])->name('add-user');
     Route::post('/adding',[AddUserController::class,'AddUser'])->name('adding');
 

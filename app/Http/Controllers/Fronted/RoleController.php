@@ -39,10 +39,10 @@ class RoleController extends Controller
         $role = Role::create(['name' => $request->input('name')]);
 
         // Store role information in session
-        session(['user_roles' => [
-            'id' => $role->id,
-            'name' => $role->name,
-        ]]);
+            session(['user_roles' => [
+                'id' => $role->id,
+                'name' => $role->name,
+            ]]);
 
         // Redirect with success message
         return redirect()->route('list-role')->with('success', 'Role created successfully!');

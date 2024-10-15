@@ -35,8 +35,71 @@
         </div>
     </div>
 {{-- </div> --}}
-
 <script>
+    $(document).ready(function() {
+        // Check if session 'user_roles' exists
+        @if(session('user_roles'))
+            $('#rolesModal').modal('show'); // Show modal if roles exist
+            {{ session()->forget('user_roles') }} // Clear roles after showing
+        @endif
+
+        // Handle role selection
+        $('.role-select').on('click', function() {
+            var selectedRoleId = $(this).data('role-id'); // Get the selected role ID
+            var selectedRoleName = $(this).data('role'); // Get the selected role name
+
+            // Redirect based on selected role
+            if (selectedRoleName === 'Admin') {
+                // Redirect to the user page
+                window.location.href = '/user-page'; // Adjust this URL as necessary
+            } else if (selectedRoleName === 'user') {
+                // Redirect to the add-user route
+                window.location.href = '/add-user'; // Adjust this URL as necessary
+            } else {
+                alert('Role not recognized: ' + selectedRoleName); // Fallback alert for unrecognized roles
+            }
+        });
+    });
+</script>
+{{-- <script>
+    $(document).ready(function() {
+        // Check if session 'user_roles' exists
+        @if(session('user_roles'))
+            $('#rolesModal').modal('show'); // Show modal if roles exist
+            {{ session()->forget('user_roles') }} // Clear roles after showing
+        @endif
+
+        // Handle role selection
+        $('.role-select').on('click', function() {
+            var selectedRoleId = $(this).data('role-id'); // Get the selected role ID
+            var selectedRoleName = $(this).data('role'); // Get the selected role name
+
+            // Store selected role name in session
+            {{ session()->put("user_role", "selectedRoleName") }}; // Note: This won't work as is
+
+            let session = "{{ session()->get('user_role') }}";
+            console.log("session data:", session);
+
+            // Debugging: Log selected role information
+            console.log('Selected Role ID:', selectedRoleId);
+            console.log('Selected Role Name:', selectedRoleName);
+
+            // Redirect based on selected role
+            if (session === 'Admin') {
+                // Redirect to the user page
+                alert("hi admin");
+                window.location.href = '/user-page'; // Adjust this URL as necessary
+            } else if (session === 'user') {
+                alert("hi employee");
+                // Redirect to the add-user route
+                window.location.href = '/add-user'; // Adjust this URL as necessary
+            } else {
+                alert('Role not recognized: ' + selectedRoleName); // Fallback alert for unrecognized roles
+            }
+        });
+    });
+</script> --}}
+{{-- <script>
     $(document).ready(function() {
         // Check if session 'user_roles' exists
         @if(session('user_roles'))
@@ -74,6 +137,88 @@
             }
         });
     });
-</script>
+</script> --}}
+
+{{-- <script>
+    $(document).ready(function() {
+        // Check if session 'user_roles' exists
+        @if(session('user_roles'))
+            $('#rolesModal').modal('show'); // Show modal if roles exist
+            {{ session()->forget('user_roles') }} // Clear roles after showing
+        @endif
+
+        // Handle role selection
+        $('.role-select').on('click', function() {
+            var selectedRoleId = $(this).data('role-id'); // Get the selected role ID
+            var selectedRoleName = $(this).data('role'); // Get the selected role name
 
 
+             session()->get("user_role", selectedRoleName);
+            let session = session()->put("user_role");
+
+            console.log("session data:", session);
+
+            // Debugging: Log selected role information
+            console.log('Selected Role ID:', selectedRoleId);
+            console.log('Selected Role Name:', selectedRoleName);
+
+            // Redirect based on selected role
+            if (session === 'Admin') {
+                // Redirect to the user page
+                alert("hi admin")
+                window.location.href = '/user-page'; // Adjust this URL as necessary
+            } else if (session === 'user') {
+                alert("hi employee")
+                // Redirect to the add-user route
+                console.log('selectedRoleName')
+                window.location.href = '/add-user'; // Adjust this URL as necessary
+            } else {
+                alert('Role not recognized: ' + selectedRoleName); // Fallback alert for unrecognized roles
+            }
+        });
+    });
+</script> --}}
+
+{{--
+<script>
+    $(document).ready(function() {
+        // Check if session 'user_roles' exists
+        @if(session('user_roles'))
+            $('#rolesModal').modal('show'); // Show modal if roles exist
+            {{ session()->forget('user_roles') }} // Clear roles after showing
+        @endif
+
+        // Handle role selection
+        $('.role-select').on('click', function() {
+            var selectedRoleId = $(this).data('role-id'); // Get the selected role ID
+            var selectedRoleName = $(this).data('role'); // Get the selected role name
+
+            // Store the selected role name in the session
+            @php
+                session()->put('user_role', '{{ js_escape(selectedRoleName) }}'); // Use a function to escape the name properly
+            @endphp
+
+            let sessionRole = "{{ session()->get('user_role') }}"; // Fetch the role from the session
+
+            console.log("session data:", sessionRole);
+
+            // Debugging: Log selected role information
+            console.log('Selected Role ID:', selectedRoleId);
+            console.log('Selected Role Name:', selectedRoleName);
+
+            // Redirect based on selected role
+            if (sessionRole === 'Admin') {
+                // Redirect to the user page
+                alert("hi admin");
+                window.location.href = '/user-page'; // Adjust this URL as necessary
+            } else if (sessionRole === 'user') {
+                alert("hi employee");
+                // Redirect to the add-user route
+                console.log('selectedRoleName');
+                window.location.href = '/add-user'; // Adjust this URL as necessary
+            } else {
+                alert('Role not recognized: ' + selectedRoleName); // Fallback alert for unrecognized roles
+            }
+        });
+    });
+</script> --}}
