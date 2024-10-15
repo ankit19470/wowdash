@@ -46,7 +46,7 @@ class LoginController extends Controller
             if ($user->hasRole('Admin') && $userRoles->count() === 1) {
                 return redirect()->route('user-page'); // Redirect to user-page if user has only the Admin role
             }
-            if ($user->hasRole('employe') && $userRoles->count() === 1) {
+            if ($user->hasRole('user') && $userRoles->count() === 1) {
                 return redirect()->route('add-user'); // Redirect to add-user if user has only the employe role
             }
 

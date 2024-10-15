@@ -38,6 +38,7 @@
 
 <script>
     $(document).ready(function() {
+        // Check if session 'user_roles' exists
         @if(session('user_roles'))
             $('#rolesModal').modal('show'); // Show modal if roles exist
             {{ session()->forget('user_roles') }} // Clear roles after showing
@@ -48,15 +49,31 @@
             var selectedRoleId = $(this).data('role-id'); // Get the selected role ID
             var selectedRoleName = $(this).data('role'); // Get the selected role name
 
-            // Check if the selected role is 'Admin'
-            if (selectedRoleName === 'Admin') {
+
+            {{ session()->put("user_role", [selectRoleName]) }};
+            let session = "{{ session()->get('user_role') }}"
+
+            console.log("session data:", session);
+
+            // Debugging: Log selected role information
+            console.log('Selected Role ID:', selectedRoleId);
+            console.log('Selected Role Name:', selectedRoleName);
+
+            // Redirect based on selected role
+            if (session === 'Admin') {
                 // Redirect to the user page
+                alert("hi admin")
                 window.location.href = '/user-page'; // Adjust this URL as necessary
-            } else {
+            } else if (session === 'user') {
+                alert("hi employee")
                 // Redirect to the add-user route
-                window.location.href = '/add-user?role_id=' + selectedRoleId; // Adjust this URL as necessary
+                console.log('selectedRoleName')
+                window.location.href = '/add-user'; // Adjust this URL as necessary
+            } else {
+                alert('Role not recognized: ' + selectedRoleName); // Fallback alert for unrecognized roles
             }
         });
     });
 </script>
+
 

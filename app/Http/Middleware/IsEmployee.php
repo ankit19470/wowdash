@@ -12,7 +12,7 @@ class IsEmployee
     {
         if (Auth::check()) {
             // Check if the authenticated user has the 'Admin' role
-            if (session('user_role') === 'employe') {
+            if (session('user_role') === 'user') {
                 return $next($request); // Proceed to the next request
             } else {
                 return redirect()->route('user-role-show')->with('error', 'Access denied. Admins only.');

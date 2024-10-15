@@ -11,15 +11,9 @@ use App\Http\Controllers\fronted\ModuleController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserRoleLogin;
 use App\Http\Controllers\fronted\AddCategory;
-use App\Http\Middleware\CheckMultipleRoles;
+// use App\Http\Middleware\CheckMultipleRoles;
 use App\Http\Middleware\IsAdmin;
 use App\Http\Middleware\IsEmployee;
-
-
-
-
-
-
 
 
 
@@ -50,7 +44,14 @@ return redirect('/');
 
 // Route::group(['middleware' => ['role:employe']], function() {
     // Route::group(['middleware' => [isEmployee::class]], function () {
-        Route::group(['middleware' => [isEmployee::class]], function () {
+Route::get('/user-role-show', [UserRoleLogin::class, 'showRoles'])->name('user-role-show');
+
+
+Route::group(['middleware' => [IsAdmin::class]], function () {
+    Route::get('user-page', [AddCategory::class, 'showUsers'])->name('user-page');
+
+});
+Route::group(['middleware' => [IsEmployee::class]], function () {
     Route::get('add-user',[AddUserController::class,'index'])->name('add-user');
     Route::post('/adding',[AddUserController::class,'AddUser'])->name('adding');
 
@@ -103,15 +104,12 @@ return redirect('/');
     Route::post('/profile/change-password', [ProfileController::class, 'changePassword'])->name('profile.change-password');
     Route::get('/users', [AddUserController::class, 'filter'])->name('users.filter');
 
-    Route::get('/user-role-show', [UserRoleLogin::class, 'showRoles'])->name('user-role-show');
     Route::put('/role/{id}/permissions', [UserRoleLogin::class, 'assignPermissions']);
 
     Route::get('/role/{id}/modules', [UserRoleLogin::class, 'showModulesAndPermissions']);
 });
-Route::group(['middleware' => [IsAdmin::class]], function () {
-    Route::get('user-page', [AddCategory::class, 'showUsers'])->name('user-page');
 
-});
+// Route::get('/user-role-show', [UserRoleLogin::class, 'showRoles'])->name('user-role-show');
 // Routes for Admin role
 // Route::group(['middleware' => ['role:Admin', CheckMultipleRoles::class]], function () {
 //     Route::group(['middleware' => ['isAdmin']], function () {

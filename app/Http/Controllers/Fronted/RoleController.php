@@ -6,8 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 // use App\Models\Permission;
 // use App\Models\Role;
-// use Spatie\Permission\Models\Role;
-use App\Models\Role; 
+use Spatie\Permission\Models\Role;
+// use App\Models\Role;
 use Spatie\Permission\Models\Permission;
 // use Spatie\Permission\Models\Role;
 
@@ -23,7 +23,6 @@ class RoleController extends Controller
         return view('fronted.add-roles',compact('modules'));
     }
 
-
     public function store(Request $request)
     {
         // Define validation rules
@@ -36,12 +35,19 @@ class RoleController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
-        // Create the role
-        Role::create(['name' => $request->input('name')]);
+        // Create the role and assign it to a variable
+        $role = Role::create(['name' => $request->input('name')]);
+
+        // Store role information in session
+        session(['user_roles' => [
+            'id' => $role->id,
+            'name' => $role->name,
+        ]]);
 
         // Redirect with success message
         return redirect()->route('list-role')->with('success', 'Role created successfully!');
     }
+
 
     public function showRole()
     {
