@@ -27,4 +27,33 @@ class UserRoleLogin extends Controller
 
         return view('fronted.user-role-show', compact('roles', 'userRoles')); // Pass both to the view
     }
+
+    public function setUserRole(Request $request)
+    {
+
+        // session()->forget('user_role');
+
+        // dd(session()->get('user_role'));
+        // Validate the incoming request
+        $request->validate([
+            'role' => 'required|string',
+        ]);
+
+        // Store the role in the session
+        $request->session()->put('user_role', $request->role);
+        $currentRole = $request->session()->get('user_role');
+
+        if(isset($currentRole) && $currentRole === "Admin"){
+            return response()->json(["success" => true,"url" => "/user-page"]);
+        }else if( isset($currentRole) && $currentRole === 'user'){
+            return response()->json(["success" => true,"url" => "/add-user"]);
+        }
+
+
+
+        // dd();
+
+        return response()->json(['success' => false]);
+    }
+
 }

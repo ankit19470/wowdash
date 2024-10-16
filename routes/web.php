@@ -12,7 +12,8 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserRoleLogin;
 use App\Http\Controllers\fronted\AddCategory;
 use App\Http\Middleware\CheckMultipleRoles;
-// use App\Http\Middleware\IsAdmin;
+use App\Http\Middleware\IsAdmin;
+use App\Http\Middleware\IsUser;
 // use App\Http\Middleware\IsEmployee;
 
 
@@ -44,16 +45,17 @@ return redirect('/');
 
 // Route::group(['middleware' => ['role:employe']], function() {
     // Route::group(['middleware' => [isEmployee::class]], function () {
-Route::get('/user-role-show', [UserRoleLogin::class, 'showRoles'])->name('user-role-show');
 
-Route::group(['middleware' => ['role:Admin']], function() {
 
-// Route::group(['middleware' => [IsAdmin::class]], function () {
+
+// Route::group(['middleware' => ['role:Admin']], function() {
+
+Route::group(['middleware' => [IsAdmin::class]], function () {
     Route::get('user-page', [AddCategory::class, 'showUsers'])->name('user-page');
 
 });
-// Route::group(['middleware' => [IsEmployee::class]], function () {
-Route::group(['middleware' => ['role:user']], function() {
+Route::group(['middleware' => [IsUser::class]], function () {
+// Route::group(['middleware' => ['role:user']], function() {
 
     Route::get('add-user',[AddUserController::class,'index'])->name('add-user');
     Route::post('/adding',[AddUserController::class,'AddUser'])->name('adding');
@@ -112,6 +114,16 @@ Route::group(['middleware' => ['role:user']], function() {
     Route::get('/role/{id}/modules', [UserRoleLogin::class, 'showModulesAndPermissions']);
 });
 
+// Route::get('/user-role-show', [UserRoleLogin::class, 'showRoles'])->name('user-role-show');
+// Route::group(['middleware' => [CheckMultipleRoles::class]],function () {
+    Route::get('/user-role-show', [UserRoleLogin::class, 'showRoles'])->name('user-role-show');
+    // Other routes that need this middleware can be added here
+// });
+Route::post('/set-user-role', [UserRoleLogin::class, 'setUserRole'])->name('setUserRole');
+
+Route::get('/page-not-found', function () {
+    return view('errors.404'); // Make sure you have a 404 view in your resources/views/errors folder
+})->name('page-not-found');
 // Route::get('/user-role-show', [UserRoleLogin::class, 'showRoles'])->name('user-role-show');
 // Routes for Admin role
 // Route::group(['middleware' => ['role:Admin', CheckMultipleRoles::class]], function () {

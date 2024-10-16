@@ -9,36 +9,37 @@
 
 <!-- Modal -->
 {{-- <div class="modal fade" id="rolesModal" tabindex="-1" role="dialog" aria-labelledby="rolesModalLabel" aria-hidden="true"> --}}
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="rolesModalLabel">Select Role</h5>
-                {{-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+<div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="rolesModalLabel">Select Role</h5>
+            {{-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button> --}}
-            </div>
-            <div class="modal-body">
-                <p>
-                    @if($roles->isNotEmpty())
-                        @foreach($roles as $role)
-                            <p>
-                                <button type="button" class="btn btn-primary role-select" data-role="{{ $role->name }}" data-role-id="{{ $role->id }}">
-                                    {{ $role->name }}
-                                </button>
-                            </p>
-                        @endforeach
-                    @else
-                        <li>No roles available.</li>
-                    @endif
+        </div>
+        <div class="modal-body">
+            <p>
+                @if ($roles->isNotEmpty())
+                    @foreach ($roles as $role)
+                        <p>
+                            <button type="button" class="btn btn-primary role-select" data-role="{{ $role->name }}"
+                                data-role-id="{{ $role->id }}">
+                                {{ $role->name }}
+                            </button>
+                        </p>
+                    @endforeach
+                @else
+                    <li>No roles available.</li>
+                @endif
                 </ul>
-            </div>
         </div>
     </div>
+</div>
 {{-- </div> --}}
 <script>
     $(document).ready(function() {
-        // Check if session 'user_roles' exists
-        @if(session('user_roles'))
+        // Check if session 'user_roles' exists and show modal if it does
+        @if (session('user_roles'))
             $('#rolesModal').modal('show'); // Show modal if roles exist
             {{ session()->forget('user_roles') }} // Clear roles after showing
         @endif
@@ -48,23 +49,74 @@
             var selectedRoleId = $(this).data('role-id'); // Get the selected role ID
             var selectedRoleName = $(this).data('role'); // Get the selected role name
 
-            // Redirect based on selected role
-            if (selectedRoleName === 'Admin') {
-                // Redirect to the user page
-                window.location.href = '/user-page'; // Adjust this URL as necessary
-            } else if (selectedRoleName === 'user') {
-                // Redirect to the add-user route
-                window.location.href = '/add-user'; // Adjust this URL as necessary
-            } else {
-                alert('Role not recognized: ' + selectedRoleName); // Fallback alert for unrecognized roles
-            }
+            // Assign role to session using JavaScript (assume backend will handle session persistence)
+            // var sessionRole = selectedRoleName;
+
+            // console.log("session data:", sessionRole);
+
+            // $.ajax({
+            //     url: '{{ route('setUserRole') }}', // Adjust the route as needed
+            //     method: 'POST',
+            //     data: {
+            //         role: selectedRoleName,
+            //         _token: '{{ csrf_token() }}' // Include CSRF token
+            //     },
+            //     success: function(response) {
+            //         // Handle success, maybe update UI or notify the user
+            //         console.log('Role saved:', response);
+            //     },
+            //     error: function(xhr) {
+            //         // Handle error
+            //         console.error('Error saving role:', xhr);
+            //     }
+            // });
+
+            const xhr = new XMLHttpRequest();
+            const url = '{{ route('setUserRole') }}'; // Adjust the route as needed
+            const token = '{{ csrf_token() }}'; // Include CSRF token
+
+            xhr.open('POST', url, true);
+            xhr.setRequestHeader('Content-Type', 'application/json'); // Set content type to JSON
+            xhr.setRequestHeader('X-CSRF-TOKEN', token); // Set CSRF token header
+
+            xhr.onload = function() {
+                if (xhr.status >= 200 && xhr.status < 300) {
+                    // Handle success, maybe update UI or notify the user
+                    let res = JSON.parse(xhr.responseText);
+                    console.log('Role saved:', JSON.parse(xhr.responseText));
+
+                    if(res.success){
+                        window.location.href = res.url;
+                    }else{
+                        alert('Role not recognized: ' + selectedRoleName);
+                    }
+
+                } else {
+                    // Handle error
+                    console.error('Error saving role:', xhr);
+                }
+            };
+
+            xhr.onerror = function() {
+                console.error('Request failed:', xhr);
+            };
+
+            // Prepare the data to send
+            const data = JSON.stringify({
+                role: selectedRoleName
+            });
+
+            // Send the request
+            xhr.send(data);
+
         });
     });
 </script>
+
 {{-- <script>
     $(document).ready(function() {
         // Check if session 'user_roles' exists
-        @if(session('user_roles'))
+        @if (session('user_roles'))
             $('#rolesModal').modal('show'); // Show modal if roles exist
             {{ session()->forget('user_roles') }} // Clear roles after showing
         @endif
@@ -102,7 +154,7 @@
 {{-- <script>
     $(document).ready(function() {
         // Check if session 'user_roles' exists
-        @if(session('user_roles'))
+        @if (session('user_roles'))
             $('#rolesModal').modal('show'); // Show modal if roles exist
             {{ session()->forget('user_roles') }} // Clear roles after showing
         @endif
@@ -113,7 +165,26 @@
             var selectedRoleName = $(this).data('role'); // Get the selected role name
 
 
-            {{ session()->put("user_role", [selectRoleName]) }};
+
+            // var selectedRoleName = $(this).data('role'); // Get the selected role name
+
+            $.ajax({
+                url: '{{ route('setUserRole') }}', // Adjust the route as needed
+                method: 'POST',
+                data: {
+                    role: selectedRoleName,
+                    _token: '{{ csrf_token() }}' // Include CSRF token
+                },
+                success: function(response) {
+                    // Handle success, maybe update UI or notify the user
+                    console.log('Role saved:', response);
+                },
+                error: function(xhr) {
+                    // Handle error
+                    console.error('Error saving role:', xhr);
+                }
+            });
+
             let session = "{{ session()->get('user_role') }}"
 
             console.log("session data:", session);
@@ -133,7 +204,8 @@
                 console.log('selectedRoleName')
                 window.location.href = '/add-user'; // Adjust this URL as necessary
             } else {
-                alert('Role not recognized: ' + selectedRoleName); // Fallback alert for unrecognized roles
+                alert('Role not recognized: ' +
+                selectedRoleName); // Fallback alert for unrecognized roles
             }
         });
     });
@@ -142,7 +214,7 @@
 {{-- <script>
     $(document).ready(function() {
         // Check if session 'user_roles' exists
-        @if(session('user_roles'))
+        @if (session('user_roles'))
             $('#rolesModal').modal('show'); // Show modal if roles exist
             {{ session()->forget('user_roles') }} // Clear roles after showing
         @endif
@@ -183,7 +255,7 @@
 <script>
     $(document).ready(function() {
         // Check if session 'user_roles' exists
-        @if(session('user_roles'))
+        @if (session('user_roles'))
             $('#rolesModal').modal('show'); // Show modal if roles exist
             {{ session()->forget('user_roles') }} // Clear roles after showing
         @endif

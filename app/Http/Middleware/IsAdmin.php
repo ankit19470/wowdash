@@ -15,12 +15,13 @@ class IsAdmin
             if (session('user_role') === 'Admin') {
                 return $next($request); // Proceed to the next request
             } else {
-                return redirect()->route('user-role-show')->with('error', 'Access denied. Admins only.');
+                // dd("unauthorized role");
+                return redirect()->route('page-not-found')->with('error', 'Access denied. Admins only.');
             }
         }
 
         // Redirect to login if the user is not authenticated
-        return redirect()->route('login')->with('error', 'Please log in first.');
+        return redirect()->route('sign-in')->with('error', 'Please log in first.');
     }
 
 }
